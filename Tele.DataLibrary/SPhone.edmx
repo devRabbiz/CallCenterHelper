@@ -1,0 +1,1533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SPhoneModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SPhoneModelStoreContainer">
+          <EntitySet Name="ivr_sugg_agency" EntityType="SPhoneModel.Store.ivr_sugg_agency" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ivr_sugg_station" EntityType="SPhoneModel.Store.ivr_sugg_station" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_BlackList" EntityType="SPhoneModel.Store.SPhone_BlackList" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_BlackListType" EntityType="SPhoneModel.Store.SPhone_BlackListType" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Sphone_Call" EntityType="SPhoneModel.Store.Sphone_Call" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_Chat" EntityType="SPhoneModel.Store.SPhone_Chat" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_ChatText" EntityType="SPhoneModel.Store.SPhone_ChatText" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_ChatTextType" EntityType="SPhoneModel.Store.SPhone_ChatTextType" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_DNIS" EntityType="SPhoneModel.Store.SPhone_DNIS" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_DutyManager" EntityType="SPhoneModel.Store.SPhone_DutyManager" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_Holiday" EntityType="SPhoneModel.Store.SPhone_Holiday" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_HolidayRole" EntityType="SPhoneModel.Store.SPhone_HolidayRole" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_IPDN" EntityType="SPhoneModel.Store.SPhone_IPDN" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_LoginLog" EntityType="SPhoneModel.Store.SPhone_LoginLog" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_Module" EntityType="SPhoneModel.Store.SPhone_Module" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_NameValue" EntityType="SPhoneModel.Store.SPhone_NameValue" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_ReportUrl" EntityType="SPhoneModel.Store.SPhone_ReportUrl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_Role" EntityType="SPhoneModel.Store.SPhone_Role" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_RoleModule" EntityType="SPhoneModel.Store.SPhone_RoleModule" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_TFN" EntityType="SPhoneModel.Store.SPhone_TFN" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_TFNDNISRel" EntityType="SPhoneModel.Store.SPhone_TFNDNISRel" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_TFNQueueRel" EntityType="SPhoneModel.Store.SPhone_TFNQueueRel" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SPhone_UserPermission" EntityType="SPhoneModel.Store.SPhone_UserPermission" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_SPHONE_B_REFERENCE_SPHONE_B" Association="SPhoneModel.Store.FK_SPHONE_B_REFERENCE_SPHONE_B">
+            <End Role="SPhone_BlackListType" EntitySet="SPhone_BlackListType" />
+            <End Role="SPhone_BlackList" EntitySet="SPhone_BlackList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_C_REFERENCE_SPHONE_C" Association="SPhoneModel.Store.FK_SPHONE_C_REFERENCE_SPHONE_C">
+            <End Role="SPhone_ChatTextType" EntitySet="SPhone_ChatTextType" />
+            <End Role="SPhone_ChatText" EntitySet="SPhone_ChatText" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_H_REFERENCE_SPHONE_H" Association="SPhoneModel.Store.FK_SPHONE_H_REFERENCE_SPHONE_H">
+            <End Role="SPhone_HolidayRole" EntitySet="SPhone_HolidayRole" />
+            <End Role="SPhone_Holiday" EntitySet="SPhone_Holiday" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_R_REFERENCE_SPHONE_M" Association="SPhoneModel.Store.FK_SPHONE_R_REFERENCE_SPHONE_M">
+            <End Role="SPhone_Module" EntitySet="SPhone_Module" />
+            <End Role="SPhone_RoleModule" EntitySet="SPhone_RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_R_REFERENCE_SPHONE_R" Association="SPhoneModel.Store.FK_SPHONE_R_REFERENCE_SPHONE_R">
+            <End Role="SPhone_Role" EntitySet="SPhone_Role" />
+            <End Role="SPhone_RoleModule" EntitySet="SPhone_RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPhone_TFNDNISRel_SPhone_DNIS" Association="SPhoneModel.Store.FK_SPhone_TFNDNISRel_SPhone_DNIS">
+            <End Role="SPhone_DNIS" EntitySet="SPhone_DNIS" />
+            <End Role="SPhone_TFNDNISRel" EntitySet="SPhone_TFNDNISRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPhone_TFNDNISRel_SPhone_TFN" Association="SPhoneModel.Store.FK_SPhone_TFNDNISRel_SPhone_TFN">
+            <End Role="SPhone_TFN" EntitySet="SPhone_TFN" />
+            <End Role="SPhone_TFNDNISRel" EntitySet="SPhone_TFNDNISRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPhone_TFNQueueRel_SPhone_TFN" Association="SPhoneModel.Store.FK_SPhone_TFNQueueRel_SPhone_TFN">
+            <End Role="SPhone_TFN" EntitySet="SPhone_TFN" />
+            <End Role="SPhone_TFNQueueRel" EntitySet="SPhone_TFNQueueRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_U_REFERENCE_SPHONE_R" Association="SPhoneModel.Store.FK_SPHONE_U_REFERENCE_SPHONE_R">
+            <End Role="SPhone_Role" EntitySet="SPhone_Role" />
+            <End Role="SPhone_UserPermission" EntitySet="SPhone_UserPermission" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ivr_sugg_agency">
+          <Key>
+            <PropertyRef Name="AGENCY_ID" />
+            <PropertyRef Name="PRODUCT_TYPE" />
+          </Key>
+          <Property Name="AGENCY_ID" Type="char" Nullable="false" MaxLength="15" />
+          <Property Name="PRODUCT_TYPE" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="AGENCY_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="AGENCY_NAME_WAV_FILENAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="AGENCY_COVER_AREA" Type="nvarchar" MaxLength="100" />
+          <Property Name="AGENCY_INFO" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FAX_AGENCY_INFO" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AGENCY_WAV_FILENAME" Type="nvarchar" MaxLength="1000" />
+          <Property Name="VALID" Type="char" MaxLength="1" />
+          <Property Name="RECORD_DATE" Type="datetime" />
+          <Property Name="CATEGORY" Type="nvarchar" MaxLength="64" />
+          <Property Name="ADD_TYPE" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="ivr_sugg_station">
+          <Key>
+            <PropertyRef Name="AGENCY_ID" />
+            <PropertyRef Name="PRODUCT_TYPE" />
+          </Key>
+          <Property Name="AGENCY_ID" Type="char" Nullable="false" MaxLength="15" />
+          <Property Name="PRODUCT_TYPE" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="AGENCY_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="AGENCY_NAME_WAV_FILENAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="AGENCY_COVER_AREA" Type="nvarchar" MaxLength="100" />
+          <Property Name="AGENCY_INFO" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FAX_AGENCY_INFO" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AGENCY_WAV_FILENAME" Type="nvarchar" MaxLength="1000" />
+          <Property Name="VALID" Type="char" MaxLength="1" />
+          <Property Name="RECORD_DATE" Type="datetime" />
+          <Property Name="CATEGORY" Type="nvarchar" MaxLength="64" />
+          <Property Name="ADD_TYPE" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="SPhone_BlackList">
+          <Key>
+            <PropertyRef Name="BlackListID" />
+          </Key>
+          <Property Name="BlackListID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BlackListTypeID" Type="uniqueidentifier" />
+          <Property Name="BillNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPhone_BlackListType">
+          <Key>
+            <PropertyRef Name="BlackListTypeID" />
+          </Key>
+          <Property Name="BlackListTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sphone_Call">
+          <Key>
+            <PropertyRef Name="CallID" />
+          </Key>
+          <Property Name="CallID" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerID" Type="varchar" MaxLength="100" />
+          <Property Name="CallBeginTime" Type="datetime" Nullable="false" />
+          <Property Name="CallEndTime" Type="datetime" />
+          <Property Name="DeskTime" Type="datetime" />
+          <Property Name="ConnectionID" Type="varchar" MaxLength="50" />
+          <Property Name="InOut" Type="int" />
+          <Property Name="CurrentQueueName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="FromQueueName" Type="varchar" MaxLength="100" />
+          <Property Name="NextQueueName" Type="varchar" MaxLength="100" />
+          <Property Name="ANI" Type="varchar" MaxLength="30" />
+          <Property Name="DNIS" Type="varchar" MaxLength="30" />
+          <Property Name="PlaceIP" Type="varchar" MaxLength="50" />
+          <Property Name="IsConference" Type="int" />
+          <Property Name="IsTransfer" Type="int" />
+          <Property Name="IsTransferEPOS" Type="int" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_Chat">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerID" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChatBeginTime" Type="datetime" />
+          <Property Name="ChatEndTime" Type="datetime" />
+          <Property Name="ConnectionID" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentQueueName" Type="varchar" MaxLength="100" />
+          <Property Name="FromQueueName" Type="varchar" MaxLength="100" />
+          <Property Name="NextQueueName" Type="varchar" MaxLength="100" />
+          <Property Name="MachineNo" Type="varchar" MaxLength="50" />
+          <Property Name="PlaceIP" Type="varchar" MaxLength="50" />
+          <Property Name="MailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ContentText" Type="nvarchar(max)" />
+          <Property Name="IsConference" Type="int" />
+          <Property Name="IsTransfer" Type="int" />
+          <Property Name="IsRTO" Type="int" />
+          <Property Name="ServicecardNo" Type="varchar" MaxLength="100" />
+          <Property Name="WSISID" Type="int" />
+          <Property Name="Enterid" Type="varchar" MaxLength="10" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="CustomerIP" Type="varchar" MaxLength="50" />
+          <Property Name="IPLocation" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SPhone_ChatText">
+          <Key>
+            <PropertyRef Name="ChatTextID" />
+          </Key>
+          <Property Name="ChatTextID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QueueName" Type="varchar" MaxLength="100" />
+          <Property Name="ChatTextTypeID" Type="uniqueidentifier" />
+          <Property Name="ChatContent" Type="nvarchar(max)" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="SortID" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPhone_ChatTextType">
+          <Key>
+            <PropertyRef Name="ChatTextTypeID" />
+          </Key>
+          <Property Name="ChatTextTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ChatTextTypeName" Type="varchar" MaxLength="50" />
+          <Property Name="SN" Type="int" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_DNIS">
+          <Key>
+            <PropertyRef Name="DNISID" />
+          </Key>
+          <Property Name="DNISID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DNISName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Ext1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ext2" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SPhone_DutyManager">
+          <Key>
+            <PropertyRef Name="DutyManagerID" />
+          </Key>
+          <Property Name="DutyManagerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ManagerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="DutyDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_Holiday">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HolidayRoleID" Type="uniqueidentifier" />
+          <Property Name="QueueName" Type="varchar" MaxLength="50" />
+          <Property Name="DNIS" Type="varchar" MaxLength="30" />
+          <Property Name="TypeID" Type="int" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Q_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Q_ProcessingBegin" Type="varchar" MaxLength="50" />
+          <Property Name="Q_ProcessingEnd" Type="varchar" MaxLength="50" />
+          <Property Name="Q_IsValid" Type="int" />
+          <Property Name="Q_RestDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_HolidayRole">
+          <Key>
+            <PropertyRef Name="HolidayRoleID" />
+          </Key>
+          <Property Name="HolidayRoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HolidayRoleName" Type="varchar" MaxLength="100" />
+          <Property Name="HolidayBegin" Type="datetime" />
+          <Property Name="HolidayEnd" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_IPDN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Place" Type="varchar" MaxLength="50" />
+          <Property Name="DNNo" Type="varchar" MaxLength="50" />
+          <Property Name="PlaceIP" Type="varchar" MaxLength="40" />
+          <Property Name="PhoneIP" Type="varchar" MaxLength="40" />
+          <Property Name="IsValid" Type="smallint" />
+          <Property Name="BindType" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneType" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="IsSayEmpNO" Type="smallint" Nullable="false" />
+          <Property Name="IsRealDN" Type="smallint" Nullable="false" />
+          <Property Name="Ext1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ext2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ext3" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SPhone_LoginLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="50" />
+          <Property Name="LoginDate" Type="datetime" />
+          <Property Name="FirstloginTime" Type="datetime" />
+          <Property Name="FirstlogoutTime" Type="datetime" />
+          <Property Name="Lastlogout" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsLeaf" Type="int" Nullable="false" />
+          <Property Name="ModuleName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ModuleUrl" Type="varchar" Nullable="false" MaxLength="2000" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_NameValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Value" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sort" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mark" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDel" Type="smallint" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_ReportUrl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="uniqueidentifier" />
+          <Property Name="ReportName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportPath" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsShow" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SPhone_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_RoleModule">
+          <Key>
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModuleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_TFN">
+          <Key>
+            <PropertyRef Name="TFNID" />
+          </Key>
+          <Property Name="TFNID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TFNName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TFNBusi" Type="nvarchar" MaxLength="50" />
+          <Property Name="TFNCallFlow" Type="varchar" MaxLength="200" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Ext1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ext2" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SPhone_TFNDNISRel">
+          <Key>
+            <PropertyRef Name="TFNID" />
+            <PropertyRef Name="DNISID" />
+          </Key>
+          <Property Name="TFNID" Type="bigint" Nullable="false" />
+          <Property Name="DNISID" Type="bigint" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_TFNQueueRel">
+          <Key>
+            <PropertyRef Name="TFNID" />
+            <PropertyRef Name="QueueID" />
+          </Key>
+          <Property Name="TFNID" Type="bigint" Nullable="false" />
+          <Property Name="QueueID" Type="bigint" Nullable="false" />
+          <Property Name="QueueName" Type="varchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SPhone_UserPermission">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="EmployeeID" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_SPHONE_B_REFERENCE_SPHONE_B">
+          <End Role="SPhone_BlackListType" Type="SPhoneModel.Store.SPhone_BlackListType" Multiplicity="0..1" />
+          <End Role="SPhone_BlackList" Type="SPhoneModel.Store.SPhone_BlackList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_BlackListType">
+              <PropertyRef Name="BlackListTypeID" />
+            </Principal>
+            <Dependent Role="SPhone_BlackList">
+              <PropertyRef Name="BlackListTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_C_REFERENCE_SPHONE_C">
+          <End Role="SPhone_ChatTextType" Type="SPhoneModel.Store.SPhone_ChatTextType" Multiplicity="0..1" />
+          <End Role="SPhone_ChatText" Type="SPhoneModel.Store.SPhone_ChatText" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_ChatTextType">
+              <PropertyRef Name="ChatTextTypeID" />
+            </Principal>
+            <Dependent Role="SPhone_ChatText">
+              <PropertyRef Name="ChatTextTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_H_REFERENCE_SPHONE_H">
+          <End Role="SPhone_HolidayRole" Type="SPhoneModel.Store.SPhone_HolidayRole" Multiplicity="0..1" />
+          <End Role="SPhone_Holiday" Type="SPhoneModel.Store.SPhone_Holiday" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_HolidayRole">
+              <PropertyRef Name="HolidayRoleID" />
+            </Principal>
+            <Dependent Role="SPhone_Holiday">
+              <PropertyRef Name="HolidayRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_R_REFERENCE_SPHONE_M">
+          <End Role="SPhone_Module" Type="SPhoneModel.Store.SPhone_Module" Multiplicity="1" />
+          <End Role="SPhone_RoleModule" Type="SPhoneModel.Store.SPhone_RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="SPhone_RoleModule">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_R_REFERENCE_SPHONE_R">
+          <End Role="SPhone_Role" Type="SPhoneModel.Store.SPhone_Role" Multiplicity="1" />
+          <End Role="SPhone_RoleModule" Type="SPhoneModel.Store.SPhone_RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SPhone_RoleModule">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPhone_TFNDNISRel_SPhone_DNIS">
+          <End Role="SPhone_DNIS" Type="SPhoneModel.Store.SPhone_DNIS" Multiplicity="1" />
+          <End Role="SPhone_TFNDNISRel" Type="SPhoneModel.Store.SPhone_TFNDNISRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_DNIS">
+              <PropertyRef Name="DNISID" />
+            </Principal>
+            <Dependent Role="SPhone_TFNDNISRel">
+              <PropertyRef Name="DNISID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPhone_TFNDNISRel_SPhone_TFN">
+          <End Role="SPhone_TFN" Type="SPhoneModel.Store.SPhone_TFN" Multiplicity="1" />
+          <End Role="SPhone_TFNDNISRel" Type="SPhoneModel.Store.SPhone_TFNDNISRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_TFN">
+              <PropertyRef Name="TFNID" />
+            </Principal>
+            <Dependent Role="SPhone_TFNDNISRel">
+              <PropertyRef Name="TFNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPhone_TFNQueueRel_SPhone_TFN">
+          <End Role="SPhone_TFN" Type="SPhoneModel.Store.SPhone_TFN" Multiplicity="1" />
+          <End Role="SPhone_TFNQueueRel" Type="SPhoneModel.Store.SPhone_TFNQueueRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_TFN">
+              <PropertyRef Name="TFNID" />
+            </Principal>
+            <Dependent Role="SPhone_TFNQueueRel">
+              <PropertyRef Name="TFNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_U_REFERENCE_SPHONE_R">
+          <End Role="SPhone_Role" Type="SPhoneModel.Store.SPhone_Role" Multiplicity="1" />
+          <End Role="SPhone_UserPermission" Type="SPhoneModel.Store.SPhone_UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SPhone_UserPermission">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Proc_AgentStatusChangeLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LogID" Type="varchar" Mode="In" />
+          <Parameter Name="EmployeeID" Type="varchar" Mode="In" />
+          <Parameter Name="TypeID" Type="int" Mode="In" />
+          <Parameter Name="InsertOrUpdate" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetChatRightEnterID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EnterID" Type="int" Mode="In" />
+          <Parameter Name="MachineNo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetProcessingQList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Proc_GetTodayRestQList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SPhoneModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="SPhoneEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="SPhone_BlackList" EntityType="SPhoneModel.SPhone_BlackList" />
+          <EntitySet Name="SPhone_BlackListType" EntityType="SPhoneModel.SPhone_BlackListType" />
+          <EntitySet Name="SPhone_Chat" EntityType="SPhoneModel.SPhone_Chat" />
+          <EntitySet Name="SPhone_ChatText" EntityType="SPhoneModel.SPhone_ChatText" />
+          <EntitySet Name="SPhone_ChatTextType" EntityType="SPhoneModel.SPhone_ChatTextType" />
+          <EntitySet Name="SPhone_DutyManager" EntityType="SPhoneModel.SPhone_DutyManager" />
+          <EntitySet Name="SPhone_Holiday" EntityType="SPhoneModel.SPhone_Holiday" />
+          <EntitySet Name="SPhone_HolidayRole" EntityType="SPhoneModel.SPhone_HolidayRole" />
+          <EntitySet Name="SPhone_Module" EntityType="SPhoneModel.SPhone_Module" />
+          <EntitySet Name="SPhone_Role" EntityType="SPhoneModel.SPhone_Role" />
+          <EntitySet Name="SPhone_RoleModule" EntityType="SPhoneModel.SPhone_RoleModule" />
+          <EntitySet Name="SPhone_UserPermission" EntityType="SPhoneModel.SPhone_UserPermission" />
+          <AssociationSet Name="FK_SPHONE_B_REFERENCE_SPHONE_B" Association="SPhoneModel.FK_SPHONE_B_REFERENCE_SPHONE_B">
+            <End EntitySet="SPhone_BlackListType" Role="SPhone_BlackListType" />
+            <End EntitySet="SPhone_BlackList" Role="SPhone_BlackList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_C_REFERENCE_SPHONE_C" Association="SPhoneModel.FK_SPHONE_C_REFERENCE_SPHONE_C">
+            <End EntitySet="SPhone_ChatTextType" Role="SPhone_ChatTextType" />
+            <End EntitySet="SPhone_ChatText" Role="SPhone_ChatText" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_H_REFERENCE_SPHONE_H" Association="SPhoneModel.FK_SPHONE_H_REFERENCE_SPHONE_H">
+            <End EntitySet="SPhone_HolidayRole" Role="SPhone_HolidayRole" />
+            <End EntitySet="SPhone_Holiday" Role="SPhone_Holiday" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_R_REFERENCE_SPHONE_M" Association="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_M">
+            <End EntitySet="SPhone_Module" Role="SPhone_Module" />
+            <End EntitySet="SPhone_RoleModule" Role="SPhone_RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_R_REFERENCE_SPHONE_R" Association="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_R">
+            <End EntitySet="SPhone_Role" Role="SPhone_Role" />
+            <End EntitySet="SPhone_RoleModule" Role="SPhone_RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPHONE_U_REFERENCE_SPHONE_R" Association="SPhoneModel.FK_SPHONE_U_REFERENCE_SPHONE_R">
+            <End EntitySet="SPhone_Role" Role="SPhone_Role" />
+            <End EntitySet="SPhone_UserPermission" Role="SPhone_UserPermission" />
+          </AssociationSet>
+          <EntitySet Name="SPhone_LoginLog" EntityType="SPhoneModel.SPhone_LoginLog" />
+          <EntitySet Name="Sphone_Call" EntityType="SPhoneModel.Sphone_Call" />
+          <FunctionImport Name="Proc_GetProcessingQList" ReturnType="Collection(SPhoneModel.Proc_GetProcessingQList_Result)" />
+          <FunctionImport Name="Proc_GetTodayRestQList" ReturnType="Collection(String)" />
+          <FunctionImport Name="Proc_AgentStatusChangeLog">
+            <Parameter Name="LogID" Mode="In" Type="String" />
+            <Parameter Name="EmployeeID" Mode="In" Type="String" />
+            <Parameter Name="TypeID" Mode="In" Type="Int32" />
+            <Parameter Name="InsertOrUpdate" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="SPhone_IPDN" EntityType="SPhoneModel.SPhone_IPDN" />
+          <FunctionImport Name="Proc_GetChatRightEnterID" ReturnType="Collection(SPhoneModel.Proc_GetChatRightEnterID_Result)">
+            <Parameter Name="EnterID" Mode="In" Type="Int32" />
+            <Parameter Name="MachineNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="SPhone_ReportUrl" EntityType="SPhoneModel.SPhone_ReportUrl" />
+          <EntitySet Name="ivr_sugg_agency" EntityType="SPhoneModel.ivr_sugg_agency" />
+          <EntitySet Name="ivr_sugg_station" EntityType="SPhoneModel.ivr_sugg_station" />
+          <EntitySet Name="SPhone_NameValue" EntityType="SPhoneModel.SPhone_NameValue" />
+          <EntitySet Name="SPhone_DNIS" EntityType="SPhoneModel.SPhone_DNIS" />
+          <EntitySet Name="SPhone_TFN" EntityType="SPhoneModel.SPhone_TFN" />
+          <EntitySet Name="SPhone_TFNDNISRel" EntityType="SPhoneModel.SPhone_TFNDNISRel" />
+          <EntitySet Name="SPhone_TFNQueueRel" EntityType="SPhoneModel.SPhone_TFNQueueRel" />
+          <AssociationSet Name="FK_SPhone_TFNDNISRel_SPhone_DNIS" Association="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_DNIS">
+            <End Role="SPhone_DNIS" EntitySet="SPhone_DNIS" />
+            <End Role="SPhone_TFNDNISRel" EntitySet="SPhone_TFNDNISRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPhone_TFNDNISRel_SPhone_TFN" Association="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_TFN">
+            <End Role="SPhone_TFN" EntitySet="SPhone_TFN" />
+            <End Role="SPhone_TFNDNISRel" EntitySet="SPhone_TFNDNISRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPhone_TFNQueueRel_SPhone_TFN" Association="SPhoneModel.FK_SPhone_TFNQueueRel_SPhone_TFN">
+            <End Role="SPhone_TFN" EntitySet="SPhone_TFN" />
+            <End Role="SPhone_TFNQueueRel" EntitySet="SPhone_TFNQueueRel" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SPhone_BlackList">
+          <Key>
+            <PropertyRef Name="BlackListID" />
+          </Key>
+          <Property Name="BlackListID" Nullable="false" Type="Guid" />
+          <Property Name="BlackListTypeID" Type="Guid" />
+          <Property Name="BillNo" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_BlackListType" Relationship="SPhoneModel.FK_SPHONE_B_REFERENCE_SPHONE_B" FromRole="SPhone_BlackList" ToRole="SPhone_BlackListType" />
+          <Property Name="IsDeleted" Nullable="false" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SPhone_BlackListType">
+          <Key>
+            <PropertyRef Name="BlackListTypeID" />
+          </Key>
+          <Property Name="BlackListTypeID" Nullable="false" Type="Guid" />
+          <Property Name="TypeName" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_BlackList" Relationship="SPhoneModel.FK_SPHONE_B_REFERENCE_SPHONE_B" FromRole="SPhone_BlackListType" ToRole="SPhone_BlackList" />
+        </EntityType>
+        <EntityType Name="SPhone_Chat">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="EmployeeID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CustomerID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CustomerName" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ChatBeginTime" Precision="3" Type="DateTime" />
+          <Property Name="ChatEndTime" Precision="3" Type="DateTime" />
+          <Property Name="ConnectionID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CurrentQueueName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="FromQueueName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="NextQueueName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="MachineNo" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PlaceIP" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="MailAddress" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ContentText" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="IsConference" Type="Int32" />
+          <Property Name="IsTransfer" Type="Int32" />
+          <Property Name="IsRTO" Type="Int32" />
+          <Property Name="ServicecardNo" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="WSISID" Type="Int32" />
+          <Property Name="Enterid" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <Property Type="String" Name="CustomerIP" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IPLocation" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SPhone_ChatText">
+          <Key>
+            <PropertyRef Name="ChatTextID" />
+          </Key>
+          <Property Name="ChatTextID" Nullable="false" Type="Guid" />
+          <Property Name="QueueName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ChatTextTypeID" Type="Guid" />
+          <Property Name="ChatContent" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_ChatTextType" Relationship="SPhoneModel.FK_SPHONE_C_REFERENCE_SPHONE_C" FromRole="SPhone_ChatText" ToRole="SPhone_ChatTextType" />
+          <Property Name="SortID" Nullable="false" Type="Int32" />
+          <Property Name="IsDeleted" Nullable="false" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SPhone_ChatTextType">
+          <Key>
+            <PropertyRef Name="ChatTextTypeID" />
+          </Key>
+          <Property Name="ChatTextTypeID" Nullable="false" Type="Guid" />
+          <Property Name="ChatTextTypeName" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="SN" Type="Int32" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_ChatText" Relationship="SPhoneModel.FK_SPHONE_C_REFERENCE_SPHONE_C" FromRole="SPhone_ChatTextType" ToRole="SPhone_ChatText" />
+        </EntityType>
+        <EntityType Name="SPhone_DutyManager">
+          <Key>
+            <PropertyRef Name="DutyManagerID" />
+          </Key>
+          <Property Name="DutyManagerID" Nullable="false" Type="Guid" />
+          <Property Name="ManagerName" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PhoneNo" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <Property Name="DutyDate" Precision="3" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="SPhone_Holiday">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Nullable="false" Type="Guid" />
+          <Property Name="HolidayRoleID" Type="Guid" />
+          <Property Name="DNIS" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="TypeID" Type="Int32" />
+          <Property Name="TypeName" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_HolidayRole" Relationship="SPhoneModel.FK_SPHONE_H_REFERENCE_SPHONE_H" FromRole="SPhone_Holiday" ToRole="SPhone_HolidayRole" />
+          <Property Name="QueueName" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Q_Name" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Q_ProcessingBegin" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Q_ProcessingEnd" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Q_IsValid" Type="Int32" />
+          <Property Name="Q_RestDate" Precision="3" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="SPhone_HolidayRole">
+          <Key>
+            <PropertyRef Name="HolidayRoleID" />
+          </Key>
+          <Property Name="HolidayRoleID" Nullable="false" Type="Guid" />
+          <Property Name="HolidayRoleName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="HolidayBegin" Precision="3" Type="DateTime" />
+          <Property Name="HolidayEnd" Precision="3" Type="DateTime" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_Holiday" Relationship="SPhoneModel.FK_SPHONE_H_REFERENCE_SPHONE_H" FromRole="SPhone_HolidayRole" ToRole="SPhone_Holiday" />
+        </EntityType>
+        <EntityType Name="SPhone_Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Nullable="false" Type="Guid" />
+          <Property Name="ParentModuleID" Nullable="false" Type="Guid" />
+          <Property Name="IsLeaf" Nullable="false" Type="Int32" />
+          <Property Name="ModuleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ModuleUrl" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_RoleModule" Relationship="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_M" FromRole="SPhone_Module" ToRole="SPhone_RoleModule" />
+        </EntityType>
+        <EntityType Name="SPhone_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Nullable="false" Type="Guid" />
+          <Property Name="RoleName" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_RoleModule" Relationship="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_R" FromRole="SPhone_Role" ToRole="SPhone_RoleModule" />
+          <NavigationProperty Name="SPhone_UserPermission" Relationship="SPhoneModel.FK_SPHONE_U_REFERENCE_SPHONE_R" FromRole="SPhone_Role" ToRole="SPhone_UserPermission" />
+        </EntityType>
+        <EntityType Name="SPhone_RoleModule">
+          <Key>
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="RoleID" Nullable="false" Type="Guid" />
+          <Property Name="ModuleID" Nullable="false" Type="Guid" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_Module" Relationship="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_M" FromRole="SPhone_RoleModule" ToRole="SPhone_Module" />
+          <NavigationProperty Name="SPhone_Role" Relationship="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_R" FromRole="SPhone_RoleModule" ToRole="SPhone_Role" />
+        </EntityType>
+        <EntityType Name="SPhone_UserPermission">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="EmployeeID" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="RoleID" Nullable="false" Type="Guid" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+          <NavigationProperty Name="SPhone_Role" Relationship="SPhoneModel.FK_SPHONE_U_REFERENCE_SPHONE_R" FromRole="SPhone_UserPermission" ToRole="SPhone_Role" />
+        </EntityType>
+        <Association Name="FK_SPHONE_B_REFERENCE_SPHONE_B">
+          <End Type="SPhoneModel.SPhone_BlackListType" Multiplicity="0..1" Role="SPhone_BlackListType" />
+          <End Type="SPhoneModel.SPhone_BlackList" Multiplicity="*" Role="SPhone_BlackList" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_BlackListType">
+              <PropertyRef Name="BlackListTypeID" />
+            </Principal>
+            <Dependent Role="SPhone_BlackList">
+              <PropertyRef Name="BlackListTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_C_REFERENCE_SPHONE_C">
+          <End Type="SPhoneModel.SPhone_ChatTextType" Multiplicity="0..1" Role="SPhone_ChatTextType" />
+          <End Type="SPhoneModel.SPhone_ChatText" Multiplicity="*" Role="SPhone_ChatText" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_ChatTextType">
+              <PropertyRef Name="ChatTextTypeID" />
+            </Principal>
+            <Dependent Role="SPhone_ChatText">
+              <PropertyRef Name="ChatTextTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_H_REFERENCE_SPHONE_H">
+          <End Type="SPhoneModel.SPhone_HolidayRole" Multiplicity="0..1" Role="SPhone_HolidayRole" />
+          <End Type="SPhoneModel.SPhone_Holiday" Multiplicity="*" Role="SPhone_Holiday" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_HolidayRole">
+              <PropertyRef Name="HolidayRoleID" />
+            </Principal>
+            <Dependent Role="SPhone_Holiday">
+              <PropertyRef Name="HolidayRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_R_REFERENCE_SPHONE_M">
+          <End Type="SPhoneModel.SPhone_Module" Multiplicity="1" Role="SPhone_Module" />
+          <End Type="SPhoneModel.SPhone_RoleModule" Multiplicity="*" Role="SPhone_RoleModule" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_Module">
+              <PropertyRef Name="ModuleID" />
+            </Principal>
+            <Dependent Role="SPhone_RoleModule">
+              <PropertyRef Name="ModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_R_REFERENCE_SPHONE_R">
+          <End Type="SPhoneModel.SPhone_Role" Multiplicity="1" Role="SPhone_Role" />
+          <End Type="SPhoneModel.SPhone_RoleModule" Multiplicity="*" Role="SPhone_RoleModule" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SPhone_RoleModule">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPHONE_U_REFERENCE_SPHONE_R">
+          <End Type="SPhoneModel.SPhone_Role" Multiplicity="1" Role="SPhone_Role" />
+          <End Type="SPhoneModel.SPhone_UserPermission" Multiplicity="*" Role="SPhone_UserPermission" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SPhone_UserPermission">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SPhone_LoginLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Nullable="false" Type="Guid" />
+          <Property Name="EmployeeID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LoginDate" Precision="3" Type="DateTime" />
+          <Property Name="FirstloginTime" Precision="3" Type="DateTime" />
+          <Property Name="FirstlogoutTime" Precision="3" Type="DateTime" />
+          <Property Name="Lastlogout" Precision="3" Type="DateTime" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="Sphone_Call">
+          <Key>
+            <PropertyRef Name="CallID" />
+          </Key>
+          <Property Name="CallID" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="EmployeeID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CustomerID" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CallBeginTime" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="CallEndTime" Precision="3" Type="DateTime" />
+          <Property Name="DeskTime" Precision="3" Type="DateTime" />
+          <Property Name="ConnectionID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="InOut" Type="Int32" />
+          <Property Name="CurrentQueueName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="FromQueueName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="NextQueueName" MaxLength="100" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="ANI" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="DNIS" MaxLength="30" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PlaceIP" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="IsConference" Type="Int32" />
+          <Property Name="IsTransfer" Type="Int32" />
+          <Property Name="IsTransferEPOS" Type="Int32" />
+          <Property Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CreateTime" Precision="3" Type="DateTime" />
+          <Property Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UpdateTime" Precision="3" Type="DateTime" />
+        </EntityType>
+        <ComplexType Name="Proc_GetProcessingQList_Result">
+          <Property Type="String" Name="Q_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Q_ProcessingBegin" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Q_ProcessingEnd" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="SPhone_IPDN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Place" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DNNo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PlaceIP" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PhoneIP" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="IsValid" />
+          <Property Type="String" Name="BindType" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PhoneType" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Precision="3" />
+          <Property Type="String" Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Precision="3" />
+          <Property Type="Int16" Name="IsSayEmpNO" Nullable="false" />
+          <Property Type="Int16" Name="IsRealDN" Nullable="false" />
+          <Property Type="String" Name="Ext1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ext2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ext3" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="Proc_GetChatRightEnterID_Result">
+          <Property Type="String" Name="Return" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="SPhone_ReportUrl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Guid" Name="GUID" />
+          <Property Type="String" Name="ReportName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReportPath" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="IsShow" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ivr_sugg_agency">
+          <Key>
+            <PropertyRef Name="AGENCY_ID" />
+            <PropertyRef Name="PRODUCT_TYPE" />
+          </Key>
+          <Property Type="String" Name="AGENCY_ID" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="PRODUCT_TYPE" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="AGENCY_NAME" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_NAME_WAV_FILENAME" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_COVER_AREA" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_INFO" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FAX_AGENCY_INFO" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_WAV_FILENAME" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VALID" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="RECORD_DATE" Precision="3" />
+          <Property Type="String" Name="CATEGORY" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ADD_TYPE" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ivr_sugg_station">
+          <Key>
+            <PropertyRef Name="AGENCY_ID" />
+            <PropertyRef Name="PRODUCT_TYPE" />
+          </Key>
+          <Property Type="String" Name="AGENCY_ID" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="PRODUCT_TYPE" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="AGENCY_NAME" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_NAME_WAV_FILENAME" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_COVER_AREA" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_INFO" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FAX_AGENCY_INFO" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AGENCY_WAV_FILENAME" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VALID" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="RECORD_DATE" Precision="3" />
+          <Property Type="String" Name="CATEGORY" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ADD_TYPE" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SPhone_NameValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Sort" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mark" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TypeCode" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TypeName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="IsDel" />
+          <Property Type="String" Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Precision="3" />
+          <Property Type="String" Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SPhone_DNIS">
+          <Key>
+            <PropertyRef Name="DNISID" />
+          </Key>
+          <Property Type="Int64" Name="DNISID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="DNISName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Precision="3" />
+          <Property Type="String" Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Precision="3" />
+          <Property Type="String" Name="Ext1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ext2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SPhone_TFNDNISRel" Relationship="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_DNIS" FromRole="SPhone_DNIS" ToRole="SPhone_TFNDNISRel" />
+        </EntityType>
+        <EntityType Name="SPhone_TFN">
+          <Key>
+            <PropertyRef Name="TFNID" />
+          </Key>
+          <Property Type="Int64" Name="TFNID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="TFNName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TFNBusi" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TFNCallFlow" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Precision="3" />
+          <Property Type="String" Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Precision="3" />
+          <Property Type="String" Name="Ext1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ext2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SPhone_TFNDNISRel" Relationship="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_TFN" FromRole="SPhone_TFN" ToRole="SPhone_TFNDNISRel" />
+          <NavigationProperty Name="SPhone_TFNQueueRel" Relationship="SPhoneModel.FK_SPhone_TFNQueueRel_SPhone_TFN" FromRole="SPhone_TFN" ToRole="SPhone_TFNQueueRel" />
+        </EntityType>
+        <EntityType Name="SPhone_TFNDNISRel">
+          <Key>
+            <PropertyRef Name="TFNID" />
+            <PropertyRef Name="DNISID" />
+          </Key>
+          <Property Type="Int64" Name="TFNID" Nullable="false" />
+          <Property Type="Int64" Name="DNISID" Nullable="false" />
+          <Property Type="String" Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Precision="3" />
+          <Property Type="String" Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Precision="3" />
+          <NavigationProperty Name="SPhone_DNIS" Relationship="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_DNIS" FromRole="SPhone_TFNDNISRel" ToRole="SPhone_DNIS" />
+          <NavigationProperty Name="SPhone_TFN" Relationship="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_TFN" FromRole="SPhone_TFNDNISRel" ToRole="SPhone_TFN" />
+        </EntityType>
+        <EntityType Name="SPhone_TFNQueueRel">
+          <Key>
+            <PropertyRef Name="TFNID" />
+            <PropertyRef Name="QueueID" />
+          </Key>
+          <Property Type="Int64" Name="TFNID" Nullable="false" />
+          <Property Type="Int64" Name="QueueID" Nullable="false" />
+          <Property Type="String" Name="QueueName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CreateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateTime" Precision="3" />
+          <Property Type="String" Name="UpdateBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UpdateTime" Precision="3" />
+          <NavigationProperty Name="SPhone_TFN" Relationship="SPhoneModel.FK_SPhone_TFNQueueRel_SPhone_TFN" FromRole="SPhone_TFNQueueRel" ToRole="SPhone_TFN" />
+        </EntityType>
+        <Association Name="FK_SPhone_TFNDNISRel_SPhone_DNIS">
+          <End Type="SPhoneModel.SPhone_DNIS" Role="SPhone_DNIS" Multiplicity="1" />
+          <End Type="SPhoneModel.SPhone_TFNDNISRel" Role="SPhone_TFNDNISRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_DNIS">
+              <PropertyRef Name="DNISID" />
+            </Principal>
+            <Dependent Role="SPhone_TFNDNISRel">
+              <PropertyRef Name="DNISID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPhone_TFNDNISRel_SPhone_TFN">
+          <End Type="SPhoneModel.SPhone_TFN" Role="SPhone_TFN" Multiplicity="1" />
+          <End Type="SPhoneModel.SPhone_TFNDNISRel" Role="SPhone_TFNDNISRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_TFN">
+              <PropertyRef Name="TFNID" />
+            </Principal>
+            <Dependent Role="SPhone_TFNDNISRel">
+              <PropertyRef Name="TFNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPhone_TFNQueueRel_SPhone_TFN">
+          <End Type="SPhoneModel.SPhone_TFN" Role="SPhone_TFN" Multiplicity="1" />
+          <End Type="SPhoneModel.SPhone_TFNQueueRel" Role="SPhone_TFNQueueRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPhone_TFN">
+              <PropertyRef Name="TFNID" />
+            </Principal>
+            <Dependent Role="SPhone_TFNQueueRel">
+              <PropertyRef Name="TFNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SPhoneModelStoreContainer" CdmEntityContainer="SPhoneEntities">
+          <EntitySetMapping Name="SPhone_BlackList">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_BlackList">
+              <MappingFragment StoreEntitySet="SPhone_BlackList">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="BlackListID" ColumnName="BlackListID" />
+                <ScalarProperty Name="BlackListTypeID" ColumnName="BlackListTypeID" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_BlackListType">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_BlackListType">
+              <MappingFragment StoreEntitySet="SPhone_BlackListType">
+                <ScalarProperty Name="BlackListTypeID" ColumnName="BlackListTypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_Chat">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_Chat">
+              <MappingFragment StoreEntitySet="SPhone_Chat">
+                <ScalarProperty Name="IPLocation" ColumnName="IPLocation" />
+                <ScalarProperty Name="CustomerIP" ColumnName="CustomerIP" />
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="ChatBeginTime" ColumnName="ChatBeginTime" />
+                <ScalarProperty Name="ChatEndTime" ColumnName="ChatEndTime" />
+                <ScalarProperty Name="ConnectionID" ColumnName="ConnectionID" />
+                <ScalarProperty Name="CurrentQueueName" ColumnName="CurrentQueueName" />
+                <ScalarProperty Name="FromQueueName" ColumnName="FromQueueName" />
+                <ScalarProperty Name="NextQueueName" ColumnName="NextQueueName" />
+                <ScalarProperty Name="MachineNo" ColumnName="MachineNo" />
+                <ScalarProperty Name="PlaceIP" ColumnName="PlaceIP" />
+                <ScalarProperty Name="MailAddress" ColumnName="MailAddress" />
+                <ScalarProperty Name="ContentText" ColumnName="ContentText" />
+                <ScalarProperty Name="IsConference" ColumnName="IsConference" />
+                <ScalarProperty Name="IsTransfer" ColumnName="IsTransfer" />
+                <ScalarProperty Name="IsRTO" ColumnName="IsRTO" />
+                <ScalarProperty Name="ServicecardNo" ColumnName="ServicecardNo" />
+                <ScalarProperty Name="WSISID" ColumnName="WSISID" />
+                <ScalarProperty Name="Enterid" ColumnName="Enterid" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_ChatText">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_ChatText">
+              <MappingFragment StoreEntitySet="SPhone_ChatText">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="SortID" ColumnName="SortID" />
+                <ScalarProperty Name="ChatTextID" ColumnName="ChatTextID" />
+                <ScalarProperty Name="QueueName" ColumnName="QueueName" />
+                <ScalarProperty Name="ChatTextTypeID" ColumnName="ChatTextTypeID" />
+                <ScalarProperty Name="ChatContent" ColumnName="ChatContent" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_ChatTextType">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_ChatTextType">
+              <MappingFragment StoreEntitySet="SPhone_ChatTextType">
+                <ScalarProperty Name="ChatTextTypeID" ColumnName="ChatTextTypeID" />
+                <ScalarProperty Name="ChatTextTypeName" ColumnName="ChatTextTypeName" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_DutyManager">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_DutyManager">
+              <MappingFragment StoreEntitySet="SPhone_DutyManager">
+                <ScalarProperty Name="DutyDate" ColumnName="DutyDate" />
+                <ScalarProperty Name="DutyManagerID" ColumnName="DutyManagerID" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_Holiday">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_Holiday">
+              <MappingFragment StoreEntitySet="SPhone_Holiday">
+                <ScalarProperty Name="Q_RestDate" ColumnName="Q_RestDate" />
+                <ScalarProperty Name="Q_IsValid" ColumnName="Q_IsValid" />
+                <ScalarProperty Name="Q_ProcessingEnd" ColumnName="Q_ProcessingEnd" />
+                <ScalarProperty Name="Q_ProcessingBegin" ColumnName="Q_ProcessingBegin" />
+                <ScalarProperty Name="Q_Name" ColumnName="Q_Name" />
+                <ScalarProperty Name="QueueName" ColumnName="QueueName" />
+                <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+                <ScalarProperty Name="HolidayRoleID" ColumnName="HolidayRoleID" />
+                <ScalarProperty Name="DNIS" ColumnName="DNIS" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_HolidayRole">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_HolidayRole">
+              <MappingFragment StoreEntitySet="SPhone_HolidayRole">
+                <ScalarProperty Name="HolidayRoleID" ColumnName="HolidayRoleID" />
+                <ScalarProperty Name="HolidayRoleName" ColumnName="HolidayRoleName" />
+                <ScalarProperty Name="HolidayBegin" ColumnName="HolidayBegin" />
+                <ScalarProperty Name="HolidayEnd" ColumnName="HolidayEnd" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_Module">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_Module">
+              <MappingFragment StoreEntitySet="SPhone_Module">
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="ParentModuleID" ColumnName="ParentModuleID" />
+                <ScalarProperty Name="IsLeaf" ColumnName="IsLeaf" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ModuleUrl" ColumnName="ModuleUrl" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_Role">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_Role">
+              <MappingFragment StoreEntitySet="SPhone_Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_RoleModule">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_RoleModule">
+              <MappingFragment StoreEntitySet="SPhone_RoleModule">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_UserPermission">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_UserPermission">
+              <MappingFragment StoreEntitySet="SPhone_UserPermission">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_LoginLog">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_LoginLog">
+              <MappingFragment StoreEntitySet="SPhone_LoginLog">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Lastlogout" ColumnName="Lastlogout" />
+                <ScalarProperty Name="FirstlogoutTime" ColumnName="FirstlogoutTime" />
+                <ScalarProperty Name="FirstloginTime" ColumnName="FirstloginTime" />
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sphone_Call">
+            <EntityTypeMapping TypeName="SPhoneModel.Sphone_Call">
+              <MappingFragment StoreEntitySet="Sphone_Call">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="IsTransferEPOS" ColumnName="IsTransferEPOS" />
+                <ScalarProperty Name="IsTransfer" ColumnName="IsTransfer" />
+                <ScalarProperty Name="IsConference" ColumnName="IsConference" />
+                <ScalarProperty Name="PlaceIP" ColumnName="PlaceIP" />
+                <ScalarProperty Name="DNIS" ColumnName="DNIS" />
+                <ScalarProperty Name="ANI" ColumnName="ANI" />
+                <ScalarProperty Name="NextQueueName" ColumnName="NextQueueName" />
+                <ScalarProperty Name="FromQueueName" ColumnName="FromQueueName" />
+                <ScalarProperty Name="CurrentQueueName" ColumnName="CurrentQueueName" />
+                <ScalarProperty Name="InOut" ColumnName="InOut" />
+                <ScalarProperty Name="ConnectionID" ColumnName="ConnectionID" />
+                <ScalarProperty Name="DeskTime" ColumnName="DeskTime" />
+                <ScalarProperty Name="CallEndTime" ColumnName="CallEndTime" />
+                <ScalarProperty Name="CallBeginTime" ColumnName="CallBeginTime" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetProcessingQList" FunctionName="SPhoneModel.Store.Proc_GetProcessingQList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SPhoneModel.Proc_GetProcessingQList_Result">
+                <ScalarProperty Name="Q_Name" ColumnName="Q_Name" />
+                <ScalarProperty Name="Q_ProcessingBegin" ColumnName="Q_ProcessingBegin" />
+                <ScalarProperty Name="Q_ProcessingEnd" ColumnName="Q_ProcessingEnd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetTodayRestQList" FunctionName="SPhoneModel.Store.Proc_GetTodayRestQList" />
+          <FunctionImportMapping FunctionImportName="Proc_AgentStatusChangeLog" FunctionName="SPhoneModel.Store.Proc_AgentStatusChangeLog" />
+          <EntitySetMapping Name="SPhone_IPDN">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_IPDN">
+              <MappingFragment StoreEntitySet="SPhone_IPDN">
+                <ScalarProperty Name="Ext3" ColumnName="Ext3" />
+                <ScalarProperty Name="Ext2" ColumnName="Ext2" />
+                <ScalarProperty Name="Ext1" ColumnName="Ext1" />
+                <ScalarProperty Name="IsRealDN" ColumnName="IsRealDN" />
+                <ScalarProperty Name="IsSayEmpNO" ColumnName="IsSayEmpNO" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+                <ScalarProperty Name="BindType" ColumnName="BindType" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="PhoneIP" ColumnName="PhoneIP" />
+                <ScalarProperty Name="PlaceIP" ColumnName="PlaceIP" />
+                <ScalarProperty Name="DNNo" ColumnName="DNNo" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetChatRightEnterID" FunctionName="SPhoneModel.Store.Proc_GetChatRightEnterID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SPhoneModel.Proc_GetChatRightEnterID_Result">
+                <ScalarProperty Name="Return" ColumnName="Return" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="SPhone_ReportUrl">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_ReportUrl">
+              <MappingFragment StoreEntitySet="SPhone_ReportUrl">
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ReportPath" ColumnName="ReportPath" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ivr_sugg_agency">
+            <EntityTypeMapping TypeName="SPhoneModel.ivr_sugg_agency">
+              <MappingFragment StoreEntitySet="ivr_sugg_agency">
+                <ScalarProperty Name="ADD_TYPE" ColumnName="ADD_TYPE" />
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="RECORD_DATE" ColumnName="RECORD_DATE" />
+                <ScalarProperty Name="VALID" ColumnName="VALID" />
+                <ScalarProperty Name="AGENCY_WAV_FILENAME" ColumnName="AGENCY_WAV_FILENAME" />
+                <ScalarProperty Name="FAX_AGENCY_INFO" ColumnName="FAX_AGENCY_INFO" />
+                <ScalarProperty Name="AGENCY_INFO" ColumnName="AGENCY_INFO" />
+                <ScalarProperty Name="AGENCY_COVER_AREA" ColumnName="AGENCY_COVER_AREA" />
+                <ScalarProperty Name="AGENCY_NAME_WAV_FILENAME" ColumnName="AGENCY_NAME_WAV_FILENAME" />
+                <ScalarProperty Name="AGENCY_NAME" ColumnName="AGENCY_NAME" />
+                <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
+                <ScalarProperty Name="AGENCY_ID" ColumnName="AGENCY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ivr_sugg_station">
+            <EntityTypeMapping TypeName="SPhoneModel.ivr_sugg_station">
+              <MappingFragment StoreEntitySet="ivr_sugg_station">
+                <ScalarProperty Name="ADD_TYPE" ColumnName="ADD_TYPE" />
+                <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+                <ScalarProperty Name="RECORD_DATE" ColumnName="RECORD_DATE" />
+                <ScalarProperty Name="VALID" ColumnName="VALID" />
+                <ScalarProperty Name="AGENCY_WAV_FILENAME" ColumnName="AGENCY_WAV_FILENAME" />
+                <ScalarProperty Name="FAX_AGENCY_INFO" ColumnName="FAX_AGENCY_INFO" />
+                <ScalarProperty Name="AGENCY_INFO" ColumnName="AGENCY_INFO" />
+                <ScalarProperty Name="AGENCY_COVER_AREA" ColumnName="AGENCY_COVER_AREA" />
+                <ScalarProperty Name="AGENCY_NAME_WAV_FILENAME" ColumnName="AGENCY_NAME_WAV_FILENAME" />
+                <ScalarProperty Name="AGENCY_NAME" ColumnName="AGENCY_NAME" />
+                <ScalarProperty Name="PRODUCT_TYPE" ColumnName="PRODUCT_TYPE" />
+                <ScalarProperty Name="AGENCY_ID" ColumnName="AGENCY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_NameValue">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_NameValue">
+              <MappingFragment StoreEntitySet="SPhone_NameValue">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_DNIS">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_DNIS">
+              <MappingFragment StoreEntitySet="SPhone_DNIS">
+                <ScalarProperty Name="Ext2" ColumnName="Ext2" />
+                <ScalarProperty Name="Ext1" ColumnName="Ext1" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="DNISName" ColumnName="DNISName" />
+                <ScalarProperty Name="DNISID" ColumnName="DNISID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_TFN">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_TFN">
+              <MappingFragment StoreEntitySet="SPhone_TFN">
+                <ScalarProperty Name="Ext2" ColumnName="Ext2" />
+                <ScalarProperty Name="Ext1" ColumnName="Ext1" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="TFNCallFlow" ColumnName="TFNCallFlow" />
+                <ScalarProperty Name="TFNBusi" ColumnName="TFNBusi" />
+                <ScalarProperty Name="TFNName" ColumnName="TFNName" />
+                <ScalarProperty Name="TFNID" ColumnName="TFNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_TFNDNISRel">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_TFNDNISRel">
+              <MappingFragment StoreEntitySet="SPhone_TFNDNISRel">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="DNISID" ColumnName="DNISID" />
+                <ScalarProperty Name="TFNID" ColumnName="TFNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPhone_TFNQueueRel">
+            <EntityTypeMapping TypeName="SPhoneModel.SPhone_TFNQueueRel">
+              <MappingFragment StoreEntitySet="SPhone_TFNQueueRel">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="QueueName" ColumnName="QueueName" />
+                <ScalarProperty Name="QueueID" ColumnName="QueueID" />
+                <ScalarProperty Name="TFNID" ColumnName="TFNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

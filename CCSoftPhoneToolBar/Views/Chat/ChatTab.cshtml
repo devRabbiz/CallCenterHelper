@@ -1,0 +1,276 @@
+﻿@model SoftPhoneToolBar.Models.ChatTabView
+@section header{
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
+    <meta http-equiv="expires" content="Wed,26 Feb 1997 08:21:57 GMT" />
+    <script type="text/javascript" src="../../Scripts/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript">
+        var jQuery141 = $.noConflict(true);
+    </script>
+    <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="../../Scripts/chat/jqeditor.js?ver=5.8"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat.js?ver=5.9"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat_api.js?ver=5.8"></script>
+    <script src="../../Scripts/json2.js"></script>
+    <link href="../../Content/editor.css?ver=5.8" rel="stylesheet" type="text/css" />
+    <link href="../../Content/chat.css?ver=5.8" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        Business_AppUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["Business.AppUrl"]';
+    </script>
+    @{
+        if (Request.Cookies["softphone"] != null && Request.Cookies["softphone"].Values["isemergency"] == "0")
+        {
+        <script type="text/javascript">
+            isemergency = false;
+            document.domain = '@System.Web.Configuration.WebConfigurationManager.AppSettings["document.domain"]';
+        </script>
+        }
+    }
+    <script type="text/javascript">
+        var chat = null, appServer, queueName, words = [], links = [], appServerDB;
+        $(document).ready(function () {
+            window.jqeditor.settings.fileServer = '@System.Configuration.ConfigurationManager.AppSettings["fileServer"]';
+            appServer = '@System.Configuration.ConfigurationManager.AppSettings["appServer"]';
+            appServerDB = '@System.Configuration.ConfigurationManager.AppSettings["AppServer.Db"]';
+            queueName = '@Model.CurrentQueueName';
+
+            var customerIP = '@Model.CustomerIP';
+            loadAddrByIP(customerIP);
+
+            loadCommonWords(queueName);
+            loadCommonLinks(queueName);
+
+            chat = new chatTab();
+
+            lenovoTrace('chat|' + chat.getID() + '|begin', false);
+
+            $("#btnSend").click(function () {
+                var text = window.jqeditor.getEditorContent('txtMessage');
+                text = text.replace(new RegExp('src="http://' + document.location.host, "ig"), 'src="');
+                text = text.replace(/<\/?(script)[^>]*>/ig, "");
+                var ntext = text.replace(/<\/?(p|font|strong|em)[^>]*>/ig, "");
+                if (ntext.length == 0) {
+                    alert("请先输入内容");
+                }
+                else if (chat && text != '$$OVERFLOW$$') {
+                    text = encodeURIComponent(text);
+                    chat.sendMessage(text);
+                }
+            });
+
+            $("#btnTransfer").click(function () { chat.transferChat(); });
+            $("#btnMeeting").click(function () { chat.meetingInvite(); });
+            $("#btnRTO").click(function () { chat.setRTO(); });
+            $("#btnHistory").click(function () { chat.viewHistory(); });
+            $("#aqueue").click(function () { chat.showQueue(this); });
+            $("#btnLink").click(function () { chat.showLinks(this); });
+            $("#btnSR").click(function () { chat.createSR(); });
+
+            $("#txtMessage").val("");
+            chat.connectionServer();
+            $(document).contextmenu(function () { return false; });
+
+            //这个方法不会被触发
+            $(window).unload(function () {
+                if (chat) chat.leftChat();
+                try {
+                    DttvncClient.doBreak();
+                } catch (e) { }
+            });
+
+            $('#iframe_txtMessage').bind('keydown', 'ctrl+v', function (e) {
+                var data = top.UploadImg();
+                if (data != 'undefined' && data != '') {
+                    data = eval('(' + data + ')');
+                    var text = '';
+                    if (data.ReturnFlag) {
+                        text = '<div>【文件】：<a href="' + data.FileUrl + '" target="_blank">'
+                            + data.FileName + '</a>&nbsp;&nbsp;[' + data.FileSize + ']</div>';
+                    }
+                    else if (data.ReturnFlag == false) {
+                        text = '<div>【文件上传失败】：' + data.Message + '</div>';
+                        alert("【文件上传失败】：" + data.Message)
+                    }
+                    chat.sendMessage(encodeURIComponent(text));
+                }
+            });
+        });
+
+        function loadAddrByIP(customerIP) {
+            try {
+                jQuery141.ajaxSetup({
+                    error: function (s, x, e) {
+                        //document.getElementById("spCustomerIP").innerHTML = val(s) + "1" + val(x) + "2" + val(e);
+                        document.getElementById("spCustomerIP").innerHTML = "所在地:未知";
+                        return false;
+                    }
+                });
+
+                var url = "http://api.map.baidu.com/location/ip?ak=F454f8a5efe5e577997931cc01de3974&ip=" + customerIP + "&coor=bd09ll";
+                jQuery141.getJSON(url,
+                    function (data) {
+                        if (data != null) {
+                            if (data.status == "0") {
+                                if (data.content.address_detail.province != data.content.address_detail.city) {
+                                    document.getElementById("spCustomerIP").innerHTML = "所在地:" + data.content.address_detail.province + data.content.address_detail.city;
+                                }
+                                else {
+                                    document.getElementById("spCustomerIP").innerHTML = "所在地:" + data.content.address_detail.province;
+                                }
+                            }
+                            else {
+                                //document.getElementById("spCustomerIP").innerHTML = "Loc failed";
+                                document.getElementById("spCustomerIP").innerHTML = "所在地:未知";
+                            }
+                        }
+                        else {
+                            //document.getElementById("spCustomerIP").innerHTML = "error, object is null";
+                            document.getElementById("spCustomerIP").innerHTML = "所在地:未知";
+                        }
+                    });
+            }
+            catch (ex) {
+                //document.getElementById("spCustomerIP").innerHTML = ex.message;
+                document.getElementById("spCustomerIP").innerHTML = "所在地:未知";
+            }
+        }
+      
+        // 加载常用语
+        function loadCommonWords(name) {
+            var url = appServerDB + 'Db/GetCommonWords?ss=' + new Date().getTime() + '&jsoncallback?';
+            var params = { queueName: name };
+            sendRequest(url, params, function (datas) {
+                $.each(datas, function (i) { words.push(datas[i]); });
+            });
+        }
+
+        // 加载链接
+        function loadCommonLinks(name) {
+            var url = appServerDB + 'Db/GetChatLinks?ss=' + new Date().getTime() + '&jsoncallback?';
+            var params = { queueName: name };
+            sendRequest(url, params, function (datas) {
+                $.each(datas, function (i) { links.push(datas[i]); });
+            });
+        }
+
+
+        $(function () {
+            var sendHotKey = top.getQkSend();
+            var keys = ["Enter", "Ctrl + Enter", "Shift + Enter", "Alt + S"];
+            $("#liHotKey").html("当前发送快捷键 " + keys[sendHotKey]);
+
+            for (var i = 1; i <= 5; i++) {
+                $(document).bind('keydown', 'alt+' + i, function (e) {
+                    var ikey = parseInt(e.data.split('+')[1]) - 1;
+                    if (top.qkSelectTab) {
+                        top.qkSelectTab(ikey);
+                    }
+                });
+            }
+        });
+    </script>
+}
+<div class="chatTabContent">
+    <div class="chat_huibg">
+        <div class="chat_name">
+            <label id="CustomerName">@Model.CustomerName</label>
+            <span id="spSuilu">随路数据:
+            </span>
+            <span id="spCustomerIP">
+            </span>
+        </div>
+        <div class="suilu">
+            <span>ID：@Html.Encode(Model.CustomerID)</span>
+            <span>主机编号：<label id="MachineNo">@Html.Encode(Model.MachineNO)</label></span>
+            <span>时长：<span id="spTime" class="time">00:00:00</span></span>
+            <span id="cIP">客户IP：@Model.CustomerIP</span>
+            <span style="display: none">
+                @Html.TextBoxFor(m => m.TicketID)
+                @Html.TextBoxFor(m => m.CurrentSessionID)
+                @Html.TextBoxFor(m => m.ChatData)
+                @Html.TextBoxFor(m => m.ChatServerHost)
+                @Html.TextBoxFor(m => m.ChatServerPort)
+                <object id="DttvncClient" classid="clsid:1A3E0785-A179-48BC-9F82-8468F15E2DB4" codebase="/Content/ttclient.cab#VERSION=3,3,3,0" viewastext>
+                    <param name="_Version" value="65536">
+                    <param name="_ExtentX" value="2646">
+                    <param name="_ExtentY" value="1323">
+                    <param name="_StockProps" value="0">
+                </object>
+            </span>
+        </div>
+        <div class="line"></div>
+        <div class="chaticon">
+            <dl>
+                <dt>
+                    <img src="../../content/images/chat.jpg" onclick="chat.transferChat();" /></dt>
+                <dd><a id="btnTransfer" href="javascript:;">转接</a></dd>
+            </dl>
+            <dl>
+                <dt class="iconline">
+                    <img src="../../content/images/chaticonline.png" /></dt>
+            </dl>
+            <dl>
+                <dt>
+                    <img src="../../content/images/duofang.jpg" onclick="chat.meetingInvite();" /></dt>
+                <dd><a id="btnMeeting" href="javascript:;">多方支持</a></dd>
+            </dl>
+            <dl>
+                <dt class="iconline">
+                    <img src="../../content/images/chaticonline.png" /></dt>
+            </dl>
+            <dl>
+                <dt>
+                    <img src="../../content/images/chatrto.png" onclick="chat.setRTO();" /></dt>
+                <dd><a id="btnRTO" href="javascript:;">RTO</a></dd>
+            </dl>
+            <dl>
+                <dt class="iconline">
+                    <img src="../../content/images/chaticonline.png" /></dt>
+            </dl>
+            <dl>
+                <dt>
+                    <img src="../../content/images/links.png" onclick="chat.showLinks(this);" /></dt>
+                <dd><a id="btnLink" href="javascript:;">常用链接</a></dd>
+            </dl>
+            <dl>
+                <dt class="iconline">
+                    <img src="../../content/images/chaticonline.png" /></dt>
+            </dl>
+            <dl>
+                <dt>
+                    <img src="../../content/images/chathistory.png" onclick="chat.viewHistory();" /></dt>
+                <dd><a id="btnHistory" href="javascript:;">历史记录</a></dd>
+            </dl>
+            <dl>
+                <dt class="iconline">
+                    <img src="../../content/images/chaticonline.png" /></dt>
+            </dl>
+            <dl>
+                <dt>
+                    <img src="../../content/images/chatsr.png" onclick="chat.createSR();" /></dt>
+                <dd><a id="btnSR" href="javascript:;">创建SR</a></dd>
+            </dl>
+        </div>
+    </div>
+    <div class="chat_wenbenone">
+        <p id="pArea" class="chat_wenben"></p>
+    </div>
+    <div class="chat_wenbenone">
+        <textarea id="txtMessage" class="jqeditor-agent"></textarea>
+    </div>
+    <div class="sent">
+        <ul>
+            <li style="width: 200px" id="liHotKey">默认发送快捷键 Enter </li>
+            <li style="width: 250px">
+                <p id="pType">正在输入中……</p>
+            </li>
+            <li>
+                <input type="button" id="btnSend" value="发送" class="icon_btn" /></li>
+        </ul>
+    </div>
+    <div id="divPanel" class="eDialog"></div>
+    <div id="divShadow"></div>
+</div>

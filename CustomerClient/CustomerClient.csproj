@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26E0D5A2-7DEE-40B9-BDD9-73609E79A4A1}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomerClient</RootNamespace>
+    <AssemblyName>CustomerClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Core, Version=8.1.0.8, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Logging, Version=8.1.0.8, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.ApplicationBlocks.Commons.Broker, Version=8.1.100.13, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.ApplicationBlocks.Commons.Broker.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Commons, Version=8.1.0.8, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Commons.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Commons.Collections, Version=8.1.0.5, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Commons.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Commons.Collections.Binding, Version=8.1.0.5, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Commons.Collections.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Commons.Connection, Version=8.1.0.8, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Commons.Connection.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Commons.Protocols, Version=8.1.0.10, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Commons.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Configuration.Protocols, Version=8.1.0.10, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Configuration.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Logging, Version=8.1.0.10, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Management.Protocols, Version=8.1.0.10, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Management.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.OpenMedia.Protocols, Version=8.1.0.10, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.OpenMedia.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.Voice.Protocols, Version=8.1.0.11, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.Voice.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.WebMedia.Protocols, Version=8.1.0.11, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.WebMedia.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Genesyslab.Platform.WebMedia.Protocols.EspEmail, Version=8.1.0.11, Culture=neutral, PublicKeyToken=2248646200015f60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\Genesyslab.Platform.WebMedia.Protocols.EspEmail.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref_Chat\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ref\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="chatting_html5.aspx.cs">
+      <DependentUpon>chatting_html5.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="chatting_html5.aspx.designer.cs">
+      <DependentUpon>chatting_html5.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chatting_Wap.aspx.cs">
+      <DependentUpon>Chatting_Wap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Chatting_Wap.aspx.designer.cs">
+      <DependentUpon>Chatting_Wap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\LenovoController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChatRTOView.cs" />
+    <Compile Include="Models\GetChatRightEnterID_Result.cs" />
+    <Compile Include="Models\IndexView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="chatting_html5.aspx" />
+    <Content Include="Chatting_Wap.aspx" />
+    <Content Include="Content\chat.css" />
+    <Content Include="Content\ChatServerInfo.xml" />
+    <Content Include="Content\mobile\css\common.css" />
+    <Content Include="Content\mobile\images\1.jpg" />
+    <Content Include="Content\mobile\images\2.jpg" />
+    <Content Include="Content\mobile\images\add_btn.jpg" />
+    <Content Include="Content\mobile\images\photo.png" />
+    <Content Include="Content\mobile\images\picture.jpg" />
+    <Content Include="Content\mobile\images\user.png" />
+    <Content Include="Content\mobile\images\waiter.png" />
+    <Content Include="Content\mobile\images\移动端-恢复的_04.jpg" />
+    <Content Include="Content\chat_html5.css" />
+    <Content Include="Content\chat_wap.css" />
+    <Content Include="Content\editor.css" />
+    <Content Include="Content\editor_html5.css" />
+    <Content Include="Content\editor_wap.css" />
+    <Content Include="Content\Images\agent.png" />
+    <Content Include="Content\Images\blank.gif" />
+    <Content Include="Content\Images\btn.png" />
+    <Content Include="Content\Images\btn_bg.gif" />
+    <Content Include="Content\Images\chatlogo.png" />
+    <Content Include="Content\Images\chat_bg.jpg" />
+    <Content Include="Content\Images\client.png" />
+    <Content Include="Content\Images\emote\angry.gif" />
+    <Content Include="Content\Images\emote\awkward.gif" />
+    <Content Include="Content\Images\emote\baituo.gif" />
+    <Content Include="Content\Images\emote\baiy.gif" />
+    <Content Include="Content\Images\emote\baoquan.gif" />
+    <Content Include="Content\Images\emote\bye.gif" />
+    <Content Include="Content\Images\emote\ch.gif" />
+    <Content Include="Content\Images\emote\crazy.gif" />
+    <Content Include="Content\Images\emote\cute.gif" />
+    <Content Include="Content\Images\emote\despise.gif" />
+    <Content Include="Content\Images\emote\doubt.gif" />
+    <Content Include="Content\Images\emote\envy.gif" />
+    <Content Include="Content\Images\emote\fastcry.gif" />
+    <Content Include="Content\Images\emote\guzhang.gif" />
+    <Content Include="Content\Images\emote\haixiu.gif" />
+    <Content Include="Content\Images\emote\jingli.gif" />
+    <Content Include="Content\Images\emote\keai.gif" />
+    <Content Include="Content\Images\emote\kelian.gif" />
+    <Content Include="Content\Images\emote\knock.gif" />
+    <Content Include="Content\Images\emote\kuaikule.gif" />
+    <Content Include="Content\Images\emote\laugh.gif" />
+    <Content Include="Content\Images\emote\meigui.gif" />
+    <Content Include="Content\Images\emote\ohmy.gif" />
+    <Content Include="Content\Images\emote\OK.gif" />
+    <Content Include="Content\Images\emote\panic.gif" />
+    <Content Include="Content\Images\emote\proud.gif" />
+    <Content Include="Content\Images\emote\qiang.gif" />
+    <Content Include="Content\Images\emote\quiet.gif" />
+    <Content Include="Content\Images\emote\sad.gif" />
+    <Content Include="Content\Images\emote\shengli.gif" />
+    <Content Include="Content\Images\emote\shutup.gif" />
+    <Content Include="Content\Images\emote\shy.gif" />
+    <Content Include="Content\Images\emote\sleep.gif" />
+    <Content Include="Content\Images\emote\smile.gif" />
+    <Content Include="Content\Images\emote\struggle.gif" />
+    <Content Include="Content\Images\emote\titter.gif" />
+    <Content Include="Content\Images\emote\tongue.gif" />
+    <Content Include="Content\Images\emote\wail.gif" />
+    <Content Include="Content\Images\emote\weiqu.gif" />
+    <Content Include="Content\Images\emote\woshou.gif" />
+    <Content Include="Content\Images\emote\wronged.gif" />
+    <Content Include="Content\Images\emote\yongbao.gif" />
+    <Content Include="Content\Images\emote\yun.gif" />
+    <Content Include="Content\Images\icons\anchor.gif" />
+    <Content Include="Content\Images\icons\close.gif" />
+    <Content Include="Content\Images\icons\flash.gif" />
+    <Content Include="Content\Images\icons\icons.gif" />
+    <Content Include="Content\Images\icons\loading.gif" />
+    <Content Include="Content\Images\icons\progress.gif" />
+    <Content Include="Content\Images\icons\progressbg.gif" />
+    <Content Include="Content\Images\icons\waiting.gif" />
+    <Content Include="Content\Images\icons\wmp.gif" />
+    <Content Include="Content\Images\icons\wordimg.gif" />
+    <Content Include="Content\Images\left.png" />
+    <Content Include="Content\Images\left_left.png" />
+    <Content Include="Content\Images\line.jpg" />
+    <Content Include="Content\Images\right.png" />
+    <Content Include="Content\Images\sent_btn.png" />
+    <Content Include="Content\LenovoRTO.cab" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\ttserver.cab" />
+    <Content Include="Content\wap\themes\external\jquery\jquery.js" />
+    <Content Include="Content\wap\themes\images\animated-overlay.gif" />
+    <Content Include="Content\wap\themes\images\ui-bg_diagonals-small_25_c5ddfc_40x40.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_diagonals-thick_20_e69700_40x40.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_diagonals-thick_22_1484e6_40x40.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_diagonals-thick_26_2293f7_40x40.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_flat_0_e69700_40x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_flat_0_e6b900_40x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_highlight-soft_100_f9f9f9_1x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Content\wap\themes\images\ui-bg_inset-hard_100_eeeeee_1x100.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_0a82eb_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_0b54d5_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_5fa5e3_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_fcdd4a_256x240.png" />
+    <Content Include="Content\wap\themes\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\wap\themes\index.html" />
+    <Content Include="Content\wap\themes\jquery-ui.css" />
+    <Content Include="Content\wap\themes\jquery-ui.js" />
+    <Content Include="Content\wap\themes\jquery-ui.min.css" />
+    <Content Include="Content\wap\themes\jquery-ui.min.js" />
+    <Content Include="Content\wap\themes\jquery-ui.structure.css" />
+    <Content Include="Content\wap\themes\jquery-ui.structure.min.css" />
+    <Content Include="Content\wap\themes\jquery-ui.theme.css" />
+    <Content Include="Content\wap\themes\jquery-ui.theme.min.css" />
+    <Content Include="Demo.aspx" />
+    <Content Include="demo.htm" />
+    <Content Include="Demo\demo.htm" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Log4net.config" />
+    <Content Include="lenovochat.io" />
+    <None Include="Properties\PublishProfiles\CustomerClient.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomerClientPub.pubxml" />
+    <Content Include="Scripts\chat.js" />
+    <Content Include="Scripts\chat_wap.js" />
+    <Content Include="Scripts\jqeditor.js" />
+    <Content Include="Scripts\jqeditor_html5.js" />
+    <Content Include="Scripts\jqeditor_wap.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\Chatting.cshtml" />
+    <Content Include="Views\Chat\ChatRTO.cshtml" />
+    <Content Include="Views\Chat\Chatting_wap.cshtml" />
+    <Content Include="Views\Chat\Chatting_html5.cshtml" />
+    <Content Include="Views\Chat\Chatting_Mobile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chat.Common\Chat.Common.csproj">
+      <Project>{bdbc3a19-f7ca-4c54-9073-dd46a3e5e589}</Project>
+      <Name>Chat.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tele.Common\Tele.Common.csproj">
+      <Project>{780c5e02-8e9a-4f36-8b26-6d2c5b0395c3}</Project>
+      <Name>Tele.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>40459</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

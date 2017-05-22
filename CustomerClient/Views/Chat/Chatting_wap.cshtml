@@ -1,0 +1,132 @@
+﻿@model CustomerClient.Models.IndexView
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/jqeditor_wap.js?ver3.95"></script>
+<script type="text/javascript" src="../../Scripts/chat_wap.js?ver3.95"></script>
+<link href="../../Content/editor_wap.css" rel="stylesheet" />
+<link href="../../Content/chat_wap.css?ver=3.3" rel="stylesheet" />
+<script src="../../Content/wap/themes/jquery-ui.min.js"></script>
+<link href="../../Content/wap/themes/jquery-ui.min.css" rel="stylesheet" />
+<script type="text/javascript">
+    var chat = null;
+    chatCustomerID = 'cs' + '@Guid.NewGuid().ToString().Replace("-", "")';
+    $(document).ready(function () {
+        window.jqeditor.settings.appServer = '@System.Configuration.ConfigurationManager.AppSettings["appServer"]';
+        window.jqeditor.settings.fileServer = '@System.Configuration.ConfigurationManager.AppSettings["fileServer"]';
+        window.jqeditor.settings.queueName = '@Model.CurrentQueueName';
+
+        chat = new chatTab();
+        $("#btnSend").attr("disabled", "disabled");
+        $("#btnSend").click(function () {
+            var text = window.jqeditor.getEditorContent('txtMessage');
+            text = text.replace(new RegExp('src="http://' + document.location.host, "ig"), 'src="');
+            text = text.replace(/<\/?(script)[^>]*>/ig, "");
+            var ntext = text.replace(/<\/?(p|font|strong|em)[^>]*>/ig, "");
+            if (ntext.length == 0) {
+                alert("请先输入内容");
+            }
+            else if (chat && text != '$$OVERFLOW$$') {
+                text = encodeURIComponent(text);
+                chat.sendMessage(text);
+            }
+            window.focus();
+        });
+        $("#txtMessage").val("");
+        $("#pArea").html("");
+
+
+        chat.showWelcomeText();
+
+        var h = $(window).height();
+        $('.pArea').height(h - 60);
+
+
+        $($('#iframe_txtMessage')[0].contentWindow).focus(function () {
+
+            try {
+                chat.updateTypingStatus(1);
+            }
+            catch (e) { }
+
+            var $p = $("#pArea");
+            $p[0].scrollTop = $p[0].scrollHeight;
+
+            setTimeout(function () {
+                var h = $(document).outerHeight();
+                $(document).scrollTop(h);
+            }, 1000);
+        }).blur(function () {
+            chat.updateTypingStatus(0);
+        });
+
+        $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 320
+        });
+
+        $("#pArea").on('click', 'a', function (event) {
+            var src = $(this).attr('href');
+            var iframe = '<iframe src="' + src + '" width="320" height="400" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
+            $('#dialog_url').empty().html(iframe);
+            $("#dialog").dialog("open");
+            event.preventDefault();
+            return false;
+        });
+    });
+    $(document).keydown(function (ev) {
+        if (event.keyCode == 116) {
+            event.keyCode = 0;
+            event.returnValue = false;
+            return true;
+        }
+    });
+    $(window).unload(function () {
+        if (chat) chat.leftChat();
+        lenovoTrace('unload', false);
+    });
+    window.onbeforeunload = function () {
+        if (chat) chat.leftChat();
+        lenovoTrace('onbeforeunload', false);
+    }
+    document.body.oncontextmenu = function () { return false; }
+</script>
+
+<div id="dialog" title="浏览">
+    <div id="dialog_url">
+    </div>
+</div>
+
+
+<div class="tabbox">
+    <div class="chat_content">
+        <div class="chat_wenbenone">
+            <div id="pArea" class="chat_wenben"></div>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="fixed">
+            <div class="chat_wenbenone" style="padding-right: 6px;">
+                <textarea id="txtMessage" class="jqeditor-client"></textarea>
+            </div>
+        </div>
+        <div class="sent" style="display: none">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="display: none">
+                        <div id="liHotKey">当前发送快捷键 Enter</div>
+                    </td>
+                    <td style="display: none">@Html.HiddenFor(m => m.ClientUserData)
+                        @Html.HiddenFor(m => m.RabitPreText)
+                        通话时长：<span id="spTime">00:00:00</span></td>
+                    <td>
+                        @*<input type="button" id="btnSend" value="发送" class="icon_btn" />*@
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

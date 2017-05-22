@@ -1,0 +1,1292 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Genesyslab.Platform.ApplicationBlocks.Commons.Broker</name>
+    </assembly>
+    <members>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService">
+             <summary>
+             <c>EventReceivingBrokerService</c> class is designed to work with event/response messages.
+              See also <see cref="!:Genesyslab.Platform.Commons.Protocols.DuplexChannel.Received"></see> event.
+             </summary>
+             <example>
+             <code>[C#]
+                 string protocolName = "Configuration";
+                 ConfServerProtocol protocol;
+                 EventReceivingBrokerService eventBroker;
+            
+                 public void Initialize() 
+                 {
+                     Endpoint endpoint = new Endpoint(protocolName, "hostname", 9999);
+                     protocol = new ConfServerProtocol(endpoint);
+                     protocol.ClientApplicationType = CfgAppType.CFGSCE;
+                     protocol.ClientName = "clientname";
+                     protocol.UserName = "user1";
+                     protocol.UserPassword = "user1-password";
+            
+                     eventBroker = new EventReceivingBrokerService(
+                                     new SingleThreadInvoker("EventReceivingBrokerService-1"));
+                     protocol.SetReceiver(eventBroker);
+                     eventBroker.Register(
+                         new Action&lt;IMessage&gt;(handle),
+                         new MessageFilter(protocol.ProtocolDescription)
+                     );
+                 }
+            
+                 public void handle(IMessage msg) 
+                 {
+                     Console.WriteLine("Incoming message: " + msg);
+                 }
+             </code>   
+                
+             </example>    
+             
+             Broker service can be shared between several protocol connections (may be of different type):
+             
+             <example>
+             <code>[C#]
+                 ...
+                 statProtocol.SetReceiver(eventBroker);
+                 ixnProtocol.SetReceiver(eventBroker);
+                 routingProtocol.SetReceiver(eventBroker);
+            
+                 // register handler for the stat protocol messages:
+                 eventBroker.Register(
+                     new MyStatAction(),
+                     new MessageFilter(statProtocol.ProtocolDescription)
+                 );
+            
+                 // register handler for all of the protocols messages:
+                 eventBroker.Register(new MyAction(), null);
+                 ...
+             </code>
+             
+            
+             By this way <code>eventBroker</code> will handle all incoming messages from all initialized
+             protocols one by one, using its invoker.
+            
+             </example>   
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1">
+            <summary>
+            <c>AsyncBrokerServiceBase</c> class extends base implementation
+            of the Publish/Subscribe pattern with asynchronous publishing.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1">
+            <summary>
+            <c>BrokerServiceBase&lt;T&gt;</c> class implements the Publish/Subscribe pattern.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.IPublishingService`1">
+            <summary>
+            <c>IPublishingService&lt;T&gt;</c> interface defines publisher contract for Publish/Subscribe pattern.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.IPublishingService`1.Publish(`0)">
+            <summary>
+            Publishes event obj
+            </summary>
+            <param name="obj">Event to be processed by subscribers</param>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService`1">
+            <summary>
+            <c>IPublishingService&lt;T&gt;</c> interface defines subscriber contract for Publish/Subscribe pattern.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService`1.Register(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{`0})">
+            <summary>
+            Registeres a subscriber for notifications about publishing event.
+            </summary>
+            <param name="subscriber">Interface of subscriber object being registered.</param> 
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService`1.Register(System.Action{`0})">
+            <summary>
+            Registeres an action to be performed when a publishing event occures.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService`1.Register(System.Action{`0},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+            Registeres an action to be performed when a publishing event occures.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+            <param name="filter">Filter predicate that allows checking whether publishing event should 
+            be processed or ignored.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService`1.Unregister(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{`0})">
+            <summary>
+            Unregisteres a subscriber from notifications about publishing activities.
+            </summary>
+            <param name="subscriber">Interface of subscriber object being unregistered.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService`1.Unregister(System.Action{`0})">
+            <summary>
+            Unregisteres a subscriber from notifications about publishing activities.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService">
+            <summary>
+            <c>ISubscriptionService</c> interface defines subscriber contract for Publish/Subscribe pattern.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService.Register``1(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{``0})">
+            <summary>
+            Registeres a subscriber for notifications about publishing activities.
+            </summary>
+            <param name="subscriber">Interface of subscriber object being registered. 
+            To be used for publishing activities processing</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService.Register``1(System.Action{``0})">
+            <summary>
+            Registeres an action to be performed when a publishing event occures.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService.Register``1(System.Action{``0},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{``0})">
+            <summary>
+            Registeres an action to be performed when a publishing event occures.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object T
+            when a publishing event occures.</param>
+            <param name="filter">filter predicate that allows checking whether publishing event should 
+            be processed or ignored.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService.Unregister``1(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{``0})">
+            <summary>
+            Unregisteres a subscriber from notifications about publishing activities.
+            </summary>
+            <param name="subscriber">Interface of subscriber object being unregistered.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriptionService.Unregister``1(System.Action{``0})">
+            <summary>
+            Unregisteres a subscriber from notifications about publishing activities.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.#ctor(System.Int32)">
+            <summary>
+            Creates an instance of <c>BrokerServiceBase</c> class.
+            </summary>
+            <param name="capacity">Defines the maximum number of subscribers the broker service will serve.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.#ctor">
+            <summary>
+            Creates an instance of <c>BrokerServiceBase</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Publish(`0)">
+            <summary>
+            Implements Publish method of <c>IPublishingService&lt;T&gt;</c> interface. 
+            The method publishes event obj.
+            </summary>
+            <param name="obj">Object that is used for event obj processing.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Register(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{`0})">
+            <summary>
+            Implementation of <c>Register(ISubscriber&lt;T&gt; subscriber)</c> method of ISubscriptionService 
+            interface. Registeres a subscriber for notifications about and processing of publishing events.
+            Implements subscription functionality of the Publish/Subscribe pattern.
+            </summary>
+            <param name="subscriber"><c>ISubscriber&lt;T&gt;</c> interface of subscriber object being registered.</param> 
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Register(System.Action{`0})">
+            <summary>
+            Implementation of <c>Register(Action&lt;T&gt; handler)</c> method of <c>ISubscriptionService&lt;T&gt;</c> 
+            interface. Subscribes an action to be performed when a publishing event occures. 
+            Implements subscription functionality of the Publish/Subscribe pattern.
+            The method also processes the filter custom attributes which allows a user to define filters 
+            externally.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param> 
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Register(System.Action{`0},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+            Implementation of <c>Register(Action&lt;T&gt; handler, IPredicate&lt;T&gt; filter)</c> method of 
+            <c>ISubscriptionService&lt;T&gt;</c> interface. Subscribes an action to be performed when a publishing 
+            event occures. Implements subscription functionality of the Publish/Subscribe pattern.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+            <param name="filter">Filter predicate that allows checking whether publishing event should 
+            be processed or ignored.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Unregister(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{`0})">
+            <summary>
+            Implementation of <c>Unregister(ISubscriber&lt;T&gt; subscriber)</c> method of 
+            <c>ISubscriptionService&lt;T&gt;</c> interface. Unregisteres a subscriber from notifications about 
+            publishing activities. Implements subscription functionality of the Publish/Subscribe pattern.
+            </summary>
+            <param name="subscriber">Interface of subscriber object being unregistered.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Unregister(System.Action{`0})">
+            <summary>
+            Implementation of <c>Unregister(ISubscriber&lt;T&gt;)</c> method of 
+            <c>ISubscriptionService&lt;T&gt;</c> interface. Unregisteres a subscriber from notifications about 
+            publishing activities. Implements subscription functionality of the Publish/Subscribe pattern.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.OnPublish(`0)">
+            <summary>
+            Called when a "publish" operation occurs.
+            </summary>
+            <param name="obj">The object being published</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.Notify(`0)">
+            <summary>
+            Calls subscribers' processing/handling methods to process publishing event
+            </summary>
+            <param name="obj">Object that is used for a publishing event processing</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.OnNotificationException(Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber{`0},System.Exception)">
+            <summary>
+            Allows to handle exceptions thrown by subscribers' publishing event processing methods
+            </summary>
+            <param name="subscriber">Exception originator</param>
+            <param name="e">Thrown exception</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.UnregisterAll">
+            <summary>
+            Unregisters all subscribers
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceBase`1.PrepareSubscribers">
+            <exclude/>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber`1">
+            <summary>
+            <c>ISubscriber&lt;T&gt;</c> interface defines subscriber contract for Publish/Subscribe pattern.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber`1.Handle(`0)">
+            <summary>
+            Processes a publishing event.
+            </summary>
+            <param name="obj">Event to be processed by subscribers.</param>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.ISubscriber`1.Filter">
+            <summary>
+            Gets filter predicate that allows checking whether publishing event should be processed
+            or ignored.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.#ctor">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.#ctor(Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.Publish(`0)">
+             <summary>
+             Enqueues event for publishing by the invoker.
+            
+             <see cref="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.Invoker"/>
+             </summary>
+             <param name="obj">Object that is used for event processing</param>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.Invoker">
+            <summary>
+            Sets invoker object.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.#ctor">
+            <summary>
+            Creates an instance of <code>EventReceivingBrokerService</code> class.
+            <see cref="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.Invoker"/>
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.#ctor(Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+            <summary>
+            Creates an instance of <code>EventReceivingBrokerService</code> class.
+            </summary>
+            <param name="invoker">invoker to be used for requests messages handling</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.ProcessMessage(Genesyslab.Platform.Commons.Protocols.IMessage)">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.Receive(System.TimeSpan)">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.Receive">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.ClearInput">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.ReleaseReceivers">
+            <exclude/>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService.InputSize">
+            <exclude/>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService">
+            <summary>
+            <c>EventBrokerService</c> class is desined to work with event/response messages.
+            See also <see cref="!:Genesyslab.Platform.Commons.Protocols.DuplexChannel.Received"></see> event.
+            </summary>
+            <example>
+            <code>[c#]
+                const string protocolName = "Configuration";
+            
+                public void Initialize()
+                {
+                    Endpoint endpoint = new Endpoint(protocolName, "hostname", 9999);
+                    ConfServerProtocol protocol = new ConfServerProtocol(endpoint);
+                    protocol.ClientType = (int)ConfServerClientType.SCE;
+            	    protocol.ClientName = "clientname";
+            	    protocol.UserName = "default";
+            	    protocol.UserPassword = "password";
+            
+                    EventBrokerService eventBroker = BrokerServiceFactory.CreateEventBroker(protocol);
+                    eventBroker.Register(this.OnConfServerEvent);
+                }
+            
+                [MessageRangeFilter(
+                        new int[]   {     
+                                        EventError.Id, 
+                                        EventObjectDeleted.Id, 
+                                        EventObjectsRead.Id, 
+                                        EventObjectCreated.Id, 
+                                        EventObjectUpdated.Id 
+                                    }, 
+                        ProtocolName = protocolName)]
+                private void OnConfServerEvent(IMessage obj)
+                {
+                    Console.WriteLine(obj);
+                }
+            </code>
+            </example>   
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1">
+            <summary>
+            <c>MessageBrokerService&lt;T&gt;</c> class implements the Publish/Subscribe pattern.
+            See also <see cref="!:Genesyslab.Platform.Commons.Protocols.DuplexChannel.Received"></see> event.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.#ctor(Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+            <summary>
+            Creates an instance of <c>MessageBrokerService</c> class.
+            </summary>
+            <param name="invoker">Initializes asyncronous invoker.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.#ctor">
+            <summary>
+            Creates an instance of <c>MessageBrokerService</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.Activate">
+            <summary>
+            Activates the service.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.Deactivate">
+            <summary>
+            Deactivates the service.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.Dispose">
+            <summary>
+            Disposes of the service. Implements the Basic Dispose Pattern.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the service. Implements the Basic Dispose Pattern.
+            </summary>
+            <param name="disposing">
+            <c>false</c> indicates that the method was invoked from the finalizer,
+            in this case reference objects should not be accessed.
+            </param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.Receive">
+            <summary>
+            Receives messages. An abstract method to be defined in subclasses.
+            </summary>
+            <returns>Returns received message object.</returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.Invoker">
+            <summary>
+            Gets/sets asyncronous invoker.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.IsActive">
+            <summary>
+            Checks if the service is active.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageBrokerService`1.GenericReceiver">
+            <summary>
+            Gets message receiver. An abstract property to be defined in subclasses.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService.#ctor">
+            <summary>
+            Creates an instance of <c>EventBrokerService</c> class. 
+            When using this constructor the following additional steps should be done to set the service in working state:
+            setting the invoker - property <c>Invoker</c>;
+            setting the receiver - property <c>Receiver</c>;
+            calling <c>Activation</c> method.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService.#ctor(Genesyslab.Platform.Commons.Protocols.IMessageReceiver)">
+            <summary>
+            Creates an instance of <c>EventBrokerService</c> class.
+            </summary>
+            <param name="receiver">Initializes message receiver.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the service. Implements the Basic Dispose Pattern.
+            </summary>
+            <param name="disposing">
+            <c>false</c> indicates that the method was invoked from the finalizer,
+            in this case reference objects should not be accessed.
+            </param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService.Receive">
+            <summary>
+            Receives event messages.
+            </summary>
+            <returns>Returns an event message.</returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService.Receiver">
+            <summary>
+            Gets/sets message receiver.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventBrokerService.GenericReceiver">
+            <summary>
+            Gets/sets generic receiver. Generic receiver is able to receive both: event and request messages.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerService`1">
+            <summary>
+            <c>BrokerService&lt;T&gt;</c> class implements a general purpose broker service.
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerService`1.#ctor(System.Int32)">
+            <summary>
+            Creates an instance of <c>BrokerService</c> class.
+            </summary>
+            <param name="capacity">Defines the maximum number of subscribers the broker service will serve.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerService`1.#ctor">
+            <summary>
+            Creates an instance of <c>BrokerService</c> class.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.AndPredicate`1">
+            <summary>
+            <c>AndPredicate&lt;T&gt;</c> class realizes 'AND' logical operation.
+            </summary>
+            <typeparam name="T">Type of the object to be used for checking the predicate condition.</typeparam>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.CompositePredicateBase`1">
+            <summary>
+            <c>CompositePredicateBase&lt;T&gt;</c> class is an abstract base class that can consist of a set 
+            of atomic predicates.
+            </summary>
+            <typeparam name="T">Type of the object to be used for checking the predicate condition.</typeparam>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.PredicateBase`1">
+            <summary>
+            <c>PredicateBase&lt;T&gt;</c>, class is an abstract base class that implements <c>IPredicate&lt;T&gt;</c> interface.
+            </summary>
+            <typeparam name="T">Type of the object to be used for checking the predicate condition.</typeparam>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate`1">
+            <summary>
+            <c>IPredicate&lt;T&gt;</c> interface defines contract for a predicate.
+            </summary>
+            <typeparam name="T">Type of the object to be used for checking the predicate condition.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate`1.Invoke(`0)">
+            <summary>
+            Evaluates predicate's condition on truth or false.
+            </summary>
+            <param name="obj">Object to be used for checking the predicate condition.</param>
+            <returns>Represents the truth or false of the predicate's condition.</returns>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.PredicateBase`1.#ctor">
+            <summary>
+            Creates an instance of <c>PredicateBase</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.PredicateBase`1.#ctor(System.Boolean)">
+            <summary>
+            Creates an instance of <c>PredicateBase</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.PredicateBase`1.Invoke(`0)">
+            <summary>
+            Evaluates predicate's condition on truth or false. Makes the result inversion 
+            in case the predicate is negated.
+            </summary>
+            <param name="obj">Object to be used for checking the predicate condition.</param>
+            <returns>represents the truth or false of the predicate's condition.</returns>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.PredicateBase`1.Evaluate(`0)">
+            <summary>
+            Evaluates predicate's condition on truth or false
+            </summary>
+            <param name="obj">Object to be used for checking the predicate condition.</param>
+            <returns>Represents the truth or false of the predicate's condition.</returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.PredicateBase`1.IsNegated">
+            <summary>
+            Gets/Sets negated state of the predicate.
+            If an object is in negated state a logical 'NOT' is applied to all the object's logical operations.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.CompositePredicateBase`1.#ctor(System.Boolean)">
+            <summary>
+            Creates an instance of <c>CompositePredicateBase</c> class.
+            </summary>
+            <param name="isNegated">If true the predicate is considered as negated: 
+            an analog of the logical '!' operation.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.CompositePredicateBase`1.#ctor(Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+            Creates an instance of <c>CompositePredicateBase</c> class.
+            Composite predicate created with this constructor is an analog of a binary logical operation.
+            </summary>
+            <param name="p0">The first predicate.</param>
+            <param name="p1">The second predicate.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.CompositePredicateBase`1.#ctor">
+            <summary>
+            Creates an instance of <c>CompositePredicateBase</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.CompositePredicateBase`1.AddPredicate(Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+            Adds a predicate to the predicates' set.
+            </summary>
+            <param name="predicate">Predicate to be added to the predicates' set.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.CompositePredicateBase`1.RemovePredicate(Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+            Removes a predicate from the predicates' set.
+            </summary>
+            <param name="predicate">Predicate to be removed from the predicates' set.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.AndPredicate`1.#ctor(Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+            Creates an instance of <c>AndPredicate</c> class.
+            AndPredicate predicate created with this constructor is an analog of a 'AND' binary logical operation.
+            </summary>
+            <param name="p0">The first predicate.</param>
+            <param name="p1">The second predicate.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.AndPredicate`1.#ctor">
+            <summary>
+             Creates an instance of <c>AndPredicate</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.AndPredicate`1.#ctor(System.Boolean)">
+            <summary>
+            Creates an instance of <c>AndPredicate</c> class.
+            </summary>
+            <param name="isNegated">If true the predicate is considered as negated: an analog of the logical '!' operation.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.AndPredicate`1.Evaluate(`0)">
+            <summary>
+            Evaluates predicate's condition on truth or false.
+            </summary>
+            <param name="obj">Object to be used for checking the predicate condition.</param>
+            <returns>Represents the truth or false of the predicate's condition.</returns>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.SubscriptionFilterAttribute">
+            <summary>
+            <c>SubscriptionFilterAttribute</c> is an abstract Custom Attribute class. 
+            It is a base class for Filter Custom Attribute classes.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.SubscriptionAttribute">
+            <summary>
+            <c>SubscriptionAttribute</c> is a base Custom Attribute class
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.SubscriptionFilterAttribute.#ctor">
+            <summary>
+            Creates an instance of <c>SubscriptionFilterAttribute</c> class
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService">
+            <summary>
+            <c>RequestBrokerService</c> class is desined to work with request messages.
+            </summary>
+            <example>
+            <code>[c#]
+                public void Initialize()
+                {
+                    ExternalServiceProtocolListener requestListener = 
+                        new ExternalServiceProtocolListener(new Endpoint(Program.ServerName, new Uri("tcp://localhost:9999")));
+                    this.requestBroker = BrokerServiceFactory.CreateRequestBroker(requestListener);
+                    this.requestBroker.Register(OnRequest);
+                    requestListener.Open();
+                }
+                
+                private void OnRequest(IRequestContext msg)
+                {
+                   if( this.logger.IsInfoEnabled ) this.logger.InfoFormat("New Request Arrived: {0}", msg);
+                }
+            </code>
+            </example>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.#ctor">
+            <summary>
+            Creates an instance of <c>RequestBrokerService</c> class.
+            When using this constructor the following additional steps should be done to set the service in working state:
+            setting the invoker - property <c>Invoker</c>;
+            setting the receiver - property <c>Receiver</c>;
+            calling <c>Activation</c> method.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.#ctor(Genesyslab.Platform.Commons.Protocols.IRequestReceiver)">
+            <summary>
+            Creates an instance of <c>RequestBrokerService</c> class.
+            </summary>
+            <param name="receiver">Initializes request receiver</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.Register(System.Action{Genesyslab.Platform.Commons.Protocols.IRequestContext})">
+            <summary>
+            Implementation of <c>Register(Action&lt;T&gt; handler)</c> method of <c>ISubscriptionService&lt;T&gt;</c> 
+            interface. Registeres an action to be performed upon receiving a request message.
+            Implements subscription functionality of the Publish/Subscribe pattern.
+            The method also processes the filter custom attributes which allows a user to define filters 
+            externally.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            when a publishing event occures.</param> 
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.Register(System.Action{Genesyslab.Platform.Commons.Protocols.IRequestContext},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{Genesyslab.Platform.Commons.Protocols.IMessage})">
+            <summary>
+            Implementation of 'Register(Action&lt;T&gt; handler, IPredicate&lt;T&gt; filter)' method of ISubscriptionService interface.
+            Subscribes an action to be performed when upon receiving a request message.
+            Implements subscription functionality of the Publish/Subscribe pattern.
+            </summary>
+            <param name="handler">Represents the method that performs an action on the specified object
+            upon receiving a request message.</param>
+            <param name="filter">Filter predicate that allows checking whether request message should 
+            be processed or ignored.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.Dispose(System.Boolean)">
+            <summary>
+            Disposes of the service. Implements the Basic Dispose Pattern.
+            </summary>
+            <param name="disposing">
+            <c>false</c> indicates that the method was invoked from the finalizer,
+            in this case reference objects should not be accessed.
+            </param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.Receive">
+            <summary>
+            Receives request messages.
+            </summary>
+            <returns>Returns request context of received message.</returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.Receiver">
+            <summary>
+            Gets/sets request receiver.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestBrokerService.GenericReceiver">
+            <summary>
+            Gets generic receiver. Generic receiver is able to receive both: event and request messages.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilterAttribute">
+            <summary>
+            <c>MessageNameFilterAttribute</c> indicates <c>MessageNameFilter</c> for a method that will handle a message.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilterAttribute.#ctor(System.String)">
+            <summary>
+             Creates an instance of <c>MessageNameFilterAttribute</c> class.
+            </summary>
+            <param name="messageName">Initializes message name property.</param>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilterAttribute.IsNegated">
+            <summary>
+            Gets/Sets negated state of the attribute. 
+            If an object is in negated state a logical 'NOT' is applied to all the object's logical operations.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilterAttribute.ProtocolName">
+            <summary>
+            Gets/Sets protocol name. 
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilterAttribute.SdkName">
+            <summary>
+            Gets/Sets sdk name. 
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilterAttribute.MessageName">
+            <summary>
+            Gets/Sets message name. 
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute">
+            <summary>
+            <c>MessageRangeFilterAttribute</c> indicates <c>MessageRangeFilter</c> for a method that will handle a message.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute.#ctor">
+            <summary>
+             Creates an instance of <c>MessageRangeFilterAttribute</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute.#ctor(System.Int32[])">
+            <summary>
+             Creates an instance of <c>MessageRangeFilterAttribute</c> class.
+            </summary>
+            <param name="messagesRange">Initializes range of valid message ids</param>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute.IsNegated">
+            <summary>
+            Gets/Sets negated state of the attribute. 
+            If an object is in negated state a logical 'NOT' is applied to all the object's logical operations.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute.ProtocolName">
+            <summary>
+            Gets/Sets protocol name. 
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute.SdkName">
+            <summary>
+            Gets/Sets sdk name. 
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilterAttribute.MessagesRange">
+            <summary>
+            Gets/Sets the range of valid message ids.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter">
+            <summary>
+            <c>MessageFilter</c> class is designed for filtering messages using protocol description and endpoint 
+            name as evaluation criteria.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor(System.Boolean,Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.String)">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="protocolDescription">Description of protocol.</param>
+            <param name="endpointName">Name of endpoint.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor(Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.String)">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+            <param name="protocolDescription">Description of protocol.</param>
+            <param name="endpointName">Name of endpoint.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor(System.Boolean,Genesyslab.Platform.Commons.Protocols.ProtocolDescription)">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="protocolDescription">Description of protocol.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor(Genesyslab.Platform.Commons.Protocols.ProtocolDescription)">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+            <param name="protocolDescription">Description of protocol.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor(System.Boolean)">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.#ctor(System.Int32)">
+            <summary>
+             Creates an instance of <c>MessageFilter</c> class.
+            </summary>
+            <param name="protocolId">The protocol's unique identifier as specified by its ProtocolId property</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.Evaluate(Genesyslab.Platform.Commons.Protocols.IMessage)">
+            <summary>
+            Evaluates a message using protocol description, endpoint name, and protocolId as criteria.
+            </summary>
+            <remarks>
+            The filter is evaluated as an "and" comparison of those of the above attributes which
+            have been assigned a value. For example, if the protocol description and endpoint are 
+            specified while protocolId isn't, protocolId will be ignored in the evaluation and this method
+            will return true if both the endpoint and protocol description match the values
+            in IMessage.
+            </remarks>
+            <param name="obj">A message targeted for evaluation.</param>
+            <returns>Returns <c>true</c> if the filter's properties match their counterparts in 
+            IMessage,otherwise returns <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.ProtocolId">
+            <summary>
+            Gets the value of the protocol's unique identifier
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.ProtocolDescription">
+            <summary>
+             Gets/Sets protocol description
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilter.EndpointName">
+            <summary>
+             Gets/Sets endpoint name
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService">
+             <summary>
+             <c>RequestReceivingBrokerService</c> class is designed to work with request messages on server side.
+             </summary>
+             <example>
+             <code>[C#]
+                 string protocolName = "CustomRouter";
+                 UrsCustomProtocolListener ursServer;
+                 RequestReceivingBrokerService requestBroker;
+            
+                 public void Initialize() 
+                 {
+                     Endpoint endpoint = new Endpoint(protocolName, "localhost", 9999);
+                     ursServer = new UrsCustomProtocolListener(endpoint);
+            
+                     requestBroker = new RequestReceivingBrokerService(
+                                         new SingleThreadInvoker("RequestReceivingBrokerService-1"));
+                     requestBroker.Register(new Action&lt;IRequestContext&gt;(handler), null);
+                     ursServer.SetReceiver(requestBroker);
+                     ursServer.Open();
+                 }
+            
+                 public void handle(IRequestContext context) 
+                 {
+                     IMessage request = context.RequestMessage;
+                     // ...
+                     IMessage response = EventSomeResponse.Create("Operation result");
+                     // ...
+                     context.Respond(response);
+                 }
+             </code>
+             </example> 
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.#ctor">
+            <summary>
+            Creates an instance of <code>RequestReceivingBrokerService</code> class.
+            <see cref="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.Invoker"/>
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.#ctor(Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+            <summary>
+            Creates an instance of <code>RequestReceivingBrokerService</code> class.
+            </summary>
+            <param name="invoker">invoker to be used for requests messages handling</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.ProcessRequest(Genesyslab.Platform.Commons.Protocols.IRequestContext)">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.ReceiveRequest(System.TimeSpan)">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.ReceiveRequest">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.ClearInput">
+            <exclude/>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.ReleaseReceivers">
+            <exclude/>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService.InputSize">
+            <exclude/>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilterAttribute">
+            <summary>
+            <c>MessageFilterAttribute</c> indicates <c>MessageFilter</c> for a method that will handle a message.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilterAttribute.#ctor">
+            <summary>
+            Creates an instance of <c>MessageFilterAttribute</c> class.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilterAttribute.IsNegated">
+            <summary>
+            Gets/Sets negated state of the attribute. 
+            If an object is in negated state a logical 'NOT' is applied to all the object's logical operations.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageFilterAttribute.ProtocolDescription">
+            <summary>
+             Gets/Sets the protocol description.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceFactory">
+             <summary>
+             <c>BrokerServiceFactory</c> class implements factory for broker services,
+             <see cref="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.EventReceivingBrokerService"/> and <see cref="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestReceivingBrokerService"/> in particular.
+             <p/>
+             Example:
+             <example>
+             <code>
+                StatServerProtocol statProtocol = ...;
+                IAsyncInvoker invoker = new SingleThreadInvoker("statEventHandler");
+                EventReceivingBrokerService eventBroker =
+                        BrokerServiceFactory.CreateEventBroker(statProtocol, invoker);
+            
+                // register handler for the stat protocol messages:
+                eventBroker.Register(
+                    new MyStatAction(),
+                    new MessageFilter(statProtocol.ProtocolDescription)
+                );
+             </code>
+             </example>
+             </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceFactory.CreateEventBroker(Genesyslab.Platform.Commons.Protocols.IMessageReceiver)">
+            <summary>
+            Creates and activates an instance of <c>EventBrokerService</c> class.
+            </summary>
+            <param name="receiver">Initializes event message receiver</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceFactory.CreateRequestBroker(Genesyslab.Platform.Commons.Protocols.IRequestReceiver)">
+            <summary>
+            Creates and activates an instance of <c>RequestBrokerService</c> class.
+            </summary>
+            <param name="receiver">Initializes request message receiver</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceFactory.CreateEventBroker(Genesyslab.Platform.Commons.Protocols.IMessageReceiverManagement,Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+             <summary>
+             Creates broker service and initializes client protocol with it as with "external receiver".
+             <p/>
+             It is possible to use created service for other protocol connections:
+             <example>
+             <code>[C#]
+                 EventReceivingBrokerService eventBroker =
+                         BrokerServiceFactory.CreateEventBroker(statProtocol, invoker);
+            
+                 ixnProtocol.SetReceiver(eventBroker);
+                 routingProtocol.SetReceiver(eventBroker);
+            
+                 // register handler for the stat protocol messages:
+                 eventBroker.Register(
+                     new MyStatAction(),
+                     new MessageFilter(statProtocol.ProtocolDescription)
+                 );
+            
+                 // register handler for all of the protocols messages:
+                 eventBroker.Register(new MyAction(), null);
+                 ...
+             </code>
+             </example>
+             <see cref="M:Genesyslab.Platform.Commons.Protocols.IMessageReceiverManagement.SetReceiver(Genesyslab.Platform.Commons.Protocols.IMessageReceiverSupport)"/>
+             </summary>
+             <param name="protocol">client protocol connection to distribute messages from (usually it's some protocol connection)</param>
+             <param name="invoker">invoker to be used for messages publishing</param>
+             <returns>initialized broker service instance</returns>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.BrokerServiceFactory.CreateRequestBroker(Genesyslab.Platform.Commons.Protocols.IRequestReceiverManagement,Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+            <summary>
+            Creates broker service and initializes server channel with it as with "external receiver".
+            <p/>
+            When the brokers' invoker handles some client message, all other clients/requests are waiting,
+            so, server side handler must execute request messages fast and schedule long tasks to other threads.
+            <see cref="M:Genesyslab.Platform.Commons.Protocols.IRequestReceiverManagement.SetReceiver(Genesyslab.Platform.Commons.Protocols.IRequestReceiverSupport)"/>
+            </summary>
+            <param name="protocol">server channel to distribute clients requests from (it can be some ServerChannel instance)</param>
+            <param name="invoker">invoker to be used for requests messages handling</param>
+            <returns>initialized broker service instance</returns>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestFilter">
+            <summary>
+            <c>RequestFilter</c> class is designed for filtering requests.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestFilter.#ctor(Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{Genesyslab.Platform.Commons.Protocols.IMessage})">
+            <summary>
+             Creates an instance of RequestFilter class.
+            </summary>
+            <param name="messageFilter">Intializes MessageFilter.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestFilter.Evaluate(Genesyslab.Platform.Commons.Protocols.IRequestContext)">
+            <summary>
+            Evaluates a request using protocol description and endpoint name as criterias.
+            </summary>
+            <param name="obj">A request targeted for evaluation.</param>
+            <returns>Returns <c>true</c> if protocol description and endpoint name of the request are equal to the protocol description.
+            and endpoint name of the message filter property, otherwise returns <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.RequestFilter.MessageFilter">
+            <summary>
+             Gets/Sets message filter 
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter">
+            <summary>
+            <c>MessageNameFilter</c> uses message name as evaluation criteria.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter.#ctor(System.String)">
+            <summary>
+             Creates an instance of <c>MessageNameFilter</c> class.
+            </summary>
+            <param name="messageName">Initializes message name.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter.#ctor(System.Boolean,System.String)">
+            <summary>
+             Creates an instance of <c>MessageNameFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="messageName">Initializes message name.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter.#ctor(Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.String)">
+            <summary>
+             Creates an instance of <c>MessageNameFilter</c> class.
+            </summary>
+            <param name="protocolDescription">Initializes protocol description.</param>
+            <param name="messageName">Initializes message name.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter.#ctor(System.Boolean,Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.String)">
+            <summary>
+             Creates an instance of <c>MessageNameFilter</c> class.
+            </summary>
+            <param name="protocolDescription">Initializes protocol description.</param>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="messageName">Initializes message name.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter.Evaluate(Genesyslab.Platform.Commons.Protocols.IMessage)">
+            <summary>
+            Evaluates a message name, protocol description and endpoint name as criteria.
+            </summary>
+            <param name="obj">A message targeted for evaluation.</param>
+            <returns>Returns <c>true</c> if message name, protocol description and endpoint name of the message are equal 
+            to the message name, protocol description and endpoint name of the message name filter, otherwise returns <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageNameFilter.MessageName">
+            <summary>
+             Gets/Sets message name
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter">
+            <summary>
+            <c>MessageIdFilter</c> uses message id as evaluation criteria.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter.#ctor(System.Int32)">
+            <summary>
+             Creates an instance of <c>MessageIdFilter</c> class.
+            </summary>
+            <param name="messageId">Initializes message id.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter.#ctor(System.Boolean,System.Int32)">
+            <summary>
+             Creates an instance of <c>MessageIdFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="messageId">Initializes message id.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter.#ctor(Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.Int32)">
+            <summary>
+             Creates an instance of <c>MessageIdFilter</c> class.
+            </summary>
+            <param name="protocolDescription">Initializes protocol description.</param>
+            <param name="messageId">Initializes message id property.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter.#ctor(System.Boolean,Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.Int32)">
+            <summary>
+             Creates an instance of <c>MessageIdFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="protocolDescription">Initializes protocol description.</param>
+            <param name="messageId">Initializes message id.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter.Evaluate(Genesyslab.Platform.Commons.Protocols.IMessage)">
+            <summary>
+            Evaluates a message using message id as evaluation criteria.
+            </summary>
+            <param name="obj">A message targeted for evaluation.</param>
+            <returns>Returns <c>true</c> if message id, protocol description and endpoint name of the message are equal 
+            to the message id protocol description and endpoint name of the message id filter, otherwise 
+            returns <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilter.MessageId">
+            <summary>
+             Gets/Sets message id
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter">
+            <summary>
+            <c>MessageRangeFilter</c> uses message id as evaluation criteria.
+            <c>MessageRangeFilter</c> contains a set of valid message ids that is used for checking if a message's id
+            present in the set.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter.#ctor(System.Int32[])">
+            <summary>
+             Creates an instance of <c>MessageRangeFilter</c> class.
+            </summary>
+            <param name="messagesRange">Initializes message range.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter.#ctor(System.Boolean,System.Int32[])">
+            <summary>
+             Creates an instance of <c>MessageRangeFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="messagesRange">Initializes message range..</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter.#ctor(Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.Int32[])">
+            <summary>
+             Creates an instance of <c>MessageRangeFilter</c> class.
+            </summary>
+            <param name="protocolDescription">Initializes protocol description..</param>
+            <param name="messagesRange">Initializes message range..</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter.#ctor(System.Boolean,Genesyslab.Platform.Commons.Protocols.ProtocolDescription,System.Int32[])">
+            <summary>
+             Creates an instance of <c>MessageRangeFilter</c> class.
+            </summary>
+            <param name="isNegated">If <c>true</c> - the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+            <param name="protocolDescription">Initializes protocol description.</param>
+            <param name="messagesRange">Initializes message range.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter.Evaluate(Genesyslab.Platform.Commons.Protocols.IMessage)">
+            <summary>
+            Evaluates a message using message id as evaluation criteria.
+            </summary>
+            <param name="obj">A message targeted for evaluation.</param>
+            <returns>Returns <c>true</c> if the obj's message id present in the set of the valid message ids,
+            otherwise retuens <c>false</c>
+            </returns>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageRangeFilter.MessagesRange">
+            <summary>
+             Gets/Sets the set of valid message ids
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerService`1">
+            <summary>
+            <c>AsyncBrokerService</c> class implements a general purpose asynchronous publishing broker service.
+            <p/>Usage sample:<code>
+                AsyncInvoker invoker = new SingleThreadInvoker("AsyncBrokerServiceTest-1");
+                AsyncBrokerService&lt;SomePublishedEvent&gt; service =
+                          new AsyncBrokerService&lt;SomePublishedEvent&gt;(invoker);
+                Action&lt;SomePublishedEvent&gt; action = Action&lt;SomePublishedEvent&gt;(handle);
+                service.Register(action, null);
+                
+                SomePublishedEvent evnt = new SomePublishedEvent(...);
+                service.Publish(evnt);
+            </code>
+            </summary>
+            <typeparam name="T">Type of event to be processed by subscribers.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerService`1.#ctor">
+             <summary>
+             Creates an instance.
+             Asynchronous event broker service must be initialized with asynchronous
+             invoker to be able to handle events.
+            
+             <see cref="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerServiceBase`1.Invoker"/>
+             </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.AsyncBrokerService`1.#ctor(Genesyslab.Platform.Commons.Threading.IAsyncInvoker)">
+            <summary>
+            Creates an instance.
+            </summary>
+            <param name="invoker">asynchronous invoker to publish events with</param>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilterAttribute">
+            <summary>
+            <c>MessageIdFilterAttribute</c> indicates <c>MessageIdFilter</c> for a method that will handle a message.
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilterAttribute.#ctor(System.Int32)">
+            <summary>
+             Creates an instance of <c>MessageIdFilterAttribute</c> class.
+            </summary>
+            <param name="messageId">Initializes message id.</param>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilterAttribute.IsNegated">
+            <summary>
+            Gets/Sets negated state of the attribute. 
+            If an object is in negated state a logical 'NOT' is applied to all the object's logical operations.
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilterAttribute.ProtocolName">
+            <summary>
+            Gets/Sets protocol name. 
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilterAttribute.SdkName">
+            <summary>
+            Gets/Sets sdk name. 
+            </summary>
+        </member>
+        <member name="P:Genesyslab.Platform.ApplicationBlocks.Commons.Broker.MessageIdFilterAttribute.MessageId">
+            <summary>
+             Gets/Sets message id.
+            </summary>
+        </member>
+        <member name="T:Genesyslab.Platform.ApplicationBlocks.Commons.OrPredicate`1">
+            <summary>
+            <c>OrPredicate&lt;T&gt;</c> class realizes 'OR' logical operation.
+            </summary>
+            <typeparam name="T">Type of the object to be used for checking the predicate condition.</typeparam>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.OrPredicate`1.#ctor(Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0},Genesyslab.Platform.ApplicationBlocks.Commons.IPredicate{`0})">
+            <summary>
+             Creates an instance of <c>OrPredicate</c> class.
+            <c>OrPredicate</c> predicate created with this constructor is an analog of an 'OR' binary logical operation.
+            </summary>
+            <param name="p0">The first predicate.</param>
+            <param name="p1">The second predicate.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.OrPredicate`1.#ctor">
+            <summary>
+             Creates an instance of <c>OrPredicate</c> class
+            </summary>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.OrPredicate`1.#ctor(System.Boolean)">
+            <summary>
+            Creates an instance of <c>OrPredicate</c> class.
+            </summary>
+            <param name="isNegated">If true the predicate is considered as negated: an analog of the logical 'NOT' operation.</param>
+        </member>
+        <member name="M:Genesyslab.Platform.ApplicationBlocks.Commons.OrPredicate`1.Evaluate(`0)">
+            <summary>
+            Evaluates predicate's condition on truth or false.
+            </summary>
+            <param name="obj">Object to be used for checking the predicate condition.</param>
+            <returns>Represents the truth or false of the predicate's condition.</returns>
+        </member>
+    </members>
+</doc>

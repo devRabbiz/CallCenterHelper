@@ -1,0 +1,294 @@
+﻿body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    --background: #c70800;
+}
+
+* {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+img {
+    border: 0;
+}
+
+input[type="text"], input[type="password"], input[type="file"] {
+    border: 1px solid #a7a7a7;
+    width: 180px;
+    height: 18px;
+    font-family: Arial;
+    vertical-align: middle;
+    line-height: 18px;
+}
+
+select {
+    border: 1px solid #a7a7a7;
+    width: 185px;
+    height: 22px;
+    font-family: Arial;
+}
+
+    input[readonly], input[disabled], select[disabled] {
+        background-color: #EEEEEE;
+        color: #aaa;
+        font-family: Arial;
+        vertical-align: middle;
+        line-height: 18px;
+    }
+
+textarea {
+    width: 180px;
+    height: 36px;
+    border: 1px solid #a7a7a7;
+    font-family: Arial;
+}
+
+a {
+    color: Black;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: Red;
+    }
+
+.searchTable {
+    width: 700px;
+}
+
+.formTable {
+    min-width: 90%;
+    width: auto;
+    white-space: nowrap;
+}
+
+/*------------------------------Login BEGIN---------------------------------*/
+
+
+.loginBox {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+}
+
+    .loginBox table {
+        margin-left: 45%;
+    }
+
+    .loginBox label {
+        margin: 10px;
+        font-family: 'Microsoft YaHei',SimSun;
+        font-size: 16px;
+        line-height: 50px;
+    }
+
+    .loginBox hr {
+        border-bottom: solid 1px #009dd9;
+    }
+/*------------------------------Login END---------------------------------*/
+
+/*------------------------------Header BEGIN---------------------------------*/
+.logo {
+    margin: 5px;
+    height: 70px;
+    background: url(../../Images/logo.gif) no-repeat;
+    border-bottom: solid 1px #ccc;
+}
+
+    .logo h1 {
+        font-family: 微软雅黑;
+        padding-left: 300px;
+    }
+
+    .logo ul {
+        float: right;
+        margin-right: 100px;
+        width: 500px;
+    }
+
+        .logo ul li {
+            float: left;
+            list-style: none;
+            width: 30%;
+            line-height: 30px;
+        }
+/*------------------------------Header END,Left BEGIN---------------------------------*/
+.menu {
+    width: 200px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+    .menu li {
+        list-style: none;
+        list-style-position: inside;
+        line-height: 28px;
+        font-size: 14px;
+    }
+
+        .menu li a {
+            padding-left: 20px;
+            display: block;
+        }
+
+.menu_sel {
+    background: url(../../Images/left_menu.gif) no-repeat left top;
+}
+
+    .menu_sel a {
+        color: White;
+    }
+
+/*------------------------------Left END, Content BEGIN---------------------------------*/
+#divFoot {
+    left: 0;
+    height: 186px;
+    position: absolute;
+    z-index: -100;
+}
+
+#left {
+    float: left;
+}
+
+#right {
+    float: right;
+}
+
+.right_bg {
+    background: url(../../Images/right_bg.gif) repeat-y;
+    width: 16px;
+    overflow: hidden;
+}
+/*divAutoH8*/ /*------------------------------Content END, Button BEGIN---------------------------------*/
+
+.btn50, .btn50_over {
+    margin-right: 5px;
+    height: 20px;
+    font-family: Arial;
+    color: White;
+    border: 0px;
+    background-image: url(../images/btnbg.gif);
+    width: 50px;
+}
+
+.btn50 {
+    background-position: 0 0;
+}
+
+.btn50_over {
+    background-position: 0 -125px;
+}
+
+.btn100, .btn100_over {
+    margin-right: 5px;
+    height: 20px;
+    font-family: Arial;
+    color: White;
+    border: 0px;
+    background-image: url(../../images/btnbg.gif);
+    width: 100px;
+}
+
+.btn100 {
+    background-position: 0 -25px;
+}
+
+.btn100_over {
+    background-position: 0 -150px;
+}
+
+.btn150, .btn150_over {
+    margin-right: 5px;
+    height: 20px;
+    font-size: 11px;
+    font-family: Arial;
+    color: White;
+    border: 0px;
+    background-image: url(../../images/btnbg.gif);
+    width: 150px;
+}
+
+.btn150 {
+    background-position: 0 -50px;
+}
+
+.btn150_over {
+    background-position: 0 -175px;
+}
+
+.btn200, .btn200_over {
+    margin-right: 5px;
+    height: 20px;
+    font-size: 11px;
+    font-family: Arial;
+    color: White;
+    border: 0px;
+    background-image: url(../../images/btnbg.gif);
+    width: 200px;
+}
+
+.btn200 {
+    background-position: 0 -75px;
+}
+
+.btn200_over {
+    background-position: 0 -200px;
+}
+
+.btn250, .btn250_over {
+    margin-right: 5px;
+    height: 20px;
+    font-size: 11px;
+    font-family: Arial;
+    color: White;
+    border: 0px;
+    background-image: url(../../images/btnbg.gif);
+    width: 250px;
+}
+
+.btn250 {
+    background-position: 0 -100px;
+}
+
+.btn250_over {
+    background-position: 0 -225px;
+}
+
+/*------------------------------Button END,  BEGIN---------------------------------*/
+.navigator a {
+    color: #009DDA;
+    text-decoration: none;
+}
+
+    .navigator a:hover {
+        color: #009dd9;
+        text-decoration: underline;
+    }
+
+.navigator ul {
+    padding: 0;
+    line-height: 30px;
+}
+
+    .navigator ul li {
+        list-style: none;
+        float: left;
+        margin-right: 5px;
+    }
+
+.box {
+    margin: 5px;
+    padding: 5px;
+}
+
+.formDiv h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 15px 0 6px 0;
+    height: 20px;
+    vertical-align: middle;
+    background: url(../../Images/formhr.gif) no-repeat left bottom;
+}

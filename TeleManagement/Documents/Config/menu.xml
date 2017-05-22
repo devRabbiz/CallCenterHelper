@@ -1,0 +1,25 @@
+<modules>
+	<!--模块 id：标识 name：模块名-->
+	<module id="mod1" name="模块一">
+		<!--组 name：组名 target：目标窗体名称（向下派生）-->
+		<group name="电话应用管理"  target="Content" >
+			<!--链接 id：菜单标识 name：菜单名 url：链接 target：目标窗体名称-->
+			<link id="a1" name="IP和DN配置" url="~/Pages/Voice/IpdnList.aspx"/>
+			<link id="a2" name="假期配置" url="~/Pages/Public/HolidayList.aspx"/>
+			<link id="a3" name="黑名单配置" url="~/Pages/Public/BlackListList.aspx"/>
+			<link id="a4" name="值班经理配置" url="~/Pages/Public/DutyManagerList.aspx"/>
+			<link id="a5" name="文本话术设置" url="~/Pages/Chat/ChatTextList.aspx"/>
+			<link id="a6" name="文本历史记录查询" url="~/Pages/Chat/ChatList.aspx"/>
+      <link id="a7" name="维修站信息配置" url="~/Pages/Voice/ivr_sugg/stationList.aspx" />
+      <link id="a8" name="代理商信息配置" url="~/Pages/Voice/ivr_sugg/agencyList.aspx" />
+      <link id="dnis1" name="小号信息配置" url="~/Pages/Voice/TFNDNIS/DNISList.aspx" />
+      <link id="tfn1" name="大号信息配置" url="~/Pages/Voice/TFNDNIS/TFNList.aspx" />
+		</group>
+		<group name="配置管理"  target="Content" >
+			<link id="b1" name="模块管理" url="~/Pages/Public/ModuleList.aspx"/>
+			<link id="b2" name="角色管理" url="~/Pages/Public/RoleList.aspx"/>
+			<link id="b3" name="黑名单类型配置" url="~/Pages/Public/BlackListTypeList.aspx"/>
+			<link id="b4" name="文本记录高级查询" url="~/Pages/Chat/ChatList2.aspx"/>
+		</group>
+	</module>
+</modules>

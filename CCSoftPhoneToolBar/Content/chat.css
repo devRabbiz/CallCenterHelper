@@ -1,0 +1,464 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+    text-decoration: none;
+}
+chat_name
+img {
+    border: none;
+}
+
+table {
+    font-size: 12px;
+}
+
+input[type="text"] {
+    border: 1px solid #a7a7a7;
+    width: 150px;
+    height: 24px;
+    padding-left: 2px;
+    font-family: Arial;
+    vertical-align: middle;
+    line-height: 24px;
+}
+
+.tabbox {
+    width: 591px;
+    height: 660px;
+    background: url(../../content/images/chat_bg.jpg) no-repeat;
+    margin: 0 auto;
+}
+
+    .tabbox dl dd {
+        float: left;
+    }
+
+    .tabbox .tabhead {
+        width: 569px;
+        margin: 0 auto;
+        padding-left: 0px;
+        border-bottom: 1px solid #000;
+    }
+
+        .tabbox .tabhead:before {
+            display: table;
+            line-height: 0;
+            content: "";
+        }
+
+.tabhead:before,
+.tabhead:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+
+.tabhead:after {
+    clear: both;
+}
+
+.tab_t1 {
+    font-size: 12px;
+    background: url(../../content/images/hi2.jpg) no-repeat;
+    width: 46px;
+    height: 28px;
+    position: relative;
+    line-height: 28px;
+    padding-left: 35px;
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
+    margin-bottom: -1px;
+}
+
+    .tab_t1.selected {
+        border-bottom: 1px solid transparent;
+        background: url(../../content/images/chat_select.png) no-repeat;
+    }
+
+    .tab_t1 :hover {
+        background: url(../../content/images/chat_hover.jpg) no-repeat;
+    }
+
+    .tab_t1.flick {
+        background: url(../../content/images/chat_hi_flash.gif) no-repeat;
+    }
+
+    .tab_t1.stop {
+        background: url(../../content/images/chat_stop.png) no-repeat;
+    }
+
+    .tab_t1.alert {
+        background: url(../../content/images/chat_alert.png) no-repeat;
+    }
+
+    .tab_t1.selected {
+        color: #000000;
+        font-weight: bold;
+    }
+
+    .tab_t1 .tabClose {
+        float: right;
+        width: 9px;
+        height: 9px;
+        margin: 2px;
+    }
+
+        .tab_t1 .tabClose:hover {
+            background: url(../../content/images/closing.jpg) no-repeat;
+        }
+
+    .tab_t1.stop.selected {
+            background: url(../../content/images/chat_stop_selected.png) no-repeat;
+    }
+
+.chatlogo {
+    width: 98px;
+    height: 44px;
+    padding-top: 2px;
+    padding-right: 10px;
+    float: right;
+}
+
+.overflow_ellipsis {
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabcontent {
+    width: 568px;
+    height: 575px;
+    margin: 0 auto;
+    background: #fcfcfc;
+    overflow: hidden;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    border-left-color: #000000;
+}
+
+.tabbox .contentitem {
+    display: none;
+}
+
+    .tabbox .contentitem.selected {
+        display: block;
+        overflow: hidden;
+    }
+
+.contentitem, .contentitem .lightframe {
+    width: 568px;
+    height: 575px;
+}
+/***********************ChatIndex 结束  Chatting开始********************************/
+.chatTabContent {
+    width: 568px;
+    height: 575px;
+    overflow: hidden;
+}
+
+.chat_huibg {
+    width: 568px;
+    height: 132px;
+    background: #ebebeb;
+}
+
+.chat_name {
+    width: 543px;
+    height: 37px;
+    padding-left: 15px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    color: #3a3a3a;
+    line-height: 37px;
+}
+
+    .chat_name span {
+        padding-left: 15px;
+        font-size: 12px;
+        line-height: 32px;
+    }
+
+.suilu {
+    width: 543px;
+    height: 32px;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 32px;
+}
+
+    .suilu img, .chaticon img {
+        cursor: pointer;
+    }
+
+    .suilu span, chat_name span {
+        padding-left: 12px;
+    }
+
+        .suilu span.time, #_Avaya_BHO_ {
+            padding-left: 0px;
+        }
+
+        .suilu span a {
+            color: #19488e;
+        }
+
+.line {
+    width: 568px;
+    height: 1px;
+    background: #d7d7d7;
+    overflow: hidden;
+}
+
+.chaticon {
+    width: 568px;
+    height: 61px;
+}
+
+    .chaticon .iconline {
+        width: 1px;
+    }
+
+    .chaticon dl {
+        height: 51px;
+        margin-top: 10px;
+        float: left;
+    }
+
+        .chaticon dl dt {
+            width: 64px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+
+        .chaticon dl dd {
+            width: 64px;
+            font-size: 12px;
+            text-align: center;
+            padding-top: 3px;
+        }
+
+            .chaticon dl dd a {
+                color: #323232;
+            }
+
+.chat_select {
+    width: 86px;
+    height: 25px;
+    background: #f7fcff;
+    border: 1px solid #9cb8d0;
+}
+
+
+.chat_wenbenone {
+    width: 568px;
+}
+
+.chat_wenben {
+    width: 568px;
+    height: 262px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+}
+
+.jqeditor-agent {
+    width: 568px;
+    height: 138px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+}
+
+.icon_btn {
+    width: 85px;
+    height: 25px;
+    background: url(../../content/images/btn_bg.gif) no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.icon_btn2 {
+    width: 68px;
+    height: 20px;
+    background: url(../../content/images/btn_bg2.gif) no-repeat;
+    border: none;
+}
+
+.sent {
+    width: 578px;
+    height: 28px;
+    line-height: 28px;
+    background: #efefef;
+    color: #272727;
+}
+
+    .sent ul {
+        width: 578px;
+    }
+
+        .sent ul li {
+            float: left;
+            padding-left: 5px;
+        }
+
+
+.icon_btn {
+    color: #363636;
+    vertical-align: top;
+}
+
+.ing {
+    width: 568px;
+    height: 30px;
+    line-height: 30px;
+    color: #272727;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+/*************************/
+
+
+.content {
+    width: 700px;
+}
+
+h1 {
+    background: #e4e9fa;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #53617d;
+    margin-top: 1px;
+    color: #53617d;
+    font-size: 14px;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+
+.box {
+    margin: 3px 15px;
+}
+
+.listTable {
+    border: solid 1px #ccc;
+}
+
+    .listTable .header {
+        background-color: #7F7F7F;
+        color: White;
+        text-align: center;
+        height: 32px;
+    }
+
+    .listTable tr td {
+        line-height: 20px;
+        border-bottom: solid 1px #ccc;
+    }
+
+.colLable {
+    width: 100px;
+    padding-left: 5px;
+    background-color: #E7E7E7;
+}
+
+.historyBox {
+    width: 838px;
+    height: 588px;
+    margin: 0 auto;
+    background: #fcfcfc;
+    border: 1px solid #c7c7c7;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.chatNav {
+    width: 828px;
+    height: 200px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+    padding: 3px;
+    line-height: 16px;
+    font-family: Calibri;
+    margin-top: 2px;
+    border-top: dotted 2px #c7c7c7;
+    border-bottom: dotted 2px #c7c7c7;
+}
+
+.chatHistory {
+    width: 828px;
+    height: 308px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+    padding: 3px;
+}
+
+.historyQuery {
+    margin-left: 5px;
+}
+
+/*************聊天话术样式*************/
+.AgentMessage, .ClientMessage, .CommonText, .Alert, .Notice {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.AgentMessage {
+    color: #76923C;
+}
+
+.ClientMessage, .ClientMessageBox {
+    color: blue;
+}
+
+.CommonText {
+    color: #010101;
+}
+
+.Alert {
+    color: #ccc;
+}
+
+.Notice {
+    color: #080808;
+}
+
+.MsgContent {
+    margin-left: 5px;
+}
+/**************************/
+#divPanel {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    border: #999 1px solid;
+    background: #fff;
+    text-align: left;
+    font-size: 12px;
+    padding: 3px;
+}
+
+#divShadow {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    background: #000;
+    opacity: 0.2;
+    -ms-filter: 'alpha(opacity=20)';
+    filter: alpha(opacity=20);
+}

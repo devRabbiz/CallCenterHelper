@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f691213527ba4ddf96e04dfc376ee57d" Name="关系图1" ZoomLevel="71">
+        <EntityTypeShape EntityType="CTICFGModel.cfg_dn" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_flex_prop" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_script" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_skill" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_skill_level" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_person" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_login_info" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_agent_group" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CTICFGModel.cfg_agent_login" Width="1.5" PointX="8.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

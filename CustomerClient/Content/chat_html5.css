@@ -1,0 +1,293 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+body{
+	background:#e5e5e5;
+}
+
+img {
+    border: none;
+}
+
+.clear{
+	clear:both;
+}
+
+.tabbox {
+    /*height: 516px;*/
+    background: #e5e5e5;
+    margin: 0 auto;
+    padding-top: 3px;
+    /*width: 540px;*/
+    min-width: 320px;
+}
+
+.chatWait {
+    line-height: 44px;
+    padding-top: 2px;
+    padding-left: 10px;
+    float: left;
+}
+
+.overflow_ellipsis {
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat_content {
+    /*width: 536px;*/
+    /*height: 480px;*/
+    margin-left: 2px;
+    border: 1px solid #c7c7c7;
+}
+
+.chat_wenbenone {
+    /*width: 526px;*/
+    padding: 1px;
+}
+
+.chat_wenben {
+    /*width: 526px;*/
+    height: 463px;
+    border: none;
+    background: #e5e5e5;
+    overflow-y: scroll;
+    padding: 5px;
+	margin-bottom:60px;
+}
+
+.jqeditor-client {
+    /*width: 536px;*/
+    height: 27px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+    min-width: 320px;
+}
+.text_left{
+	width:80%;
+	float:left;
+	border:1px solid #d7d7d7;
+	border-top:none;
+	height:27px;
+}
+.sentbtn{
+	float:left;
+}
+.allbox{
+	width:100%;
+}
+
+.icon_btn {
+    width: 60px;
+    height: 27px;
+    background: url(images/btn.png) no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.sent {
+    /*width: 536px;*/
+    height: 28px;
+    line-height: 28px;
+    background: #efefef;
+    color: #272727;
+    margin-top: 5px;
+}
+
+    .sent ul {
+        width: 536px;
+    }
+
+        .sent ul li {
+            float: left;
+            padding-left: 5px;
+        }
+
+.icon_btn {
+    color:#FFF;
+    vertical-align: top;
+}
+
+/*************聊天话术样式*************/
+.AgentMessage, .ClientMessage, .CommonText, .Alert, .Notice {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.AgentMessage {
+    color: #76923C;
+}
+
+.ClientMessage, .ClientMessageBox {
+    color: blue;
+}
+
+.CommonText {
+    color: #010101;
+}
+.line{
+	width:34%;
+	height:2px;
+	background:url(Images/line.jpg) repeat-x;
+	float:left;
+	margin-top:1.2em;
+}
+.linebox{
+	width:100%;
+	margin:0 auto;
+	height:20%;
+}
+
+.Alert,.AgentMessageBox .linebox .AgentMessage {
+    color: #e97503;
+	text-align:center;
+	height:20%;
+	width:7em;
+	line-height:2em;
+	float:left;
+    display:block;
+}
+
+.Notice {
+    color: #080808;
+}
+
+.MsgContent {
+    margin-left: 10px;
+	line-height:2em;
+	margin:0 auto;
+}
+.MsgContent_t {
+    margin-left: 10px;
+	line-height:2em;
+}
+
+/**************************/
+
+.AgentMessageBox, .ClientMessageBox {
+    clear: both;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+    .ClientMessageBox .ClientMessage {
+        display: none;
+    }
+
+    .ClientMessageBox .MsgContent {
+        max-width: 220px;
+        float: right;
+        background:#8cd840;
+        color: #000;
+        margin-right: 10px;
+        border: 1px solid #9f9f9f;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        box-shadow: 0px 1px 0px #d5d5d5;
+        padding: 10px;
+        position: relative;
+        word-break: break-all;
+        word-wrap: break-word;
+		font-family:'微软雅黑';
+    }
+
+        .ClientMessageBox .MsgContent .Arrow {
+            background-image: url(images/right.png);
+            background-repeat: no-repeat;
+            height: 24px;
+            width: 13px;
+            position: absolute;
+            right: -13px;
+            top: 11px;
+        }
+
+    .ClientMessageBox .Pic {
+        float: right;
+        width: 38px;
+        height: 38px;
+        background-image: url(images/client.png);
+    }
+
+
+.AgentMessageBox {
+}
+
+    .AgentMessageBox .AgentMessage {
+        display: none;
+    }
+
+    .AgentMessageBox .MsgContent {
+		width:93%;
+        float: left;
+        background:#d6d6d6;
+        color: #1f1f1f;
+        border: 1px solid #c1c1c1;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        box-shadow: 0px 1px 0px #d5d5d5;
+        padding: 10px;
+        position: relative;
+        word-break: break-all;
+        word-wrap: break-word;
+		font-family:'微软雅黑';
+    }
+	.AgentMessageBox .MsgContent_t {
+        max-width: 220px;
+        float: left;
+        background:#f8f8f8;
+        color: #1f1f1f;
+        border: 1px solid #d1d1d1;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        box-shadow: 0px 1px 0px #d5d5d5;
+        padding: 10px;
+        position: relative;
+        word-break: break-all;
+        word-wrap: break-word;
+		font-family:'微软雅黑';
+    }
+	
+
+    .AgentMessageBox .Pic {
+        width: 38px;
+        height: 38px;
+        background-image: url(images/agent.png);
+        float: left;
+    }
+
+    .AgentMessageBox .MsgContent_t .Arrow {
+        background-image: url(images/left_left.png);
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 13px;
+        position: absolute;
+        left: -6px;
+        top: 11px;
+    }
+	.eFile{
+		width:180px;
+	}
+.eBtn{
+	width:50px;
+	height:25px;
+	margin-left:6px;
+}
+.fixed{
+	width:100%;
+	position:fixed;
+	bottom:0px;
+}

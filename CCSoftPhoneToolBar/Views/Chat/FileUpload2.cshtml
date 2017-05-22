@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>FileUpload2</title>
+    @{
+        if (Request.Cookies["softphone"] != null && Request.Cookies["softphone"].Values["isemergency"] == "0")
+        {
+        <script type="text/javascript">
+            try{
+                document.domain = '@System.Web.Configuration.WebConfigurationManager.AppSettings["document.domain"]';
+            }
+            catch (e) { }
+        </script>
+        }
+    }
+</head>
+<body>
+    <div id="r">@ViewData["r"]</div>
+</body>
+</html>

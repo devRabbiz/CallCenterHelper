@@ -1,0 +1,49 @@
+﻿@model SoftPhoneToolBar.Models.ChatRTOView
+@{
+    ViewBag.Title = "远程协助";
+}
+@section header{
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/chat.js?ver=2.1"></script>
+    @{
+        if (Request.Cookies["softphone"].Values["isemergency"] == "0")
+        {
+        <script type="text/javascript">
+            document.domain = '@System.Web.Configuration.WebConfigurationManager.AppSettings["document.domain"]';
+        </script>
+        }
+    }
+    <script type="text/javascript">
+        $(function () {
+            var accessCode = $("#AccessCode").val();
+            window.DttvncClient.doConnect('apptype=client ttserver=123.103.15.176 usessl=1 port=443 accesscode=' + accessCode + ' localstatusport=4357 clientcontrol=yes  hidealert=yes width=800 height=600');
+            setTimeout(closeWindow, 1000);
+        });
+        function closeWindow() {
+            var isIE = navigator.appName == "Microsoft Internet Explorer";
+            var win = top.window;
+            if (!isIE) win.close();
+            else {
+                win.opener = "";
+                win.open("", "_self");
+                win.close();
+            }
+        }
+        //$(window).unload(function () { DttvncClient.doBreak(); });
+    </script>
+}
+
+<div style="font-size: 12px;">
+    <div class="RAtitle">正在发送远程协助，请稍候……</div>
+    <div style="height: 50px">验证码：@Html.Encode(Model.AccessCode)</div>
+
+    <div>
+        <object id="DttvncClient" classid="clsid:1A3E0785-A179-48BC-9F82-8468F15E2DB4" codebase="/Content/ttclient.cab#VERSION=3,3,3,0" viewastext>
+            <param name="_Version" value="65536">
+            <param name="_ExtentX" value="2646">
+            <param name="_ExtentY" value="1323">
+            <param name="_StockProps" value="0">
+        </object>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model CustomerClient.Models.ChatRTOView
+@{
+    ViewBag.Title = "远程协助";
+}
+@section header{
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
+    <link href="../../Content/chat.css?ver=2.9" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        $(function () {
+            var accesscode = $("#AccessCode").val();
+            DttvncServer.doConnect('apptype=server ttserver=123.103.15.176 usessl=1 port=443 accesscode=' + accesscode + ' localstatusport=4357 clientcontrol=yes  hidealert=yes width=800 height=600');
+            setTimeout(closeWindow, 2000);
+        });
+        //$(window).unload(function () {
+        //    DttvncServer.doBreak();
+        //});
+        window.oncontextmenu = function () { return false; }
+        function closeWindow() {
+            var isIE = navigator.appName == "Microsoft Internet Explorer";
+            var win = top.window;
+            if (!isIE) win.close();
+            else {
+                win.opener = "";
+                win.open("", "_self");
+                win.close();
+            }
+        }
+    </script>
+}
+<table width="220" height="100" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="center">
+            @Html.Encode(Model.AccessCode)<br>
+            <br>
+            <font color="#0000ff">　<span class="STYLE4">联想远程协助工具加载中......</span></font></td>
+    </tr>
+</table>
+<div style="display: none">
+    <object id="DttvncServer" classid="clsid:7F88B22A-06AB-4B11-8E8D-0D035435221B" codebase="/Content/ttserver.cab#VERSION=3,3,3,0" viewastext>
+        <param name="_Version" value="65536">
+        <param name="_ExtentX" value="2646">
+        <param name="_ExtentY" value="1323">
+        <param name="_StockProps" value="0">
+    </object>
+</div>

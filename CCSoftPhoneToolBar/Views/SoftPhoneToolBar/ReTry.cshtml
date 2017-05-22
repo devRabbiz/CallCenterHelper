@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "ReTry";
+}
+<script src="../../Scripts/jquery-1.9.1.js"></script>
+
+@{
+    var msg = Request.QueryString["msg"] ?? "";
+}
+<h5>@msg</h5>
+<script>
+    var msg = '@msg';
+    $(function () {
+        $('.y').click(function () {
+            window.returnValue = '1:' + msg;
+            window.close();
+        });
+
+        $('.n').click(function () {
+            window.returnValue = '0:' + msg;
+            window.close();
+        });
+    });
+</script>
+
+<input type="button" value="确定" class="y" />
+
+<input type="button" value="取消" class="n" />

@@ -1,0 +1,95 @@
+﻿@model CustomerClient.Models.IndexView
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+@*<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />*@
+<script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/jqeditor.js?ver=2.9"></script>
+<script type="text/javascript" src="../../Scripts/chat.js?ver=2.9"></script>
+<link href="../../Content/editor.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    var chat = null;
+    $(function () {
+        $("#btnRequest").click(function () {
+            //var feature = 'width=600px,height=500px,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no';
+            //var url = '/Chat/Chatting?' + $('#form1').serialize();
+            //window.open(url, 'newwindow', feature);
+        });
+    });
+</script>
+<form id="form1" action="Chat/Chatting">
+    <table align="center">
+        <tr>
+            <td>UserID</td>
+            <td>
+                <input type="text" id="UserID" name="UserID" value="1" /></td>
+        </tr>
+        <tr>
+            <td>TargetSkill</td>
+            <td>
+                <input type="text" id="TargetSkill" value="12" name="TargetSkill" /></td>
+        </tr>
+        <tr>
+            <td>UserName</td>
+            <td>
+                <input type="text" id="UserName" name="UserName" value="测试" /></td>
+        </tr>
+        <tr>
+            <td>EnterID</td>
+            <td>
+                <input type="text" id="EnterID" name="EnterID" value="9999" /></td>
+        </tr>
+        <tr>
+            <td>strServiceCardNo</td>
+            <td>
+                <input type="text" id="strServiceCardNo" name="strServiceCardNo" /></td>
+        </tr>
+        <tr>
+            <td>MachineNo</td>
+            <td>
+                <input type="text" id="MachineNo" name="MachineNo" /></td>
+        </tr>
+        <tr>
+            <td>RegisterNumber</td>
+            <td>
+                <input type="text" id="RegisterNumber" name="RegisterNumber" /></td>
+        </tr>
+
+
+        <tr>
+            <td>Queue</td>
+            <td>
+                <input type="text" id="Queue" name="Queue" /></td>
+        </tr>
+
+        <tr>
+            <td>LAStatID</td>
+            <td>
+                <input type="text" id="LAStatID" name="LAStatID" /></td>
+        </tr>
+        <tr>
+            <td>CIP</td>
+            <td>
+                <input type="text" id="CIP" name="CIP"  value='@Request.UserHostAddress'/></td>
+        </tr>
+        <tr>
+            <td>emailClient</td>
+            <td>
+                <input type="text" id="emailClient" value="3333@163.com" name="emailClient" /></td>
+        </tr>
+        <tr>
+            <td>WSISID</td>
+            <td>
+                <input type="text" id="WSISID" name="WSISID" /></td>
+        </tr>
+        <tr>
+            <td>PreText</td>
+            <td>
+                <textarea id="PreText" name="PreText" rows="10" cols="60"></textarea></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" id="btnRequest" value="聊天申请" style="width: 100px; height: 50px;" />
+            </td>
+        </tr>
+    </table>
+</form>

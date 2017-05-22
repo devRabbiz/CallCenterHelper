@@ -1,0 +1,12 @@
+html{height:100%;background-color:#FFFFFF;}
+body,td,th{font-family:Arial,Helvetica,sans-serif;font-size:12px;}
+body{height:100%;*height:90%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+
+.xhe-border{border:1px dotted #d3d3d3;}
+.xhe-border th,.xhe-border td{border:1px dotted #d3d3d3;}
+
+
+.sourceMode{margin:0px;padding:0px;overflow:hidden;height:100%;}
+.sourceMode textarea{*position:absolute;border:0px;margin:0px;padding:0px;width:100%;height:100%;overflow-y:auto;font-family:'Courier New',Courier,monospace !important;font-size:10pt;outline:0;}
+
+.previewMode{margin:5px;padding:0px;}

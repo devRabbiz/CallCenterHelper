@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+1. item - > ObjectType:
+        Agent = 0,
+        AgentPlace = 1,
+        Queue = 5,
+        RegularDN = 8,
+-->
+
+<Statistics>
+
+  <!-- 热备 -->
+  <HASupport>
+    <item Key="tcp://10.99.36.158:3490" HA="0" BacupURI="tcp://10.99.36.159:3490" />
+    <item key="tcp://10.99.36.158:3410" HA="0" BacupURI="tcp://10.99.36.159:3410" />
+  </HASupport>
+
+
+  <!-- =============队列============= -->
+  <!--排队量/Switch_Avaya-->
+  <Statistic CacheKey="skill/Switch_Avaya" StatisticType="Current_In_Queue" ObjectType="5" Uri="tcp://10.99.36.158:3410" BaseReferenceId="11000000" />
+
+  <!--排队量/Switch_Avaya_NJ-->
+  <Statistic CacheKey="skill/Switch_Avaya_NJ" StatisticType="Current_In_Queue" ObjectType="5" Uri="tcp://10.99.36.158:3490" BaseReferenceId="11000000" />
+
+  <!--排队量/Switch_MM-->
+  <Statistic CacheKey="skill/Switch_MM" StatisticType="Current_In_Queue" ObjectType="5" Uri="tcp://10.99.36.158:3490" BaseReferenceId="11000000" />
+  <!-- =============队列============= -->
+
+  <!-- =============Agent============= -->
+  <!--呼入量-->
+  <Statistic CacheKey="agent/12" StatisticType="TotalNumberInboundCalls" ObjectType="0" Uri="tcp://10.99.36.158:3410" BaseReferenceId="12000000" />
+
+
+  <!--坐席呼出量-->
+  <Statistic CacheKey="agent/13" StatisticType="TotalNumberOutboundCalls" ObjectType="0" Uri="tcp://10.99.36.158:3410" BaseReferenceId="13000000" />
+
+
+  <!--Chat处理量-->
+  <Statistic CacheKey="agent/14" StatisticType="Total_Inbound_Handled" ObjectType="0" Uri="tcp://10.99.36.158:3490" BaseReferenceId="14000000" />
+
+
+  <!--案面时长-->
+  <Statistic CacheKey="agent/16" StatisticType="Total_Work_Time" ObjectType="0" Uri="tcp://10.99.36.158:3410" BaseReferenceId="16000000" />
+
+
+  <!--通话时长-->
+  <Statistic CacheKey="agent/17" StatisticType="Total_Talk_Time_CC" ObjectType="0" Uri="tcp://10.99.36.158:3410" BaseReferenceId="17000000" />
+
+
+  <!--坐席状态-->
+  <Statistic CacheKey="agent/18" StatisticType="CurrentAgentState" ObjectType="0" Uri="tcp://10.99.36.158:3410" BaseReferenceId="18000000" />
+
+
+  <!--Chat坐席状态-->
+  <Statistic CacheKey="agent/19" StatisticType="CurrentTargetState" ObjectType="0" Uri="tcp://10.99.36.158:3490" BaseReferenceId="19000000" />
+  <!-- =============Agent============= -->
+
+</Statistics>

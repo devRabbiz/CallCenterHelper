@@ -1,0 +1,419 @@
+﻿@model SoftPhoneToolBar.Models.SoftPhoneToolBarVM
+@{
+    ViewBag.Title = "Lenovo Call Center";
+    var jsVersion = "?v=130704";
+}
+@section header{
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" type="text/css"  />
+    <link href="@Url.Content("~/Content/Default.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/softphone_config.js")@jsVersion" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/softphone_interface.js")@jsVersion" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/softphone_api.js")@jsVersion" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/cti.js")@jsVersion" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/common.js")@jsVersion" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.blockUI.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/lenovo_business_cti.js")@jsVersion" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.resizeTo(window.screen.availWidth, window.screen.availHeight);
+        window.moveTo(0, 0);
+        $(function () {
+            OCXAutoJsonMerge = true;//不要去掉，去掉后会出问题的
+
+            $('#ocx_placehold').html('<object class="lenovo_cc_softphone" classid="clsid:F465D5AB-F971-4633-BB45-D226B18422FF" width="0" height="0" style="overflow: hidden; width: 0px; height: 0px; line-height: 0px;"></object>');
+
+            SPhone = $('.lenovo_cc_softphone:first').get(0);
+
+            $('#softphoneblockui').block({ message: '初始化...' });
+
+            //初始化softphone_config.js
+            CallCenterCode = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.CallCenterCode"]';
+            VOICE_SUPPORT_TYPE = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.VOICE_SUPPORT_TYPE"]';
+            LENOVODEBUG = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.LENOVODEBUG"]'=='1';
+            config_TRANSFERDN.报工号 = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.报工号"]';
+            config_TRANSFERDN.电话支付 = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.电话支付"]';
+            config_TRANSFERDN.转队列 = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.转队列"]';
+            config_TRANSFERDN.转满意度 = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.转满意度"]';
+            lenovo_authorizedNumber = '@System.Web.Configuration.WebConfigurationManager.AppSettings["js.lenovo_authorizedNumber"]';
+
+            //http://domain.com/
+            AppSoftPhoneServiceUri = '@System.Web.Configuration.WebConfigurationManager.AppSettings["AppServer"]';
+            AppServer_DbUri = '@System.Web.Configuration.WebConfigurationManager.AppSettings["AppServer.Db"]';
+            AgentIP = '@Request.UserHostAddress';
+            NLBOpenStaticAppServers = '@System.Web.Configuration.WebConfigurationManager.AppSettings["NLBOpenStaticAppServers"]';
+            if (SPhone.ClientTest) {
+                if (SPhone.ClientVersion == undefined || (SPhone.ClientVersion != '1.0.2.0' && SPhone.ClientVersion != '1.0.2.1' && SPhone.ClientVersion != '1.0.3.0' && SPhone.ClientVersion != '1.0.3.1')) {
+                    if (confirm('已有新的版本，请升级到最新版本')) {
+                        window.open('/setup/lenovo_softphone_setup.msi');
+                    }
+                    $('#softphoneblockui').unblock();
+                    return;
+                }
+
+                $.getJSON(AppServer_DbUri + 'Db/GetPlaceDN?callback=?', {}, function (rPlaceDN) {
+                    if (rPlaceDN.Code == -1) {
+                        $('#softphoneblockui').unblock();
+                        TelLoad(0, rPlaceDN.Message);
+                        return;
+                    }
+                    else {
+                        $.getJSON(AppServer_DbUri + 'Db/GetAgentInfo?callback=?', { employee_id: '@Model.employee_id' }, function (r) {
+                            if (r.ErrCode == -1) {
+                                alert(r.ErrMessage);
+                                $('#softphoneblockui').unblock();
+                                return;
+                            }
+
+                            PERSON_DBID = r.Person.DBID;//员工DBID
+                            EmployeeID = r.EmployeeID;//初始化员工编号
+
+                            r.Person.DN = rPlaceDN.d.DN;
+                            r.Person.Place = rPlaceDN.d.Place;
+
+                            if (r.Person.DN == '') {
+                                alert('缺少DN');
+                                $('#softphoneblockui').unblock();
+                                return;
+                            }
+
+                            if (r.Person.Place == '') {
+                                alert('缺少Place');
+                                $('#softphoneblockui').unblock();
+                                return;
+                            }
+
+                            @*if ('1' == '@System.Web.Configuration.WebConfigurationManager.AppSettings["IsQuickDebug"]') {
+                                r.Person.DN = '@System.Web.Configuration.WebConfigurationManager.AppSettings["IsQuickDebug.DN"]';
+                                r.Person.Place = '@System.Web.Configuration.WebConfigurationManager.AppSettings["IsQuickDebug.Place"]';
+                                r.EnableChat = '@System.Web.Configuration.WebConfigurationManager.AppSettings["IsQuickDebug.EnableChat"]' == '1';
+                                r.EnableVoice = '@System.Web.Configuration.WebConfigurationManager.AppSettings["IsQuickDebug.EnableVoice"]' == '1';
+                            }*@
+
+                            //$('#FirstName').html(r.FirstName).attr('title', '员工编号:' + EmployeeID);
+
+                            var settings = {
+                                CallCenter: CallCenterCode,
+                                TServerConfig: {
+                                    EnableVoice: r.EnableVoice,
+                                    TSERVER_IDENTIFIER: 'localhost_SoftPhone_TS',
+                                    TSERVER_URI: '@System.Web.Configuration.WebConfigurationManager.AppSettings["TCP.TSERVER_URI"]',
+                                    TSERVER_CLIENT_NAME: 'OCX_SoftPhone_TS',
+                                    TSERVER_CLIENT_PASSWORD: '',
+                                    TSERVER_QUEUE: '',
+                                    DN: r.Person.DN,
+                                    AgentID: r.AgentID,
+                                    Password: '',
+                                    AgentStatus: 0,
+
+                                    HASupport: '1' == '@System.Web.Configuration.WebConfigurationManager.AppSettings["TCP.TSERVER_HASupport"]',
+                                    Bakup_TSERVER_URI: '@System.Web.Configuration.WebConfigurationManager.AppSettings["TCP.TSERVER_URI_BAKUP"]'
+                                },
+                                IServerConfig: {
+                                    EnableChat: r.EnableChat,
+                                    //EnableChat: false,
+                                    ISERVER_IDENTIFIER: 'localhost_SoftPhone_IS',
+                                    ISERVER_URI: '@System.Web.Configuration.WebConfigurationManager.AppSettings["TCP.ISERVER_URI"]',
+                                    ISERVER_CLIENT_NAME: 'OCX_SoftPhone_IS',
+                                    TenantId: 101,
+                                    AgentID: r.EmployeeID,
+                                    PlaceID: r.Person.Place,
+                                    HASupport: false,
+                                    WarmStandby: '1' == '@System.Web.Configuration.WebConfigurationManager.AppSettings["TCP.ISERVER_WarmStandby"]',
+                                    Bakup_ISERVER_URI: '@System.Web.Configuration.WebConfigurationManager.AppSettings["TCP.ISERVER_URI_BAKUP"]'
+                                }
+                            }
+
+                            //合并配置
+                            mergeJson(cfg, settings);
+
+                            if (cfg.TServerConfig.EnableVoice) {
+                                //$('#v2_lenovo_voice_onoff').removeAttr('disabled');
+                            }
+                            else {
+                                cfg.TServerConfig.AgentStatus = AgentStatus.其他;
+                            }
+
+                            if (cfg.IServerConfig.EnableChat) {
+                                //$('#v2_lenovo_chat_onoff').removeAttr('disabled');
+                            }
+                            else {
+                                cfg.IServerConfig.AgentStatus = AgentStatus.其他;
+                            }
+
+                            $('#time1').val('00:00:00');
+                            $('#time2').val('00:00:00');
+
+                            //begin
+                            IPDNSET.IsRealDN = rPlaceDN.d.IsRealDN;
+                            IPDNSET.IsSayEmpNO = rPlaceDN.d.IsSayEmpNO;
+
+                            IPDNSET.Ext1 = rPlaceDN.d.Ext1;
+                            IPDNSET.Ext2 = rPlaceDN.d.Ext2;
+                            IPDNSET.Ext3 = rPlaceDN.d.Ext3;
+
+                            if (IPDNSET.IsSayEmpNO != 1) {
+                                config_TRANSFERDN.报工号 = '';
+                            }
+
+                            if (IPDNSET.IsRealDN != 1) {
+                                cfg.TServerConfig.EnableVoice = false;
+                            }
+                            //end
+
+                            if ('@Request.QueryString["debug"]' == '1') {
+                                cfg.LogMessage = true;
+                                cfg.LogRequest = true;
+                                cfg.LogResponse = true;
+                                cfg.LogTrace = true;
+                                LENOVODEBUG = true;
+                                $('.LENOVODEBUG_Container').show();
+                            }
+
+                            SoftPhone.SetConfig(cfg);
+
+                            //workArea
+                            if ('0' == '@Model.IsEmergency') {
+                                try {
+                                    IS_Lenovo_Business = true;
+                                    lenovo_rote_data.lUserId = r.EmployeeID;
+                                    lenovo_rote_data.strLoginId = r.LoginCode;
+                                    $('.workArea').height($(window).height() - 95);
+                                    var businessApp = '@System.Web.Configuration.WebConfigurationManager.AppSettings["Business.AppUrl"]';//http://app8.esoon.lenovo/
+                                    window.workArea.location.replace(businessApp + 'MainSysDispatchAction.do?account=@Model.employee_id&passWord=@Model.password&sysType=1&genesysFlag=1&remoteIp=@Request.UserHostAddress');
+                                }
+                                catch (e) {
+                                    IS_Lenovo_Business = false;
+                                }
+                            }
+                            else {
+                                $('.workArea').hide();
+                            }
+
+                            $(window).resize(function () {
+                                window.resizeTo(window.screen.availWidth, window.screen.availHeight);
+                                window.moveTo(0, 0);
+                            });
+
+                            $.each(NLBOpenStaticAppServers.split(','), function (i, e) {
+                                agentOpenStatistic(e + 'PhoneStat/OpenAgentStatistic?callback=?', r.Person);
+                            });
+
+                            if (cfg.TServerConfig.EnableVoice) {
+                                agentGetStatistic(AppSoftPhoneServiceUri + 'PhoneStat/GetAgentStatisticResult?callback=?', r.Person.DBID);
+                            }
+                        })
+                .error(function () {
+                    alert('登录失败');
+                    $('#softphoneblockui').unblock();
+                });
+                    }
+                }).error(function () {
+                    $.unblockUI();
+                    TelLoad(0, '获取IP对应的DN、Place时发生错误');
+                    return;
+                });
+            }
+            else {
+                alert('请先安装控件');
+                $('#softphoneblockui').unblock();
+                window.open('/setup/lenovo_softphone_setup.msi');
+                SPhone = null;
+            }
+        });
+
+        var _workAreaOnloadSucc = false;
+        function _workAreaOnload() {
+            if (_workAreaOnloadSucc == false && workArea.document.location != 'about:blank') {
+                LogMessage('登录业务系统开始');
+                _workAreaOnloadSucc = true;
+                lenovo_operationDispose(1);//登录
+            }
+        }
+    </script>
+}
+
+<!--头部-->
+<div class="toper" id="softphoneblockui">
+    <div class="logo">
+        <img src="/Content/images/new_lenovo.jpg" alt="" />
+        <span id="ocx_placehold">
+            @*<object class="lenovo_cc_softphone" classid="clsid:F465D5AB-F971-4633-BB45-D226B18422FF"
+                width="0" height="0" style="overflow: hidden; width: 0px; height: 0px; line-height: 0px;">
+            </object>*@
+        </span>
+    </div>
+    <div class="zhuangtai">
+        <dl>
+            <dt id="agentstatus" class="phoneicon">
+                <span class="disabled"></span></dt>
+            <dd>状态</dd>
+        </dl>
+    </div>
+    <div class="phone">
+        <div class="xianshi">
+            <ul>
+                <li id="no">呼入：<span id="CallInCount">0</span> &nbsp; 呼出：<span id="CallOutCount">0</span> &nbsp; 文本：<span id="ChatInCount">0</span></li>
+                <li>随路数据：<span><input type="text" id="rotedata" style="width: 170px; height: 20px; background: #FFF; border: 1px solid #c3c3c3;" readonly="readonly" value="/队列/主叫/服务卡" /></span></li>
+                <li>
+                    <img src="/Content/images/icon_t.gif" align="middle" class="icon_t" /><span id="time1_span">通话时间</span>：<input id="time1" style="width: 50px; height: 19px; background: #FFF; border: 1px solid #c3c3c3;" /></li>
+                <li>
+                    <img src="/Content/images/icon_t.gif" align="middle" class="icon_t" />AHT：<input id="time2" style="width: 50px; height: 19px; background: #FFF; border: 1px solid #c3c3c3;" /></li>
+                <li><span style="color: #ae0f61; font-weight: bold;">主：</span><span id="QueueCount1">0</span> &nbsp; <span style="color: #099a02; font-weight: bold">辅：</span><span id="QueueCount2">0</span></li>
+            </ul>
+        </div>
+        <div class="bohao" id="dialplateV2">
+            <input class="phonenumber" style="width: 98px; height: 22px; line-height: 22px; background: #FFF; border: 1px solid #c3c3c3;" type="text" />
+        </div>
+        <div class="ico" id="softphonetoolbar" connectionid="" secondconnectionid="">
+            <dl class="btarea">
+                <dt id="answer" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>拨/接/挂</dd>
+            </dl>
+            <dl class="btarea">
+                <dt id="keypad" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>拔号盘</dd>
+            </dl>
+            <dl class="btarea">
+                <dt id="hold" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>hold</dd>
+            </dl>
+            <dl>
+                <dt class="xian">
+                    <img src="/Content/images/line_two.jpg" /></dt>
+            </dl>
+            <dl class="btarea">
+                <dt id="transfer" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>转接个人</dd>
+            </dl>
+            <dl class="btarea">
+                <dt id="transferCancel" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>取消转接</dd>
+            </dl>
+
+            <dl>
+                <dt class="xian">
+                    <img src="/Content/images/line_two.jpg" /></dt>
+            </dl>
+            <dl class="btarea">
+                <dt id="conference" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>多方通话</dd>
+            </dl>
+            <dl class="btarea">
+                <dt id="conferenceCancel" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>取消通话</dd>
+            </dl>
+            <dl>
+                <dt class="xian">
+                    <img src="/Content/images/line_two.jpg" /></dt>
+            </dl>
+            <dl class="btarea">
+                <dt id="chat" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>Chat</dd>
+            </dl>
+            <dl>
+                <dt class="xian">
+                    <img src="/Content/images/line_two.jpg" /></dt>
+            </dl>
+            <dl class="btarea">
+                <dt id="transferSearch" class="phoneicon">
+                    <span class="disabled"></span>
+                </dt>
+                <dd>队列转接</dd>
+            </dl>
+            <dl class="btarea">
+                <dt id="transferTelPay" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>电话支付</dd>
+            </dl>
+            <dl>
+                <dt class="xian">
+                    <img src="/Content/images/line_two.jpg" /></dt>
+            </dl>
+            <dl class="btarea">
+                <dt id="ivr" class="phoneicon">
+                    <span class="disabled"></span></dt>
+                <dd>转满意度</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="hello"><span><a id="Logout">【注销】</a></span></div>
+</div>
+<!--头部end-->
+
+
+<div id="dialplate" jtag="拨号盘" title="拨号盘" style="display: none;">
+    <a class="backspace" href="#">退格</a>
+    <table>
+        <tr>
+            <td><a href="#">1</a></td>
+            <td><a href="#">2</a></td>
+            <td><a href="#">3</a></td>
+        </tr>
+        <tr>
+            <td><a href="#">4</a></td>
+            <td><a href="#">5</a></td>
+            <td><a href="#">6</a></td>
+        </tr>
+        <tr>
+            <td><a href="#">7</a></td>
+            <td><a href="#">8</a></td>
+            <td><a href="#">9</a></td>
+        </tr>
+        <tr>
+            <td><a href="#">*</a></td>
+            <td><a href="#">0</a></td>
+            <td><a href="#">#</a></td>
+        </tr>
+    </table>
+</div>
+
+<div class="LENOVODEBUG_Container" style="display: none">
+    <ol class="LENOVODEBUG"></ol>
+    <div>
+        <p style="margin-top: 5px; text-align: left;">
+            <input type="button" onclick="$('.LENOVODEBUG').html('')" value="Clear" />
+            <input type="button" onclick="LogMessage(SPhone.GetDebugInfo() + '<br/>0:' + getConnection(0) + '<br/>1:' + getConnection(1))" value="GetSoftPhoneInfo" />
+            <label>
+                <input type="checkbox" class="LENOVODEBUG_AUTOFLOW" checked="checked" />滚动</label>
+        </p>
+    </div>
+</div>
+
+<ul id="v2_menu" style="display: none;">
+    <li class="v2_menu_agentstatus">坐席状态</li>
+    <li><a class="click" jtag="all:0">就绪</a></li>
+    <li class="ui-state-disabled lenovo_center"><a>处理电话</a></li>
+    <li class="ui-state-disabled lenovo_center"><a>案头工作</a></li>
+    <li><a class="click" jtag="all:3">后续跟进</a></li>
+    <li><a class="click" jtag="all:4">开会</a></li>
+    <li><a class="click" jtag="all:5">培训</a></li>
+    <li><a class="click" jtag="all:6">休息</a></li>
+    <li><a class="click" jtag="all:7">午餐</a></li>
+    <li><a class="click" jtag="all:8">其他</a></li>
+
+    <li class="v2_menu_bt">
+        <div class="v2_menu_split"></div>
+        <div style="margin-top: 4px; margin-bottom: 2px;">
+            <label class="forvoice">
+                <input type="checkbox" id="v2_lenovo_voice_onoff" disabled="disabled" checked="checked" />电话</label>
+            <label class="forchat">
+                <input type="checkbox" id="v2_lenovo_chat_onoff" disabled="disabled" checked="checked" />文本</label>
+        </div>
+    </li>
+</ul>
+
+
+<div class="workArea">
+    <iframe id="workArea" name="workArea" src="about:blank" onload="_workAreaOnload()" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto">不支持iframe!</iframe>
+</div>

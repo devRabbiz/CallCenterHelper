@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoginAuth.aspx.cs" Inherits="Tele.Management.LoginAuth" %>

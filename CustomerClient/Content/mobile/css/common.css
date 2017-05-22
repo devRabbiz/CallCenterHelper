@@ -1,0 +1,105 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,table,th,td{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+body{font:12px/14px "Microsoft YaHei",Arial,Helvetica,sans-serif;color:#000;}
+input,select,button,textarea{vertical-align:middle;font-size:12px;outline:none;}
+em{color:#ea4545;}
+input{border:1px solid #ccc;border-radius: 3px}
+inputcheckbox{vertical-align:-2px;}
+input[type=text]::-ms-clear{display: none;}
+ol,ul{list-style:none}img{border:0}em{font-style:normal}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+body{
+	        	background: #ebebeb;
+	        	width: 100%;
+	        }
+	    	section{
+	    		width:96%;
+	    		height:auto;
+	    		margin:auto;
+	    		margin-top:5px;
+	    	}
+	    	.waiterBox{
+	    		float:left;
+	    	}
+	    	.waiterBox,.userBox{
+	    		width:75%;
+	    		height:auto;
+	    		padding:0 1%;
+	    		margin-top:25px;
+	    		clear:both;
+	    	}
+	    	.img{
+	    		float:left;
+	    		width:15%;
+	    	}
+	    	.img img{
+	    		width:100%;
+	    	}
+	    	.waiterBox .con img{
+	    		position: absolute;
+	    		left:-10px;
+	    	}
+	    	.con{
+	    		float:left;
+	    		height:auto;
+	    		padding:5px 2%;
+	    		margin-left:4%;
+	    		width:75%;
+	    	    border-radius: 3px;
+	    	    background: #fff;
+	    	    color: #6b6b6b;
+                position: relative;
+	    	}
+	    	.con p{
+                line-height:18px;
+	    	}
+	    	.userBox{
+	    		clear:both;
+	    		float: right;
+	    	}
+            .userBox .con{
+            	margin:0;
+            	margin-right:4%;
+            	background:#cfe8fb;
+            }
+            .userBox .con img{
+	    		position: absolute;
+	    		right:-10px;
+	    	}
+            .sendBox{
+            	position: fixed;
+            	width: 100%;
+            	bottom: 0px;
+            	padding-top:10px;
+            	border-top: 1px solid #ccc;
+            	border-bottom: 1px solid #ccc;
+            	background:#ebebeb;
+
+            }
+            .sendBox input{
+            	width:80%;
+            	margin-left:4%;
+            	height:20px;
+            	padding:3px 2px;
+            	margin-bottom: 10px;
+            }
+            .sendBox button{
+            	border:none;
+            	background: ##ebebeb;
+            	cursor: pointer;
+            	color: #ccc;
+            }
+            .sendPhotoBox{
+            	width: 100%;
+            	background: #fafafa;
+            	height:160px;
+            	border-top: 1px solid #ccc;
+            	display: none;
+            }
+            .sendPhotoBox img{
+            	float:left;
+            	height:100px;
+            	margin-top:20px;
+            	margin-left:3%;
+            	cursor: pointer;
+            }

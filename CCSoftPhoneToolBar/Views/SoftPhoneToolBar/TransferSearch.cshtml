@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "电话转接";
+}
+@section header{
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <link href="@Url.Content("~/Content/Default.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/json2.js")" type="text/javascript"></script>
+    <style>
+        .notready input {
+            display: none;
+        }
+
+        tr.notready td {
+            background-color: red;
+        }
+
+        #SearchSkillUpdateDiv {
+            height: 400px;
+            overflow: auto;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var AppSoftPhoneServiceUri = '@System.Web.Configuration.WebConfigurationManager.AppSettings["AppServer"]';
+
+            var skills = [];
+
+            var isLoad = false;
+
+            function getSkills(succ) {
+                isLoad = true;
+                $.getJSON(AppSoftPhoneServiceUri + 'CFG/GetSkills?callback=?', {}, function (r) {
+                    skills = r;
+                    if (succ) {
+                        (succ)();
+                    }
+                }).error(function () {
+                    isLoad = false;
+                    alert('查询失败');
+                });
+            };
+
+            function bindSkills() {
+                try {
+                    var skill = $('#skillname').val();
+                    $('#SearchSkillUpdateDiv table:first tr:gt(0)').remove();
+                    if (skill.length > 1 || skill == '' || 1 == 1) {
+                        var begin = new Date().getTime();
+                        var html = '';
+                        $(skills).each(function () {
+                            if (skill == '' || new String(this.Name).toLowerCase().indexOf(skill.toLowerCase()) != -1) {
+                                html += '<tr><td><a href="javascript:" jtag="' + this.Name + '">' + this.Name + '</a></td><td><input type="button" jtag="' + this.Name + '" value="转接" /></td></tr>';
+                            }
+                        });
+                        $('#SearchSkillUpdateDiv table:first').append(html);
+                        var end = new Date().getTime();
+                        document.title = '电话转接 ' + ((end - begin)) + ' ms';
+                    }
+                }
+                catch (e) { }
+            }
+
+            getSkills(bindSkills);
+
+            //1.队列搜索
+            $('#SkillListForm form:first').submit(function () {
+                if ($('#SkillListForm #name').val() == '') {
+                    $('#SkillListForm #name').focus();
+                    return false;
+                }
+                var begin = new Date().getTime();
+                if (!isLoad) {
+                    getSkills(bindSkills);
+                }
+                else {
+                    bindSkills();
+                }
+                return false;
+            });
+
+            $('#SkillListForm form:first').submit();
+
+            $('#SkillListForm #skillname').keyup(function () {
+                $('#SkillListForm form:first').submit();
+            });
+
+            //查询队列对应的已登录的员工
+            $(document).on('click', '#SearchSkillUpdateDiv a', function () {
+                $('#AgentListForm #agent_skillname').val($(this).attr('jtag'));
+                $('#AgentListForm form:first').submit();
+            });
+
+            //2.坐席搜索
+            $('#AgentListForm form:first').submit(function () {
+                var data = { skillName: $('#agent_skillname').val(), agentName: $('#agent_name').val(), DN: $('#agent_dn').val() };
+                $('#SearchAgentUpdateDiv table:first tr:gt(0)').remove();
+                $.getJSON(AppSoftPhoneServiceUri + 'PhoneStat/GetAgents?callback=?', data, function (r) {
+                    $(r).each(function () {
+                        var status = this.IsReady ? '就绪' : '未就绪';
+                        var statusclass = this.IsReady ? 'ready' : 'notready'
+                        $('#SearchAgentUpdateDiv table:first').append('<tr class="' + statusclass + '"><td>' + this.AgentName + '</td><td>' + status + '</td><td>' + this.DN + '</td><td><input type="button" jtag="' + this.DN + '" value="转接" /></td></tr>');
+                    });
+                });
+                return false;
+            });
+
+            //转接按钮
+            $(document).on('click', '#SearchSkillUpdateDiv input', function () {
+                var skill = $(this).attr('jtag');
+                window.returnValue = 'agentGroup:' + skill;
+                window.close();
+            });
+
+            //转坐席分机
+            $(document).on('click', '#SearchAgentUpdateDiv input', function () {
+                var dn = $(this).attr('jtag');
+                window.returnValue = 'agent:' + dn;
+                window.close();
+            });
+        });
+    </script>
+}
+
+<table border="0" cellpadding="1" cellspacing="1">
+    <tr>
+        <td valign="top" width="300">
+            <div id="SkillListForm">
+                <form id="SkillList" style="height: 80px;">
+                    <table class="grd-detail" width="98%" align="center" border="0" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <th width="100">坐席组名称</th>
+                            <td>
+                                <input name="skillname" id="skillname" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="查询" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div style="margin: 3px;"></div>
+                <div id="SearchSkillUpdateDiv">
+                    <table class="grd" width="98%" align="center" border="0" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <th>坐席组名称</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+        <td valign="top" width="300">
+            <div id="AgentListForm">
+                <form id="SkillAgentList" style="height: 80px;">
+                    <input type="hidden" name="agent_skillname" id="agent_skillname" />
+                    <table class="grd-detail" width="98%" align="center" border="0" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <th width="100">坐席名称</th>
+                            <td>
+                                <input name="agent_name" id="agent_name" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <th>坐席DN</th>
+                            <td>
+                                <input name="agent_dn" id="agent_dn" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="查询" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div style="margin: 3px;"></div>
+                <div id="SearchAgentUpdateDiv">
+                    <table class="grd" width="98%" align="center" border="0" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <th>坐席名称
+                            </th>
+                            <th>状态</th>
+                            <th>DN</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+

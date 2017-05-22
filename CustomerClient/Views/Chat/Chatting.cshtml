@@ -1,0 +1,77 @@
+﻿@model CustomerClient.Models.IndexView
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+@*<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />*@
+<script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../Scripts/jqeditor.js?ver=2.9"></script>
+<script type="text/javascript" src="../../Scripts/chat.js?ver=2.9"></script>
+<link href="../../Content/editor.css" rel="stylesheet" />
+<link href="../../Content/chat.css?ver=2.0" rel="stylesheet" />
+<script type="text/javascript">
+    var chat = null;
+    chatCustomerID = 'cs' + '@Guid.NewGuid().ToString().Replace("-", "")';
+    $(document).ready(function () {
+        window.jqeditor.settings.appServer = '@System.Configuration.ConfigurationManager.AppSettings["appServer"]';
+        window.jqeditor.settings.fileServer = '@System.Configuration.ConfigurationManager.AppSettings["fileServer"]';
+        window.jqeditor.settings.queueName = '@Model.CurrentQueueName';
+
+        chat = new chatTab();
+        $("#btnSend").attr("disabled", "disabled");
+        $("#btnSend").click(function () {
+            var text = window.jqeditor.getEditorContent('txtMessage');
+            text = text.replace(new RegExp('src="http://' + document.location.host, "ig"), 'src="');
+            text = text.replace(/<\/?(script)[^>]*>/ig, "");
+            var ntext = text.replace(/<\/?(p|font|strong|em)[^>]*>/ig, "");
+            if (ntext.length == 0) {
+                alert("请先输入内容");
+            }
+            else if (chat && text != '$$OVERFLOW$$') {
+                text = encodeURIComponent(text);
+                chat.sendMessage(text);
+            }
+        });
+        $("#txtMessage").val("");
+        $("#pArea").html("");
+        chat.showWelcomeText();
+    });
+    $(document).keydown(function (ev) {
+        if (event.keyCode == 116) {
+            event.keyCode = 0;
+            event.returnValue = false;
+            return true;
+        }
+    });
+    $(window).unload(function () {
+        if (chat) chat.leftChat();
+        lenovoTrace('unload', false);
+    });
+    window.onbeforeunload = function () {
+        if (chat) chat.leftChat();
+        lenovoTrace('onbeforeunload', false);
+    }
+    document.body.oncontextmenu = function () { return false; }
+</script>
+
+
+<div class="tabbox">
+    <div class="chat_content">
+        <div class="chat_wenbenone">
+            <p id="pArea" class="chat_wenben"></p>
+        </div>
+        <div class="chat_wenbenone">
+            <textarea id="txtMessage" class="jqeditor-client"></textarea>
+        </div>
+        <div class="sent">
+            <ul>
+                <li style="width: 236px" id="liHotKey">当前发送快捷键 Enter</li>
+                <li style="width: 200px">@Html.HiddenFor(m => m.ClientUserData)
+                    @Html.HiddenFor(m => m.RabitPreText)
+                    通话时长：<span id="spTime">00:00:00</span></li>
+                <li>
+                    <input type="button" id="btnSend" value="发送" class="icon_btn" /></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+

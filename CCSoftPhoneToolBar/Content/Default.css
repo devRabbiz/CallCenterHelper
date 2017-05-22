@@ -1,0 +1,608 @@
+﻿/*=====================公共部分=====================*/
+ul, dd, dl, form, li, body {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: '宋体';
+}
+
+img {
+    border: 0;
+}
+
+/*=====================头部=====================*/
+.toper {
+    margin: 0 auto;
+    width: 1338px;
+    height: 95px;
+    background: url(images/toper_bg.png);
+}
+
+.logo {
+    width: 214px;
+    height: 73px;
+    padding-left: 15px;
+    padding-top: 22px;
+    float: left;
+}
+
+.zhuangtai {
+    width: 68px;
+    height: 90px;
+    float: left;
+}
+
+.phone {
+    width: 857px;
+    height: 95px;
+    padding-left: 26px;
+    float: left;
+}
+
+
+
+.xianshi {
+    width: 857px;
+    height: 37px;
+}
+
+.bohao {
+    width: 98px;
+    height: 22px;
+    float: left;
+}
+
+
+#no {
+    background: none;
+    padding-left: 10px;
+}
+
+.xianshi ul li {
+    float: left;
+    padding-left: 18px;
+    font-size: 12px;
+    height: 37px;
+    line-height: 37px;
+    background: url(images/line.jpg) 8px center no-repeat;
+}
+
+dl {
+    float: left;
+    height: 53px;
+    padding-top: 5px;
+}
+
+    dl dt {
+        width: 58px;
+        text-align: center;
+    }
+
+    dl dd {
+        font-size: 12px;
+        text-align: center;
+        padding-top: 3px;
+    }
+
+.xian {
+    width: 3px;
+}
+
+.hello {
+    width: 153px;
+    height: 85px;
+    padding-top: 10px;
+    float: left;
+    font-size: 12px;
+    text-align: right;
+}
+
+    .hello a {
+        color: #035580;
+    }
+
+    .hello span {
+        margin-left: 10px;
+    }
+
+        .hello span a {
+            color: #000;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+/*===============正式开始==================*/
+/*===============小键盘==================*/
+
+
+ol.LENOVODEBUG {
+    overflow: auto;
+    height: 380px;
+    background-color: #FFFFCC;
+    border: 1px solid #CCCCCC;
+    font-size: 10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 5px;
+    padding: 5px;
+}
+
+    ol.LENOVODEBUG li {
+        list-style-position: outside;
+        list-style-type: decimal;
+        margin-top: 3px;
+        margin-right: 3px;
+        margin-bottom: 3px;
+        margin-left: 40px;
+    }
+
+.LENOVODEBUG .now {
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1px dashed #CCCCCC;
+}
+
+
+.LENOVODEBUG .LogRequest {
+    color: #00FF00;
+    font-weight: bold;
+}
+
+    .LENOVODEBUG .LogRequest pre {
+        background-color: #666666;
+        color: #FFFFFF;
+        font-weight: normal;
+    }
+
+.LENOVODEBUG .LogException {
+    color: #FF0000;
+}
+
+    .LENOVODEBUG .LogException pre {
+        color: #FFFFFF;
+        background-color: #FF0000;
+    }
+
+.LENOVODEBUG .LogResponse pre {
+    color: blue;
+    background-color: #F7F7F7;
+}
+/*LENOVODEBUG  end*/
+
+#dialplate table td a {
+    background-color: #F0F0F0;
+    color: #000000;
+    font-family: "微软雅黑";
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 25px;
+    height: 25px;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+    #dialplate table td a:hover {
+        font-size: 20px;
+    }
+
+.phoneiconsplit {
+}
+
+
+
+/*开始*/
+.phoneicon {
+    /*text-align: center;
+    margin: auto;*/
+}
+
+    .phoneicon span {
+        display: block;
+        height: 28px;
+        width: 30px;
+        cursor: pointer;
+        margin: auto;
+    }
+
+    .phoneicon .disabled {
+        cursor: not-allowed;
+    }
+
+/*agentstatus*/
+#agentstatus {
+    width: 68px;
+    height: 67px;
+}
+
+    #agentstatus span {
+        width: 68px;
+        height: 67px;
+    }
+
+    #agentstatus .disabled {
+        background-image: url(images/ready_disabled.png);
+    }
+
+    #agentstatus .enable {
+        background-image: url(images/break.png);
+    }
+
+    #agentstatus .ready {
+        background-image: url(images/ready.png);
+    }
+
+    #agentstatus .voiceready {
+        background-image: url(images/ready_voice.png);
+    }
+
+    #agentstatus .chatready {
+        background-image: url(images/ready_chat.png);
+    }
+
+    #agentstatus .notready {
+        background-image: url(images/notready.png);
+    }
+
+    #agentstatus .anmian {
+        background-image: url(images/anmian.png);
+    }
+
+    /*后续3 */
+    #agentstatus .notready_2 {
+        background-image: url(images/notready_8.png);
+    }
+
+    #agentstatus .notready_3 {
+        background-image: url(images/notready_3.png);
+    }
+
+    #agentstatus .notready_4 {
+        background-image: url(images/notready_4.png);
+    }
+
+    #agentstatus .notready_5 {
+        background-image: url(images/notready_5.png);
+    }
+
+    #agentstatus .notready_6 {
+        background-image: url(images/notready_6.png);
+    }
+
+    #agentstatus .notready_7 {
+        background-image: url(images/notready_7.png);
+    }
+
+    #agentstatus .notready_8 {
+        background-image: url(images/notready_8.png);
+    }
+
+/*小键盘*/
+#keypad .disabled {
+    background-image: url(images/key_disabled.png);
+}
+
+#keypad .enable {
+    background-image: url(images/key.png);
+}
+/*end*/
+
+/*拨打 挂断*/
+#answer {
+}
+
+    #answer .disabled {
+        background-image: url(images/jieqi_disabled.png);
+    }
+
+    #answer .ReleaseCall {
+        background-image: url(images/release.png);
+    }
+
+    #answer .Dialing {
+        background-image: url(images/jieqi_flash.gif);
+    }
+
+    #answer .MakeCall {
+        background-image: url(images/jieqi.png);
+    }
+
+/*hold*/
+#hold {
+}
+
+    #hold .disabled {
+        background-image: url(images/hold_disabled.png);
+    }
+
+    #hold .enable {
+        background-image: url(images/hold.png);
+    }
+
+    #hold .HoldCall {
+        background-image: url(images/hold.png);
+    }
+
+    #hold .RetrieveCall {
+        background-image: url(images/hold_retrieve.png);
+    }
+
+/*transfer*/
+#transfer {
+}
+
+    #transfer .disabled {
+        background-image: url(images/transfer_person_disabled.png);
+    }
+
+    #transfer .InitiateTransfer {
+        background-image: url(images/transfer_person_enable.png);
+    }
+
+    #transfer .CompleteTransfer {
+        background-image: url(images/transfer_person_enable.png);
+    }
+
+/*transferCancel*/
+#transferCancel {
+}
+
+    #transferCancel .disabled {
+        background-image: url(images/transferCancel_disabled.png);
+    }
+
+    #transferCancel .ReleaseCall {
+        background-image: url(images/transferCancel.png);
+    }
+
+/*conference*/
+#conference {
+}
+
+    #conference .disabled {
+        background-image: url(images/duofang_disabled.png);
+    }
+
+    #conference .InitiateConference {
+        background-image: url(images/duofang.png);
+    }
+
+    #conference .CompleteConference {
+        background-image: url(images/duofang.png);
+    }
+
+/*conferenceCancel*/
+#conferenceCancel {
+}
+
+    #conferenceCancel .disabled {
+        background-image: url(images/transferCancel_disabled.png);
+    }
+
+    #conferenceCancel .ReleaseCall {
+        background-image: url(images/transferCancel.png);
+    }
+
+#email {
+}
+
+    #email .disabled {
+        background-image: url(cti_image/a11-email_disabled.gif);
+    }
+
+    #email .enable {
+        background-image: url(cti_image/a11-email_flash.gif);
+    }
+
+#chat {
+}
+
+    #chat .disabled {
+        background-image: url(images/chat_disabled.png);
+    }
+
+    #chat .enable {
+        background-image: url(images/chat_enable.png);
+        cursor: default;
+    }
+
+    #chat .flash {
+        background-image: url(images/chat_flash.gif);
+    }
+
+#sms {
+}
+
+    #sms .enable {
+        background-image: url(cti_image/a15-SMS_flash.gif);
+    }
+
+    #sms .disabled {
+        background-image: url(cti_image/a15-SMS_disabled.gif);
+    }
+
+/*转满意度 转接 转电话支付*/
+#ivr {
+}
+
+    #ivr .disabled {
+        background-image: url(images/ivr_disabled.gif);
+    }
+
+    #ivr .enable {
+        background-image: url(images/ivr.png);
+    }
+
+#transferSearch {
+}
+
+    #transferSearch .disabled {
+        background-image: url(images/duilie_disabled.png);
+    }
+
+    #transferSearch .enable {
+        background-image: url(images/duilie.png);
+    }
+
+#transferTelPay {
+}
+
+    #transferTelPay .disabled {
+        background-image: url(images/pay_disablded.png);
+    }
+
+    #transferTelPay .enable {
+        background-image: url(images/pay.png);
+    }
+
+
+
+
+
+
+
+
+
+/*menu*/
+.ui-menu {
+    font-size: 12px;
+    line-height: 22px;
+    width: 100px;
+}
+
+.lenovo_menu {
+    background: gray;
+}
+
+    .lenovo_menu a {
+        color: #fff;
+        text-align: center;
+    }
+
+.lenovo_submenu, .click {
+    text-align: center;
+    cursor: pointer;
+}
+
+.lenovo_submenu {
+    text-align: center;
+    width: 100px;
+}
+
+
+
+
+
+
+/*表格全局*/
+.grd {
+    background-color: #CCCCCC;
+    font-family: "宋体";
+}
+
+    .grd tr th {
+        background-color: #666666;
+        line-height: 20px;
+        font-weight: normal;
+        color: #FFFFFF;
+    }
+
+    .grd tr td {
+        background-color: #FFFFFF;
+        line-height: 20px;
+    }
+
+.grd-detail {
+    background-color: #CCCCCC;
+    font-family: "宋体";
+}
+
+    .grd-detail tr th {
+        background-color: #F7F7F7;
+        font-weight: normal;
+        text-align: right;
+        line-height: 20px;
+    }
+
+    .grd-detail tr td {
+        background-color: #FFFFFF;
+        line-height: 20px;
+    }
+
+
+.text2span {
+    BACKGROUND-COLOR: transparent;
+    BORDER: none;
+}
+
+
+
+/* blockUI 样式 */
+div.growlUI {
+    background: url(images/face-sad.png) no-repeat 10px 6px;
+}
+
+    div.growlUI h1, div.growlUI h2 {
+        color: white;
+        padding: 3px 3px 3px 75px;
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    div.growlUI h2 {
+        color: white;
+        padding: 3px 3px 3px 75px;
+        text-align: left;
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+
+/* V2菜单 */
+#v2_menu {
+}
+
+    #v2_menu .lenovo_center {
+        text-align: center;
+    }
+
+    #v2_menu .v2_menu_agentstatus {
+        background-color: gray;
+        text-align: center;
+        color: #fff;
+    }
+
+    #v2_menu li.v2_menu_bt {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        line-height: 12px;
+    }
+
+    #v2_menu .v2_menu_bt {
+        background-color: #fff;
+        text-align: center;
+    }
+
+    #v2_menu .v2_menu_split {
+        background-color: gray;
+        height: 1px;
+        overflow: hidden;
+    }
+
+
+/*.buttonarea {
+
+}
+    .buttonarea:hover {
+        background-color:#67fb67;
+    }
+
+    .buttonarea.on {
+        background-color:#FF0000;
+    }*/

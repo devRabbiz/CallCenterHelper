@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5cf98979659f4a63b247a4d824815089" Name="关系图1" ZoomLevel="88">
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_BlackList" PointX="13" PointY="8" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_BlackListType" PointX="10.75" PointY="8.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_Chat" PointX="0.75" PointY="11.875" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_ChatText" PointX="13" PointY="3.125" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_ChatTextType" PointX="10.75" PointY="3.375" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_DutyManager" PointX="2.75" PointY="11.875" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_Holiday" PointX="10" PointY="12.125" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_HolidayRole" PointX="7.75" PointY="12.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_Module" PointX="5.75" PointY="9.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_Role" PointX="5.75" PointY="4.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_RoleModule" PointX="8" PointY="4.75" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_UserPermission" PointX="8" PointY="8.125" Width="1.5" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="SPhoneModel.FK_SPHONE_B_REFERENCE_SPHONE_B" />
+        <AssociationConnector ManuallyRouted="false" Association="SPhoneModel.FK_SPHONE_C_REFERENCE_SPHONE_C" />
+        <AssociationConnector ManuallyRouted="false" Association="SPhoneModel.FK_SPHONE_H_REFERENCE_SPHONE_H" />
+        <AssociationConnector ManuallyRouted="false" Association="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_M" />
+        <AssociationConnector ManuallyRouted="false" Association="SPhoneModel.FK_SPHONE_R_REFERENCE_SPHONE_R" />
+        <AssociationConnector ManuallyRouted="false" Association="SPhoneModel.FK_SPHONE_U_REFERENCE_SPHONE_R" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_LoginLog" PointX="4.75" PointY="13.875" Width="1.5" FillColor="255, 192, 255" />
+        <EntityTypeShape EntityType="SPhoneModel.Sphone_Call" PointX="12.75" PointY="11.875" Width="1.5" FillColor="255, 192, 255" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_IPDN" Width="1.5" PointX="6.75" PointY="16.875" FillColor="255, 192, 255" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_ReportUrl" Width="1.5" PointX="14.75" PointY="11.875" />
+        <EntityTypeShape EntityType="SPhoneModel.ivr_sugg_agency" Width="1.5" PointX="14.75" PointY="14.875" />
+        <EntityTypeShape EntityType="SPhoneModel.ivr_sugg_station" Width="1.5" PointX="15.75" PointY="2.875" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_NameValue" Width="1.5" PointX="2.75" PointY="17.875" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_DNIS" Width="1.5" PointX="0.75" PointY="0.75" FillColor="Silver" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_TFN" Width="1.5" PointX="0.75" PointY="4.5" FillColor="Silver" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_TFNDNISRel" Width="1.5" PointX="3" PointY="4.875" FillColor="Silver" />
+        <EntityTypeShape EntityType="SPhoneModel.SPhone_TFNQueueRel" Width="1.5" PointX="3" PointY="8.125" FillColor="Silver" />
+        <AssociationConnector Association="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_DNIS" />
+        <AssociationConnector Association="SPhoneModel.FK_SPhone_TFNDNISRel_SPhone_TFN" />
+        <AssociationConnector Association="SPhoneModel.FK_SPhone_TFNQueueRel_SPhone_TFN" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Documents>
+  <Document ID="Xlt001" FilePath="~/Documents/Templates/IP和DN配置信息.xlt">
+    <WorkSheet SheetName="IP和DN配置信息">
+      <Column FieldName="Place" Name="Place" Type="System.String" />
+      <Column FieldName="DNNo" Name="DN" Type="System.String" />
+      <Column FieldName="PlaceIP" Name="IP" Type="System.String" />
+      <Column FieldName="IsValid" Name="有效性" Type="System.Int16" Mappings="有效:1,无效:0" />
+      <Column FieldName="BindType" Name="绑定方式" Type="System.String" />
+      <Column FieldName="PhoneType" Name="话机类型" Type="System.String" />
+      <Column FieldName="PhoneIP" Name="话机IP" Type="System.String" />
+    </WorkSheet>
+  </Document>
+  <Document ID="Xlt002" FilePath="~/Documents/Templates/值班信息.xlt">
+    <WorkSheet SheetName="值班信息">
+      <Column FieldName="ManagerName" Name="值班经理姓名" Type="System.String" />
+      <Column FieldName="PhoneNo" Name="电话号码" Type="System.String" />
+      <Column FieldName="DutyDate" Name="值班日期" Type="System.DateTime" />
+    </WorkSheet>
+  </Document>
+  <Document ID="Xlt101" FilePath="~/Documents/Templates/Chat历史记录.xlt">
+    <WorkSheet SheetName="Chat详细记录">
+      <Column FieldName="ChatID" Name="Chat标识" Type="System.String" />
+      <Column FieldName="Queue" Name="当前队列" Type="System.String" />
+      <Column FieldName="CustomerID" Name="客户ID" Type="System.String" />
+      <Column FieldName="CustomerName" Name="客户姓名" Type="System.String" />
+      <Column FieldName="Date" Name="日期" Type="System.DateTime" />
+      <Column FieldName="Time" Name="时间" Type="System.DateTime" />
+      <Column FieldName="NickName" Name="发送人" Type="System.String" />
+      <Column FieldName="Message" Name="发送内容" Type="System.String" />
+    </WorkSheet>
+  </Document>
+
+  <Document ID="XltStation" FilePath="~/Documents/Templates/维修站信息.xlsx">
+    <WorkSheet SheetName="维修站信息">
+      <Column FieldName="AGENCY_ID" Name="维修站编号" Type="System.String" />
+      <Column FieldName="PRODUCT_TYPE" Name="产线" Type="System.String" />
+      <Column FieldName="AGENCY_NAME" Name="所在区县" Type="System.String" />
+      <Column FieldName="AGENCY_COVER_AREA" Name="区号" Type="System.String" />
+      <Column FieldName="AGENCY_INFO" Name="地址" Type="System.String" />
+      <Column FieldName="ADD_TYPE" Name="支持周末派送" Type="System.String" />
+    </WorkSheet>
+  </Document>
+
+  <Document ID="XltAgency" FilePath="~/Documents/Templates/代理商信息.xlsx">
+    <WorkSheet SheetName="代理商信息">
+      <Column FieldName="AGENCY_ID" Name="代理商编号" Type="System.String" />
+      <Column FieldName="PRODUCT_TYPE" Name="产线" Type="System.String" />
+      <Column FieldName="AGENCY_NAME" Name="所在区县" Type="System.String" />
+      <Column FieldName="AGENCY_COVER_AREA" Name="区号" Type="System.String" />
+      <Column FieldName="AGENCY_INFO" Name="地址" Type="System.String" />
+      <Column FieldName="ADD_TYPE" Name="支持周末派送" Type="System.String" />
+    </WorkSheet>
+  </Document>
+
+</Documents>

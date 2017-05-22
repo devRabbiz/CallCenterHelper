@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1BD9A071-F4CB-4CCD-9D57-77D597E3A759}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SoftPhone.Entity</RootNamespace>
+    <AssemblyName>SoftPhone.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AjaxReturn.cs" />
+    <Compile Include="Common\InitAgentInfo.cs" />
+    <Compile Include="Common\InitInfoVM.cs" />
+    <Compile Include="Genesys\cfg\Proc_GetCfgAdmin_Result.cs" />
+    <Compile Include="Genesys\cfg\Proc_GetCfgSkill_Result.cs" />
+    <Compile Include="Genesys\cfg\Proc_GetPersonAgentInfo_Result.cs" />
+    <Compile Include="Genesys\cfg\Proc_GetPersonSkills_Result.cs" />
+    <Compile Include="Genesys\ers\EnterID2Skill_Result.cs" />
+    <Compile Include="ivr_sugg_agency.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ivr_sugg_station.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\cfg\AgentInfo.cs" />
+    <Compile Include="Model\cfg\AgentLogin.cs" />
+    <Compile Include="Model\cfg\LoginResult.cs" />
+    <Compile Include="Model\cfg\Person.cs" />
+    <Compile Include="Model\cfg\Skill.cs" />
+    <Compile Include="Model\cfg\SkillLevel.cs" />
+    <Compile Include="Model\cfg\AgentStatisticResult.cs" />
+    <Compile Include="Model\cfg\StatOpenType.cs" />
+    <Compile Include="Model\cfg\SwitcheVQ.cs" />
+    <Compile Include="Model\cfg\TransferAgent.cs" />
+    <Compile Include="Model\DNPlace.cs" />
+    <Compile Include="Model\stat\CSDP_ChatAgent.cs" />
+    <Compile Include="Model\stat\SearchItem.cs" />
+    <Compile Include="Model\stat\Statistic.cs" />
+    <Compile Include="Model\stat\StatisticItem.cs" />
+    <Compile Include="Model\stat\TransferChatAgent.cs" />
+    <Compile Include="Proc_GetChatRightEnterID_Result.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_GetProcessingQList_Result.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPhoneModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_BlackList.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_BlackListType.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sphone_Call.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_Chat.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_ChatText.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_ChatTextType.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_DNIS.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_DutyManager.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_Holiday.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_HolidayRole.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_IPDN.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_LoginLog.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_Module.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_NameValue.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_ReportUrl.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_Role.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_RoleModule.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_TFN.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_TFNDNISRel.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_TFNQueueRel.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SPhone_UserPermission.cs">
+      <DependentUpon>SPhoneModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SPhoneModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SPhoneModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

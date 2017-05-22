@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "电话排队量_大屏显示";
+}
+@section header{
+    <script src="../../Scripts/jquery-1.9.1.js"></script>
+    <script src="../../Scripts/jquery-ui-1.10.1.js"></script>
+    <script src="../../Scripts/jquery.cookie.js"></script>
+    <script src="../../Scripts/jquery.multiselect.js"></script>
+    <script src="../../Scripts/jquery.multiselect.filter.js"></script>
+    <link href="../../Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <link href="../../Content/themes/jquery.multiselect.css" rel="stylesheet" />
+    <link href="../../Content/themes/jquery.multiselect.filter.css" rel="stylesheet" />
+    <style>
+        body, table {
+            font-size: 12px;
+            font-family: '微软雅黑';
+        }
+
+        .show {
+        }
+
+            .show thead td {
+                background-color: #B8B8B8;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .show tbody tr {
+                background-color: #FFFFFF;
+            }
+
+        .show {
+            width: 1100px;
+            zoom: 1;
+            margin: auto;
+        }
+
+            .show div {
+                width: 212px;
+                float: left;
+                display: block;
+                border: 1px solid #CCCCCC;
+                margin: 3px;
+                line-height: 22px;
+            }
+
+            .show span {
+                display: block;
+                width: 180px;
+                float: left;
+                overflow: hidden;
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: #CCCCCC;
+                margin-right: 3px;
+                background-color: #efefef;
+                text-indent: 3px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .show i {
+                display: block;
+                font-style: normal;
+                text-align: center;
+            }
+
+        .MM {
+            cursor: pointer;
+        }
+
+        .show span.MM {
+            text-decoration: underline;
+        }
+
+        #mm_agents_dialog {
+            zoom: 1;
+            margin: auto;
+        }
+
+            #mm_agents_dialog div {
+                display: inline-block;
+                border: 1px solid #CCCCCC;
+                margin: 3px;
+                line-height: 22px;
+                float: left;
+                width: 160px;
+            }
+
+            #mm_agents_dialog span {
+                display: block;
+                width: 120px;
+                float: left;
+                overflow: hidden;
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: #CCCCCC;
+                margin-right: 3px;
+                background-color: #efefef;
+                text-indent: 3px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            #mm_agents_dialog i {
+                display: block;
+                font-style: normal;
+                text-align: center;
+            }
+    </style>
+    <script>
+        var KEY = 'BS_SKILLS';
+        var COOKIE_BS_SKILLS = '';
+        var Interval0 = -1;
+        var AppServer = '@System.Configuration.ConfigurationManager.AppSettings["AppServer"]';
+        $(function () {
+            $('#search').hide();
+
+            COOKIE_BS_SKILLS = $.cookie(KEY);
+            var bs_skills = [];
+            if (COOKIE_BS_SKILLS != null) {
+                try {
+                    bs_skills = $.parseJSON('[' + COOKIE_BS_SKILLS + ']');
+                }
+                catch (e) { }
+            }
+
+            $.getJSON(AppServer + 'CFG/GetSkillsNormal?callback=?', {}, function (r) {
+
+                $(r).each(function () {
+                    if ($.inArray(this.DBID, bs_skills) != -1) {
+                        $('#q').append('<option value=' + this.DBID + ' selected="selected">' + this.Name + '</option>');
+                    }
+                    else {
+                        $('#q').append('<option value=' + this.DBID + '>' + this.Name + '</option>');
+                    }
+                });
+
+                $('#q')
+                    .multiselect({
+                        selectedList: 5,
+                        minWidth: 600,
+                        height: 300,
+                        checkAllText: '全选',
+                        uncheckAllText: '取消选中',
+                        noneSelectedText: '选择队列',
+                        selectedText: '# 个队列选中',
+                        open: function () {
+                            $('#show').empty();
+                            clearInterval(Interval0);
+                        },
+                        close: function () {
+                            var values = $.map($('#search #q option:selected'), function (i, e) {
+                                return $(i).attr('value');
+                            }).join(',');
+                            COOKIE_BS_SKILLS = values;
+                            $.cookie(KEY, COOKIE_BS_SKILLS, { expires: 365 });
+                            getQSInfo();
+                            Interval0 = setInterval(function () { getQSInfo(); }, 3000);
+                        }
+                    })
+                    .multiselectfilter({
+                        label: '筛选',
+                        placeholder: '请输入关键字',
+                        width: 200
+                    });
+
+                $('#search').show();
+
+                getQSInfo();
+                Interval0 = setInterval(function () { getQSInfo(); }, 3000);
+
+            }).error(function () { alert('查询失败') });
+
+
+        });
+
+        function getQSInfo() {
+            var url = AppServer + 'PhoneStat/GetQueneCount?callback=?';
+            if (COOKIE_BS_SKILLS == null || COOKIE_BS_SKILLS == '') {
+                $('#show').empty();
+                $('#time').html('');
+                $('#timeSpan').hide();
+                return;
+            }
+            var data = { 'skillDBIDList': COOKIE_BS_SKILLS };
+            $.getJSON(url, data, function (r) {
+                $('#timeSpan').show();
+                $('#time').html(GetCurrentTime());
+                $('#show').empty();
+                $(r).each(function () {
+                    $('#show').append('<div jtag="' + this.IsMM + '"' + (this.IsMM ? " class=MM title='查看'" : "") + '><span>' + this.Name + '</span><i>' + this.Count + '</i></div>');
+                });
+            });
+        }
+
+        function GetCurrentTime() {
+            /// <summary>
+            /// yyyy-MM-dd HH:mm:ss
+            /// </summary>
+            /// <returns type="string"></returns>
+            var d = new Date();
+            var year = d.getFullYear().toString();
+            var month = "0" + (d.getMonth() + 1);
+            var day = '0' + d.getDate();
+            var hour = '0' + d.getHours();
+            var minute = '0' + d.getMinutes();
+            var second = '0' + d.getSeconds();
+            var result = year + '-' +
+                month.substr(month.length - 2) + '-' +
+                day.substr(day.length - 2) + ' ' +
+                hour.substr(hour.length - 2) + ':' +
+                minute.substr(minute.length - 2) + ':' +
+                second.substr(second.length - 2);
+            return result;
+        }
+
+        //mm begin
+        var mmdialog;
+        var mmName = '';
+        var mmTimeout = 0;
+
+        function show_mm(name, j) {
+            try{
+                if ($("#mm_agents_dialog").dialog("isOpen")) {
+                    $('#mm_agents_dialog').empty();
+                    $('#mm_agents_dialog').dialog("close");
+                }
+            }
+            catch (e) { }
+            $('#mm_agents_dialog').dialog({
+                title: name.split('_')[0],
+                modal: false, draggable: true, resizable: true, closeOnEscape: true, height: 400, width: 208, autoOpen: true,
+                position: { my: 'left top+1', at: 'left bottom', of: $(j) },
+                open: function () {
+                    mmName = name;
+                    put_mm();
+                },
+                close: function () {
+                    mmName = '';
+                    clearTimeout(mmTimeout);
+                }
+            });
+        }
+
+        function put_mm() {
+            var isOpen = $('#mm_agents_dialog').dialog('isOpen');
+            if (isOpen) {
+                var data = { skillName: mmName };
+                $.getJSON('/ChatStat/GetAgents?_t' + new Date().getTime(), data, function (r) {
+                    $('#mm_agents_dialog').empty();
+                    $(r).each(function () {
+                        $('#mm_agents_dialog').append('<div><span>' + this.AgentName + '</span><i>' + this.CurrentChatCount + '</i></div>');
+                    });
+                });
+                mmTimeout = setTimeout(function () { put_mm(); }, 3000);
+            }
+        }
+
+        $(document).on('click', 'div[jtag="true"]', function () {
+            show_mm($('span:first', this).html(), this);
+        });
+    </script>
+}
+<div id="search" style="width: 1094px; margin: auto;">
+    <select id="q" name="q" multiple="multiple" title="选择显示队列">
+    </select>
+    <span id="timeSpan">刷新时间：</span>
+    <span id="time"></span>
+</div>
+<div id="show" class="show">
+</div>
+<div style="clear: left"></div>
+<div id="mm_agents_dialog"></div>

@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CTICFGModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="CTICFGModelStoreContainer">
+          <EntitySet Name="cfg_agent_group" EntityType="CTICFGModel.Store.cfg_agent_group" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_agent_login" EntityType="CTICFGModel.Store.cfg_agent_login" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_dn" EntityType="CTICFGModel.Store.cfg_dn" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_flex_prop" EntityType="CTICFGModel.Store.cfg_flex_prop" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_login_info" EntityType="CTICFGModel.Store.cfg_login_info" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_person" EntityType="CTICFGModel.Store.cfg_person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_script" EntityType="CTICFGModel.Store.cfg_script" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_skill" EntityType="CTICFGModel.Store.cfg_skill" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="cfg_skill_level" EntityType="CTICFGModel.Store.cfg_skill_level" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="cfg_agent_group">
+          <Key>
+            <PropertyRef Name="group_dbid" />
+            <PropertyRef Name="agent_dbid" />
+          </Key>
+          <Property Name="group_dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="agent_dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="group_csid" Type="numeric" Precision="10" />
+          <Property Name="agent_csid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_agent_login">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="switch_dbid" Type="numeric" Precision="10" />
+          <Property Name="tenant_dbid" Type="numeric" Precision="10" />
+          <Property Name="login_code" Type="varchar" MaxLength="255" />
+          <Property Name="state" Type="int" />
+          <Property Name="override" Type="varchar" MaxLength="255" />
+          <Property Name="use_override" Type="int" />
+          <Property Name="sw_specific_type" Type="int" />
+          <Property Name="csid" Type="numeric" Precision="10" />
+          <Property Name="switch_csid" Type="numeric" Precision="10" />
+          <Property Name="tenant_csid" Type="numeric" Precision="10" />
+          <Property Name="password" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="cfg_dn">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="switch_dbid" Type="numeric" Precision="10" />
+          <Property Name="tenant_dbid" Type="numeric" Precision="10" />
+          <Property Name="type" Type="int" />
+          <Property Name="number_" Type="varchar" MaxLength="255" />
+          <Property Name="association" Type="varchar" MaxLength="255" />
+          <Property Name="login_flag" Type="int" />
+          <Property Name="dn_login_id" Type="varchar" MaxLength="255" />
+          <Property Name="register_all" Type="int" />
+          <Property Name="group_dbid" Type="numeric" Precision="10" />
+          <Property Name="trunks" Type="int" />
+          <Property Name="route_type" Type="int" />
+          <Property Name="override" Type="varchar" MaxLength="255" />
+          <Property Name="state" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="use_override" Type="int" />
+          <Property Name="sw_specific_type" Type="int" />
+          <Property Name="csid" Type="numeric" Precision="10" />
+          <Property Name="switch_csid" Type="numeric" Precision="10" />
+          <Property Name="tenant_csid" Type="numeric" Precision="10" />
+          <Property Name="group_csid" Type="numeric" Precision="10" />
+          <Property Name="place_dbid" Type="numeric" Precision="10" />
+          <Property Name="place_csid" Type="numeric" Precision="10" />
+          <Property Name="site_dbid" Type="numeric" Precision="10" />
+          <Property Name="contract_dbid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_flex_prop">
+          <Key>
+            <PropertyRef Name="dbid" />
+            <PropertyRef Name="part" />
+          </Key>
+          <Property Name="dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="object_dbid" Type="numeric" Precision="10" />
+          <Property Name="object_type" Type="int" />
+          <Property Name="parent_dbid" Type="numeric" Precision="10" />
+          <Property Name="prop_name" Type="varchar" MaxLength="255" />
+          <Property Name="prop_value" Type="varchar" MaxLength="255" />
+          <Property Name="prop_type" Type="int" />
+          <Property Name="part" Type="int" Nullable="false" />
+          <Property Name="csid" Type="numeric" Precision="10" />
+          <Property Name="object_csid" Type="numeric" Precision="10" />
+          <Property Name="parent_csid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_login_info">
+          <Key>
+            <PropertyRef Name="person_dbid" />
+            <PropertyRef Name="agent_login_dbid" />
+          </Key>
+          <Property Name="person_dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="agent_login_dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="wrapup_time" Type="int" />
+          <Property Name="person_csid" Type="numeric" Precision="10" />
+          <Property Name="agent_login_csid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_person">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="tenant_dbid" Type="numeric" Precision="10" />
+          <Property Name="last_name" Type="varchar" MaxLength="64" />
+          <Property Name="first_name" Type="varchar" MaxLength="64" />
+          <Property Name="address_line1" Type="varchar" MaxLength="64" />
+          <Property Name="address_line2" Type="varchar" MaxLength="64" />
+          <Property Name="address_line3" Type="varchar" MaxLength="64" />
+          <Property Name="address_line4" Type="varchar" MaxLength="64" />
+          <Property Name="address_line5" Type="varchar" MaxLength="64" />
+          <Property Name="office" Type="varchar" MaxLength="64" />
+          <Property Name="home" Type="varchar" MaxLength="64" />
+          <Property Name="mobile" Type="varchar" MaxLength="64" />
+          <Property Name="pager" Type="varchar" MaxLength="64" />
+          <Property Name="fax" Type="varchar" MaxLength="64" />
+          <Property Name="modem" Type="varchar" MaxLength="64" />
+          <Property Name="phones_comment" Type="varchar" MaxLength="64" />
+          <Property Name="birthdate" Type="varchar" MaxLength="64" />
+          <Property Name="comment_" Type="varchar" MaxLength="255" />
+          <Property Name="employee_id" Type="varchar" MaxLength="64" />
+          <Property Name="user_name" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="64" />
+          <Property Name="is_agent" Type="int" />
+          <Property Name="is_admin" Type="int" />
+          <Property Name="state" Type="int" />
+          <Property Name="csid" Type="numeric" Precision="10" />
+          <Property Name="tenant_csid" Type="numeric" Precision="10" />
+          <Property Name="place_dbid" Type="numeric" Precision="10" />
+          <Property Name="place_csid" Type="numeric" Precision="10" />
+          <Property Name="capacity_dbid" Type="numeric" Precision="10" />
+          <Property Name="site_dbid" Type="numeric" Precision="10" />
+          <Property Name="contract_dbid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_script">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="tenant_dbid" Type="numeric" Precision="10" />
+          <Property Name="index_" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="cont_person_dbid" Type="numeric" Precision="10" />
+          <Property Name="state" Type="int" />
+          <Property Name="csid" Type="numeric" Precision="10" />
+          <Property Name="tenant_csid" Type="numeric" Precision="10" />
+          <Property Name="cont_person_csid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_skill">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="tenant_dbid" Type="numeric" Precision="10" />
+          <Property Name="state" Type="int" />
+          <Property Name="csid" Type="numeric" Precision="10" />
+          <Property Name="tenant_csid" Type="numeric" Precision="10" />
+        </EntityType>
+        <EntityType Name="cfg_skill_level">
+          <Key>
+            <PropertyRef Name="person_dbid" />
+            <PropertyRef Name="skill_dbid" />
+          </Key>
+          <Property Name="person_dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="skill_dbid" Type="numeric" Nullable="false" Precision="10" />
+          <Property Name="level_" Type="int" />
+          <Property Name="person_csid" Type="numeric" Precision="10" />
+          <Property Name="skill_csid" Type="numeric" Precision="10" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CTICFGModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CTICFGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cfg_dn" EntityType="CTICFGModel.cfg_dn" />
+          <EntitySet Name="cfg_flex_prop" EntityType="CTICFGModel.cfg_flex_prop" />
+          <EntitySet Name="cfg_script" EntityType="CTICFGModel.cfg_script" />
+          <EntitySet Name="cfg_skill" EntityType="CTICFGModel.cfg_skill" />
+          <EntitySet Name="cfg_skill_level" EntityType="CTICFGModel.cfg_skill_level" />
+          <EntitySet Name="cfg_person" EntityType="CTICFGModel.cfg_person" />
+          <EntitySet Name="cfg_login_info" EntityType="CTICFGModel.cfg_login_info" />
+          <EntitySet Name="cfg_agent_group" EntityType="CTICFGModel.cfg_agent_group" />
+          <EntitySet Name="cfg_agent_login" EntityType="CTICFGModel.cfg_agent_login" />
+        </EntityContainer>
+        <EntityType Name="cfg_dn">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="switch_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="tenant_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="number_" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="association" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="login_flag" Type="Int32" />
+          <Property Name="dn_login_id" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="register_all" Type="Int32" />
+          <Property Name="group_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="trunks" Type="Int32" />
+          <Property Name="route_type" Type="Int32" />
+          <Property Name="override" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="use_override" Type="Int32" />
+          <Property Name="sw_specific_type" Type="Int32" />
+          <Property Name="csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="switch_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="tenant_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="group_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="place_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="place_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="site_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="contract_dbid" Type="Decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_flex_prop">
+          <Key>
+            <PropertyRef Name="dbid" />
+            <PropertyRef Name="part" />
+          </Key>
+          <Property Name="dbid" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="object_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="object_type" Type="Int32" />
+          <Property Name="parent_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="prop_name" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="prop_value" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="prop_type" Type="Int32" />
+          <Property Name="part" Type="Int32" Nullable="false" />
+          <Property Name="csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="object_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="parent_csid" Type="Decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_script">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="name" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="tenant_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="index_" Type="Int32" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="cont_person_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="tenant_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="cont_person_csid" Type="Decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_skill">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Name="dbid" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="name" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="tenant_dbid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="tenant_csid" Type="Decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_skill_level">
+          <Key>
+            <PropertyRef Name="person_dbid" />
+            <PropertyRef Name="skill_dbid" />
+          </Key>
+          <Property Name="person_dbid" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="skill_dbid" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="level_" Type="Int32" />
+          <Property Name="person_csid" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="skill_csid" Type="Decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_person">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Type="Decimal" Name="dbid" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="tenant_dbid" Precision="10" Scale="0" />
+          <Property Type="String" Name="last_name" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="first_name" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address_line1" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address_line2" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address_line3" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address_line4" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="address_line5" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="office" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="home" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="mobile" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pager" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="fax" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="modem" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="phones_comment" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="birthdate" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="comment_" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="employee_id" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="user_name" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="password" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="is_agent" />
+          <Property Type="Int32" Name="is_admin" />
+          <Property Type="Int32" Name="state" />
+          <Property Type="Decimal" Name="csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="tenant_csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="place_dbid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="place_csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="capacity_dbid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="site_dbid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="contract_dbid" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_login_info">
+          <Key>
+            <PropertyRef Name="person_dbid" />
+            <PropertyRef Name="agent_login_dbid" />
+          </Key>
+          <Property Type="Decimal" Name="person_dbid" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="agent_login_dbid" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Int32" Name="wrapup_time" />
+          <Property Type="Decimal" Name="person_csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="agent_login_csid" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_agent_group">
+          <Key>
+            <PropertyRef Name="group_dbid" />
+            <PropertyRef Name="agent_dbid" />
+          </Key>
+          <Property Type="Decimal" Name="group_dbid" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="agent_dbid" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="group_csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="agent_csid" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="cfg_agent_login">
+          <Key>
+            <PropertyRef Name="dbid" />
+          </Key>
+          <Property Type="Decimal" Name="dbid" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="switch_dbid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="tenant_dbid" Precision="10" Scale="0" />
+          <Property Type="String" Name="login_code" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="state" />
+          <Property Type="String" Name="override" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="use_override" />
+          <Property Type="Int32" Name="sw_specific_type" />
+          <Property Type="Decimal" Name="csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="switch_csid" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="tenant_csid" Precision="10" Scale="0" />
+          <Property Type="String" Name="password" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CTICFGModelStoreContainer" CdmEntityContainer="CTICFGEntities">
+          <EntitySetMapping Name="cfg_dn">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_dn">
+              <MappingFragment StoreEntitySet="cfg_dn">
+                <ScalarProperty Name="dbid" ColumnName="dbid" />
+                <ScalarProperty Name="switch_dbid" ColumnName="switch_dbid" />
+                <ScalarProperty Name="tenant_dbid" ColumnName="tenant_dbid" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="number_" ColumnName="number_" />
+                <ScalarProperty Name="association" ColumnName="association" />
+                <ScalarProperty Name="login_flag" ColumnName="login_flag" />
+                <ScalarProperty Name="dn_login_id" ColumnName="dn_login_id" />
+                <ScalarProperty Name="register_all" ColumnName="register_all" />
+                <ScalarProperty Name="group_dbid" ColumnName="group_dbid" />
+                <ScalarProperty Name="trunks" ColumnName="trunks" />
+                <ScalarProperty Name="route_type" ColumnName="route_type" />
+                <ScalarProperty Name="override" ColumnName="override" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="use_override" ColumnName="use_override" />
+                <ScalarProperty Name="sw_specific_type" ColumnName="sw_specific_type" />
+                <ScalarProperty Name="csid" ColumnName="csid" />
+                <ScalarProperty Name="switch_csid" ColumnName="switch_csid" />
+                <ScalarProperty Name="tenant_csid" ColumnName="tenant_csid" />
+                <ScalarProperty Name="group_csid" ColumnName="group_csid" />
+                <ScalarProperty Name="place_dbid" ColumnName="place_dbid" />
+                <ScalarProperty Name="place_csid" ColumnName="place_csid" />
+                <ScalarProperty Name="site_dbid" ColumnName="site_dbid" />
+                <ScalarProperty Name="contract_dbid" ColumnName="contract_dbid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_flex_prop">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_flex_prop">
+              <MappingFragment StoreEntitySet="cfg_flex_prop">
+                <ScalarProperty Name="dbid" ColumnName="dbid" />
+                <ScalarProperty Name="object_dbid" ColumnName="object_dbid" />
+                <ScalarProperty Name="object_type" ColumnName="object_type" />
+                <ScalarProperty Name="parent_dbid" ColumnName="parent_dbid" />
+                <ScalarProperty Name="prop_name" ColumnName="prop_name" />
+                <ScalarProperty Name="prop_value" ColumnName="prop_value" />
+                <ScalarProperty Name="prop_type" ColumnName="prop_type" />
+                <ScalarProperty Name="part" ColumnName="part" />
+                <ScalarProperty Name="csid" ColumnName="csid" />
+                <ScalarProperty Name="object_csid" ColumnName="object_csid" />
+                <ScalarProperty Name="parent_csid" ColumnName="parent_csid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_script">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_script">
+              <MappingFragment StoreEntitySet="cfg_script">
+                <ScalarProperty Name="dbid" ColumnName="dbid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="tenant_dbid" ColumnName="tenant_dbid" />
+                <ScalarProperty Name="index_" ColumnName="index_" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="cont_person_dbid" ColumnName="cont_person_dbid" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="csid" ColumnName="csid" />
+                <ScalarProperty Name="tenant_csid" ColumnName="tenant_csid" />
+                <ScalarProperty Name="cont_person_csid" ColumnName="cont_person_csid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_skill">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_skill">
+              <MappingFragment StoreEntitySet="cfg_skill">
+                <ScalarProperty Name="dbid" ColumnName="dbid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="tenant_dbid" ColumnName="tenant_dbid" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="csid" ColumnName="csid" />
+                <ScalarProperty Name="tenant_csid" ColumnName="tenant_csid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_skill_level">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_skill_level">
+              <MappingFragment StoreEntitySet="cfg_skill_level">
+                <ScalarProperty Name="person_dbid" ColumnName="person_dbid" />
+                <ScalarProperty Name="skill_dbid" ColumnName="skill_dbid" />
+                <ScalarProperty Name="level_" ColumnName="level_" />
+                <ScalarProperty Name="person_csid" ColumnName="person_csid" />
+                <ScalarProperty Name="skill_csid" ColumnName="skill_csid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_person">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_person">
+              <MappingFragment StoreEntitySet="cfg_person">
+                <ScalarProperty Name="contract_dbid" ColumnName="contract_dbid" />
+                <ScalarProperty Name="site_dbid" ColumnName="site_dbid" />
+                <ScalarProperty Name="capacity_dbid" ColumnName="capacity_dbid" />
+                <ScalarProperty Name="place_csid" ColumnName="place_csid" />
+                <ScalarProperty Name="place_dbid" ColumnName="place_dbid" />
+                <ScalarProperty Name="tenant_csid" ColumnName="tenant_csid" />
+                <ScalarProperty Name="csid" ColumnName="csid" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="is_agent" ColumnName="is_agent" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="comment_" ColumnName="comment_" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="phones_comment" ColumnName="phones_comment" />
+                <ScalarProperty Name="modem" ColumnName="modem" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="pager" ColumnName="pager" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="home" ColumnName="home" />
+                <ScalarProperty Name="office" ColumnName="office" />
+                <ScalarProperty Name="address_line5" ColumnName="address_line5" />
+                <ScalarProperty Name="address_line4" ColumnName="address_line4" />
+                <ScalarProperty Name="address_line3" ColumnName="address_line3" />
+                <ScalarProperty Name="address_line2" ColumnName="address_line2" />
+                <ScalarProperty Name="address_line1" ColumnName="address_line1" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="tenant_dbid" ColumnName="tenant_dbid" />
+                <ScalarProperty Name="dbid" ColumnName="dbid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_login_info">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_login_info">
+              <MappingFragment StoreEntitySet="cfg_login_info">
+                <ScalarProperty Name="agent_login_csid" ColumnName="agent_login_csid" />
+                <ScalarProperty Name="person_csid" ColumnName="person_csid" />
+                <ScalarProperty Name="wrapup_time" ColumnName="wrapup_time" />
+                <ScalarProperty Name="agent_login_dbid" ColumnName="agent_login_dbid" />
+                <ScalarProperty Name="person_dbid" ColumnName="person_dbid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_agent_group">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_agent_group">
+              <MappingFragment StoreEntitySet="cfg_agent_group">
+                <ScalarProperty Name="agent_csid" ColumnName="agent_csid" />
+                <ScalarProperty Name="group_csid" ColumnName="group_csid" />
+                <ScalarProperty Name="agent_dbid" ColumnName="agent_dbid" />
+                <ScalarProperty Name="group_dbid" ColumnName="group_dbid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cfg_agent_login">
+            <EntityTypeMapping TypeName="CTICFGModel.cfg_agent_login">
+              <MappingFragment StoreEntitySet="cfg_agent_login">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="tenant_csid" ColumnName="tenant_csid" />
+                <ScalarProperty Name="switch_csid" ColumnName="switch_csid" />
+                <ScalarProperty Name="csid" ColumnName="csid" />
+                <ScalarProperty Name="sw_specific_type" ColumnName="sw_specific_type" />
+                <ScalarProperty Name="use_override" ColumnName="use_override" />
+                <ScalarProperty Name="override" ColumnName="override" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="login_code" ColumnName="login_code" />
+                <ScalarProperty Name="tenant_dbid" ColumnName="tenant_dbid" />
+                <ScalarProperty Name="switch_dbid" ColumnName="switch_dbid" />
+                <ScalarProperty Name="dbid" ColumnName="dbid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

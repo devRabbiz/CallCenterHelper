@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "转接";
+}
+@section header{
+    <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.1.js"></script>
+    <script type="text/javascript" src="../../Scripts/json2.js"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat_interface.js"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat_api.js?ver=5.8"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat.js?ver=5.8"></script>
+    @{
+        if (Request.Cookies["softphone"]!=null  && Request.Cookies["softphone"].Values["isemergency"] == "0")
+        {
+        <script type="text/javascript">
+            document.domain = '@System.Web.Configuration.WebConfigurationManager.AppSettings["document.domain"]';
+        </script>
+        }
+    }
+    <script type="text/javascript">
+
+        var domain_phone, domain_phone_Db;
+        $(function () {
+            // 电话服务域名和端口
+            domain_phone = '@System.Configuration.ConfigurationManager.AppSettings["appServer"]';
+            domain_phone_Db = '@System.Configuration.ConfigurationManager.AppSettings["AppServer.Db"]';
+
+            // 加载客服组列表
+            $("#txtSkillName").keyup(function () {
+                loadSkills(true);
+            });
+
+            // 加载客服列表
+            $("#txtAgentName").keyup(function () {
+                loadAgents(true);
+            });
+            loadSkills(true);
+        });
+
+    </script>
+    <link href="../../Content/chat.css?ver=5.8" rel="stylesheet" type="text/css" />
+}
+<div class="content">
+    <h1>聊天转出</h1>
+    <div class="box  border_b1">
+        <table border="0" cellpadding="1" cellspacing="1">
+            <tr>
+                <td valign="bottom" width="340">
+                    <table>
+                        <tr>
+                            <td class="colLable">坐席组名称：</td>
+                            <td>
+                                <input id="txtSkillName" name="txtSkillName" type="text" /></td>
+                        </tr>
+                    </table>
+                </td>
+                <td valign="top" width="340">
+                    <table>
+                        <tr style="line-height: 30px;">
+                            <td class="colLable">当前坐席组：</td>
+                            <td>
+                                <label id="hdSkillName"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="colLable">坐席名称：</td>
+                            <td>
+                                <input id="txtAgentName" type="text" name="txtAgentName" /></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <div id="skills">
+                        <table class="listTable" align="center" width="99%">
+                            <thead>
+                                <tr class="header">
+                                    <th width="80%">坐席组名称</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                <td valign="top">
+                    <div id="agents">
+                        <table class="listTable" align="center" width="99%">
+                            <thead>
+                                <tr class="header">
+                                    <th width="50%">坐席名称</th>
+                                    <th width="30%">状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+﻿.searchTable tr {
+    margin-bottom: 5px;
+    height: 30px;
+}
+
+    .searchTable tr td {
+        padding-left: 5px;
+    }
+
+        .searchTable tr td input[type="text"], input[type="password"], select {
+            width: 120px;
+        }
+
+/*---------------------DeluxeGrid-----------------------------*/
+
+.item, .sitem, .aitem {
+    height: 22px;
+}
+
+    .item td, .sitem td, .aitem td {
+        padding-left: 5px;
+    }
+
+    .item a, .sitem a, .aitem a {
+        color: #009DDA;
+    }
+
+.item {
+    background-color: White;
+}
+
+.aitem {
+    background-color: #EFEFEF;
+}
+
+.sitem {
+    background-color: #D1DDF1;
+    color: #333333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.header {
+    background-color: #7F7F7F;
+    color: White;
+    text-align: center;
+    height: 24px;
+}
+
+    .header a {
+        color: White;
+    }
+
+.pager {
+    height: 26px;
+}
+
+    .pager input[type=text] {
+        border: 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .pager input[type=submit] {
+        margin-left: 5px;
+        height: 24px;
+        border: 1px solid #ccc;
+        background-color: White;
+        cursor: pointer;
+    }
+
+
+
+/*---------------------DeluxeGrid END-----------------------------*/
+
+
+/*************聊天话术样式*************/
+.historyBox {
+    width: 675px;
+    margin: 5px;
+}
+
+.chatContent {
+    border: solid 1px #ccc;
+    margin-bottom: 5px;
+    padding: 3px;
+}
+
+    .chatContent h3 {
+        background: #7f7f7f;
+        color: white;
+        line-height: 24px;
+    }
+
+.AgentMessage, .ClientMessage, .CommonText, .Alert, .Notice {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.AgentMessage {
+    color: #76923C;
+}
+
+.ClientMessage {
+    color: blue;
+}
+
+.CommonText {
+    color: #010101;
+}
+
+.Alert {
+    color: #ccc;
+}
+
+.Notice {
+    color: #080808;
+}
+
+.MsgContent {
+    margin-left: 5px;
+}
+/**************************/

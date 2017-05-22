@@ -1,0 +1,111 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.bigbox{
+	width:1024px;
+	height:608px;
+	margin:0 auto;
+	background:url(images/loginbig_bg.jpg) no-repeat;
+	padding-top:160px;
+}
+.main{
+	width:1024px;
+	height:424px;
+	margin:0 auto;
+	background:#e5f7ff;
+}
+.mainleft{
+	width:626px;
+	height:389px;
+	background:url(images/mainleftpic.jpg) no-repeat;
+	float:left;
+	padding-left:34px;
+	padding-top:33px;
+}
+.logo{
+	width:215px;
+	height:23px;
+}
+.mainright{
+	width:364px;
+	height:422px;
+	float:left;
+}
+.title{
+	width:364px;
+	height:37px;
+	padding-top:70px;
+}
+.lenovotitle{
+	height:35px;
+	padding-left:31px;
+	font-size:22px;
+	font-family:'微软雅黑';
+	color:#232323;
+	font-weight:normal;
+}
+.line{
+	width:364px;
+	height:2px;
+	background:url(images/login_line.jpg) no-repeat;
+	overflow:hidden;
+}
+.user{
+	height:364px;
+	padding-top:35px;
+}
+.yonghu{
+	width:364px;
+	height:23px;
+	margin-bottom:6px;
+}
+.person{
+	width:70px;
+	height:23px;
+	line-height:23px;
+	padding-right:10px;
+	text-align:right;
+	font-size:14px;
+	font-family:'微软雅黑';
+	float:left;
+}
+.text{
+	width:268px;
+	float:left;
+}
+.tet{
+	width:220px;
+	height:21px;
+	border:1px solid #3684ab;
+	background:url(images/pic2.jpg) 3px center no-repeat #eaf8ff;
+    padding-left:20px;
+}
+.tet_2{
+	width:220px;
+	height:21px;
+	border:1px solid #3684ab;
+	background:url(images/pic1.jpg) 3px center no-repeat #eaf8ff;
+    padding-left:20px;
+}
+.list{
+	width:244px;
+	height:24px;
+	background:#eaf8ff;
+	border:1px solid #3684ab;
+}
+.login{
+	width:123px;
+	height:35px;
+	margin:0 auto;
+	margin-top:40px;
+
+}
+.loginbtn{
+	width:123px;
+	height:35px;
+	background:url(images/loginbtn.jpg) no-repeat;
+	font-size:14px;
+	font-family:'微软雅黑';
+	color:#FFF;
+	border:none;
+}

@@ -1,0 +1,785 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{203BC5B3-FB8B-45D6-AFC3-317E7C25C0D1}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SoftPhoneToolBar</RootNamespace>
+    <AssemblyName>SoftPhoneToolBar</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\Ref\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Ref_Chat\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\Users\Derek\Desktop\Lenovo.Tele\Lenovo.Tele\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SoftPhoneToolBarController.cs" />
+    <Compile Include="domain.aspx.cs">
+      <DependentUpon>domain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="domain.aspx.designer.cs">
+      <DependentUpon>domain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LenovoTrace.aspx.cs">
+      <DependentUpon>LenovoTrace.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LenovoTrace.aspx.designer.cs">
+      <DependentUpon>LenovoTrace.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChatRTOView.cs" />
+    <Compile Include="Models\ChatTabView.cs" />
+    <Compile Include="Models\HistoryModel.cs" />
+    <Compile Include="Models\InitInfoVM.cs" />
+    <Compile Include="Models\LoginVM.cs" />
+    <Compile Include="Models\SkillAgentVM.cs" />
+    <Compile Include="Models\SkillVM.cs" />
+    <Compile Include="Models\SoftPhoneToolBarVM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupportClass\BaseController.cs" />
+    <Compile Include="SupportClass\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\calendar.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\cti_image\a01-keypad_disabled.gif" />
+    <Content Include="Content\cti_image\a01-keypad_down.gif" />
+    <Content Include="Content\cti_image\a01-keypad_enabled.gif" />
+    <Content Include="Content\cti_image\a01-keypad_flash.gif" />
+    <Content Include="Content\cti_image\a01-keypad_over.gif" />
+    <Content Include="Content\cti_image\a02-dial_disabled.gif" />
+    <Content Include="Content\cti_image\a02-dial_down.gif" />
+    <Content Include="Content\cti_image\a02-dial_enable.gif" />
+    <Content Include="Content\cti_image\a02-dial_flash.gif" />
+    <Content Include="Content\cti_image\a02-dial_over.gif" />
+    <Content Include="Content\cti_image\a05-dail_disabled.gif" />
+    <Content Include="Content\cti_image\a05-dail_down.gif" />
+    <Content Include="Content\cti_image\a05-dail_enabled.gif" />
+    <Content Include="Content\cti_image\a05-dail_flash.gif" />
+    <Content Include="Content\cti_image\a05-dail_over.gif" />
+    <Content Include="Content\cti_image\a05-phone_disabled.gif" />
+    <Content Include="Content\cti_image\a05-phone_down.gif" />
+    <Content Include="Content\cti_image\a05-phone_enabled.gif" />
+    <Content Include="Content\cti_image\a05-phone_Flash.gif" />
+    <Content Include="Content\cti_image\a05-phone_over.gif" />
+    <Content Include="Content\cti_image\a05-phone_Pause.gif" />
+    <Content Include="Content\cti_image\a05-release_disable.gif" />
+    <Content Include="Content\cti_image\a05-release_down.gif" />
+    <Content Include="Content\cti_image\a05-release_enable.gif" />
+    <Content Include="Content\cti_image\a05-release_flash.gif" />
+    <Content Include="Content\cti_image\a05-release_over.gif" />
+    <Content Include="Content\cti_image\a05-transfer_enabled.gif" />
+    <Content Include="Content\cti_image\a06-attacheddata_enabled.gif" />
+    <Content Include="Content\cti_image\a06-hold_disabled.gif" />
+    <Content Include="Content\cti_image\a06-hold_down.gif" />
+    <Content Include="Content\cti_image\a06-hold_enabled.gif" />
+    <Content Include="Content\cti_image\a06-hold_flash.gif" />
+    <Content Include="Content\cti_image\a06-hold_over.gif" />
+    <Content Include="Content\cti_image\a07-conference_enabled.gif" />
+    <Content Include="Content\cti_image\a07-transfer_disabled.gif" />
+    <Content Include="Content\cti_image\a07-transfer_down.gif" />
+    <Content Include="Content\cti_image\a07-transfer_enabled.gif" />
+    <Content Include="Content\cti_image\a07-transfer_flash.gif" />
+    <Content Include="Content\cti_image\a07-transfer_over.gif" />
+    <Content Include="Content\cti_image\a08-conference_disabled.gif" />
+    <Content Include="Content\cti_image\a08-conference_down.gif" />
+    <Content Include="Content\cti_image\a08-conference_enabled.gif" />
+    <Content Include="Content\cti_image\a08-conference_flash.gif" />
+    <Content Include="Content\cti_image\a08-conference_over.gif" />
+    <Content Include="Content\cti_image\a09-attacheddata_disabled.gif" />
+    <Content Include="Content\cti_image\a09-attacheddata_down.gif" />
+    <Content Include="Content\cti_image\a09-attacheddata_enabled.gif" />
+    <Content Include="Content\cti_image\a09-attacheddata_flash.gif" />
+    <Content Include="Content\cti_image\a09-attacheddata_over.gif" />
+    <Content Include="Content\cti_image\a10-ivr_disabled.gif" />
+    <Content Include="Content\cti_image\a10-ivr_down.gif" />
+    <Content Include="Content\cti_image\a10-ivr_enabled.gif" />
+    <Content Include="Content\cti_image\a10-ivr_flash.gif" />
+    <Content Include="Content\cti_image\a10-ivr_over.gif" />
+    <Content Include="Content\cti_image\a11-email_disabled.gif" />
+    <Content Include="Content\cti_image\a11-email_down.gif" />
+    <Content Include="Content\cti_image\a11-email_enabled.gif" />
+    <Content Include="Content\cti_image\a11-email_flash.gif" />
+    <Content Include="Content\cti_image\a11-email_over.gif" />
+    <Content Include="Content\cti_image\a11-email_talking.gif" />
+    <Content Include="Content\cti_image\a12-chat_disabled.gif" />
+    <Content Include="Content\cti_image\a12-chat_down.gif" />
+    <Content Include="Content\cti_image\a12-chat_enabled.gif" />
+    <Content Include="Content\cti_image\a12-chat_flash.gif" />
+    <Content Include="Content\cti_image\a12-chat_over.gif" />
+    <Content Include="Content\cti_image\a12-chat_talking.gif" />
+    <Content Include="Content\cti_image\a13-co-browse_flash.gif" />
+    <Content Include="Content\cti_image\a13-cobrowse_disabled.gif" />
+    <Content Include="Content\cti_image\a13-cobrowse_down.gif" />
+    <Content Include="Content\cti_image\a13-cobrowse_enabled.gif" />
+    <Content Include="Content\cti_image\a13-cobrowse_flash.gif" />
+    <Content Include="Content\cti_image\a13-cobrowse_over.gif" />
+    <Content Include="Content\cti_image\a13-cobrowse__over.gif" />
+    <Content Include="Content\cti_image\a14-voip_disabled.gif" />
+    <Content Include="Content\cti_image\a14-voip_down.gif" />
+    <Content Include="Content\cti_image\a14-voip_enabled.gif" />
+    <Content Include="Content\cti_image\a14-voip_flash.gif" />
+    <Content Include="Content\cti_image\a14-voip_over.gif" />
+    <Content Include="Content\cti_image\a15-SMS_disabled.gif" />
+    <Content Include="Content\cti_image\a15-SMS_down.gif" />
+    <Content Include="Content\cti_image\a15-SMS_enabled.gif" />
+    <Content Include="Content\cti_image\a15-SMS_flash.gif" />
+    <Content Include="Content\cti_image\a15-SMS_over.gif" />
+    <Content Include="Content\cti_image\a16-fax_disabled.gif" />
+    <Content Include="Content\cti_image\a16-fax_down.gif" />
+    <Content Include="Content\cti_image\a16-fax_enabled.gif" />
+    <Content Include="Content\cti_image\a16-fax_flash.gif" />
+    <Content Include="Content\cti_image\a16-fax_over.gif" />
+    <Content Include="Content\cti_image\a17-lamp_disabled.gif" />
+    <Content Include="Content\cti_image\a17-lamp_down.gif" />
+    <Content Include="Content\cti_image\a17-lamp_enabled.gif" />
+    <Content Include="Content\cti_image\a17-lamp_flash.gif" />
+    <Content Include="Content\cti_image\a17-lamp_over.gif" />
+    <Content Include="Content\cti_image\a18-send_disabled.gif" />
+    <Content Include="Content\cti_image\a18-send_down.gif" />
+    <Content Include="Content\cti_image\a18-send_enabled.gif" />
+    <Content Include="Content\cti_image\a18-send_flash.gif" />
+    <Content Include="Content\cti_image\a18-send_over.gif" />
+    <Content Include="Content\cti_image\a19-postit_disabled.gif" />
+    <Content Include="Content\cti_image\a19-postit_down.gif" />
+    <Content Include="Content\cti_image\a19-postit_enabled.gif" />
+    <Content Include="Content\cti_image\a19-postit_flash.gif" />
+    <Content Include="Content\cti_image\a19-postit_over.gif" />
+    <Content Include="Content\cti_image\a20-handnophone_disabled.gif" />
+    <Content Include="Content\cti_image\a20-handnophone_down.gif" />
+    <Content Include="Content\cti_image\a20-handnophone_enabled.gif" />
+    <Content Include="Content\cti_image\a20-handnophone_flash.gif" />
+    <Content Include="Content\cti_image\a20-handnophone_over.gif" />
+    <Content Include="Content\cti_image\arrow01.gif" />
+    <Content Include="Content\cti_image\arrow1-1.gif" />
+    <Content Include="Content\cti_image\arrow1-2.gif" />
+    <Content Include="Content\cti_image\arrow2-1.gif" />
+    <Content Include="Content\cti_image\arrow2-2.gif" />
+    <Content Include="Content\cti_image\AttachData.gif" />
+    <Content Include="Content\cti_image\B01-disabled.gif" />
+    <Content Include="Content\cti_image\B01-enabled.gif" />
+    <Content Include="Content\cti_image\B01-over.gif" />
+    <Content Include="Content\cti_image\B02-disabled.gif" />
+    <Content Include="Content\cti_image\B02-enabled.gif" />
+    <Content Include="Content\cti_image\B02-over.gif" />
+    <Content Include="Content\cti_image\B03-disabled.gif" />
+    <Content Include="Content\cti_image\B03-enabled.gif" />
+    <Content Include="Content\cti_image\B03-over.gif" />
+    <Content Include="Content\cti_image\B04-disabled.gif" />
+    <Content Include="Content\cti_image\B04-enabled.gif" />
+    <Content Include="Content\cti_image\B04-over.gif" />
+    <Content Include="Content\cti_image\B05-disabled.gif" />
+    <Content Include="Content\cti_image\B05-enabled.gif" />
+    <Content Include="Content\cti_image\B05-over.gif" />
+    <Content Include="Content\cti_image\B06-disabled.gif" />
+    <Content Include="Content\cti_image\B06-enabled.gif" />
+    <Content Include="Content\cti_image\B06-over.gif" />
+    <Content Include="Content\cti_image\B07-disabled.gif" />
+    <Content Include="Content\cti_image\B07-enabled.gif" />
+    <Content Include="Content\cti_image\B07-over.gif" />
+    <Content Include="Content\cti_image\B08-disabled.gif" />
+    <Content Include="Content\cti_image\B08-enabled.gif" />
+    <Content Include="Content\cti_image\B08-over.gif" />
+    <Content Include="Content\cti_image\B09-disabled.gif" />
+    <Content Include="Content\cti_image\B09-enabled.gif" />
+    <Content Include="Content\cti_image\B09-over.gif" />
+    <Content Include="Content\cti_image\B10-disabled.gif" />
+    <Content Include="Content\cti_image\B10-enabled.gif" />
+    <Content Include="Content\cti_image\B10-over.gif" />
+    <Content Include="Content\cti_image\B11-disabled.gif" />
+    <Content Include="Content\cti_image\B11-enabled.gif" />
+    <Content Include="Content\cti_image\B11-over.gif" />
+    <Content Include="Content\cti_image\B12-disabled.gif" />
+    <Content Include="Content\cti_image\B12-enabled.gif" />
+    <Content Include="Content\cti_image\B12-over.gif" />
+    <Content Include="Content\cti_image\B13-disabled.gif" />
+    <Content Include="Content\cti_image\B13-enabled.gif" />
+    <Content Include="Content\cti_image\B13-over.gif" />
+    <Content Include="Content\cti_image\B14-disabled.gif" />
+    <Content Include="Content\cti_image\B14-enabled.gif" />
+    <Content Include="Content\cti_image\B14-over.gif" />
+    <Content Include="Content\cti_image\ban_Enter_Disenable.gif" />
+    <Content Include="Content\cti_image\ban_Enter_Enable.gif" />
+    <Content Include="Content\cti_image\ban_Enter_Over.gif" />
+    <Content Include="Content\cti_image\ban_Enter_Select.gif" />
+    <Content Include="Content\cti_image\ban_Hangup_Disenable.gif" />
+    <Content Include="Content\cti_image\ban_Hangup_Enable.gif" />
+    <Content Include="Content\cti_image\ban_Hangup_Over.gif" />
+    <Content Include="Content\cti_image\ban_Hangup_Select.gif" />
+    <Content Include="Content\cti_image\ban_Monitor_Disenable.gif" />
+    <Content Include="Content\cti_image\ban_Monitor_Enable.gif" />
+    <Content Include="Content\cti_image\ban_Monitor_Over.gif" />
+    <Content Include="Content\cti_image\ban_Monitor_Select.gif" />
+    <Content Include="Content\cti_image\ban_Part_Disenable.gif" />
+    <Content Include="Content\cti_image\ban_Part_Enable.gif" />
+    <Content Include="Content\cti_image\ban_Part_Over.gif" />
+    <Content Include="Content\cti_image\ban_Part_Select.gif" />
+    <Content Include="Content\cti_image\bottom.gif" />
+    <Content Include="Content\cti_image\Break.gif" />
+    <Content Include="Content\cti_image\break_disabled.jpg" />
+    <Content Include="Content\cti_image\button01.gif" />
+    <Content Include="Content\cti_image\button_s.gif" />
+    <Content Include="Content\cti_image\c01-1.gif" />
+    <Content Include="Content\cti_image\c01-2.gif" />
+    <Content Include="Content\cti_image\c02-1.gif" />
+    <Content Include="Content\cti_image\c02-2.gif" />
+    <Content Include="Content\cti_image\cancel_disabled.jpg" />
+    <Content Include="Content\cti_image\cbg01.gif" />
+    <Content Include="Content\cti_image\Chat.gif" />
+    <Content Include="Content\cti_image\chat_disabled.jpg" />
+    <Content Include="Content\cti_image\CoBrowse.gif" />
+    <Content Include="Content\cti_image\Conference.gif" />
+    <Content Include="Content\cti_image\d01.gif" />
+    <Content Include="Content\cti_image\duilie_disabled.jpg" />
+    <Content Include="Content\cti_image\duofang_disabled.jpg" />
+    <Content Include="Content\cti_image\e-ACW-01.gif" />
+    <Content Include="Content\cti_image\e-ACW-02.gif" />
+    <Content Include="Content\cti_image\e-ACW-03.gif" />
+    <Content Include="Content\cti_image\e-OL-01.gif" />
+    <Content Include="Content\cti_image\e-OL-02.gif" />
+    <Content Include="Content\cti_image\e-OL-03.gif" />
+    <Content Include="Content\cti_image\e-SP-01.gif" />
+    <Content Include="Content\cti_image\e-SP-02.gif" />
+    <Content Include="Content\cti_image\e-SP-03.gif" />
+    <Content Include="Content\cti_image\Email.gif" />
+    <Content Include="Content\cti_image\email_disabled.gif" />
+    <Content Include="Content\cti_image\email_down.gif" />
+    <Content Include="Content\cti_image\email_enabled.gif" />
+    <Content Include="Content\cti_image\email_over.gif" />
+    <Content Include="Content\cti_image\Esoon.gif" />
+    <Content Include="Content\cti_image\Fax.gif" />
+    <Content Include="Content\cti_image\Help.gif" />
+    <Content Include="Content\cti_image\Hidden.gif" />
+    <Content Include="Content\cti_image\HiddenMouseOver.gif" />
+    <Content Include="Content\cti_image\Hold.gif" />
+    <Content Include="Content\cti_image\hold_disabled.jpg" />
+    <Content Include="Content\cti_image\icon_d.gif" />
+    <Content Include="Content\cti_image\icon_in.gif" />
+    <Content Include="Content\cti_image\icon_out.gif" />
+    <Content Include="Content\cti_image\icon_p.gif" />
+    <Content Include="Content\cti_image\icon_p2.gif" />
+    <Content Include="Content\cti_image\icon_t.gif" />
+    <Content Include="Content\cti_image\Ivr.gif" />
+    <Content Include="Content\cti_image\ivr_disabled.gif" />
+    <Content Include="Content\cti_image\jieqi_disabled.jpg" />
+    <Content Include="Content\cti_image\Keypad.gif" />
+    <Content Include="Content\cti_image\key_disabled.jpg" />
+    <Content Include="Content\cti_image\line-bg.gif" />
+    <Content Include="Content\cti_image\Line1.gif" />
+    <Content Include="Content\cti_image\Line2.gif" />
+    <Content Include="Content\cti_image\Line3.gif" />
+    <Content Include="Content\cti_image\notready_disable.gif" />
+    <Content Include="Content\cti_image\notready_enabled.gif" />
+    <Content Include="Content\cti_image\notready_over.gif" />
+    <Content Include="Content\cti_image\OnDuty.gif" />
+    <Content Include="Content\cti_image\pay_disablded.jpg" />
+    <Content Include="Content\cti_image\person_disabled.jpg" />
+    <Content Include="Content\cti_image\quxiao_disabled.jpg" />
+    <Content Include="Content\cti_image\ready_disable.gif" />
+    <Content Include="Content\cti_image\ready_enabled.gif" />
+    <Content Include="Content\cti_image\ready_over.gif" />
+    <Content Include="Content\cti_image\SendMarqueeMessage.gif" />
+    <Content Include="Content\cti_image\SendPersonalMessage.gif" />
+    <Content Include="Content\cti_image\Show.gif" />
+    <Content Include="Content\cti_image\ShowMouseOver.gif" />
+    <Content Include="Content\cti_image\Silence.gif" />
+    <Content Include="Content\cti_image\Sms.gif" />
+    <Content Include="Content\cti_image\space.gif" />
+    <Content Include="Content\cti_image\Transfer.gif" />
+    <Content Include="Content\cti_image\Voip.gif" />
+    <Content Include="Content\Default.css" />
+    <Content Include="Content\editor.css" />
+    <Content Include="Content\images\anmian.gif" />
+    <Content Include="Content\images\anmian.png" />
+    <Content Include="Content\images\blank.gif" />
+    <Content Include="Content\images\blueline.jpg" />
+    <Content Include="Content\images\blue_bg.jpg" />
+    <Content Include="Content\images\blue_navbg.jpg" />
+    <Content Include="Content\images\break.jpg" />
+    <Content Include="Content\images\break.png" />
+    <Content Include="Content\images\break_disabled.jpg" />
+    <Content Include="Content\images\btn_bg.gif" />
+    <Content Include="Content\images\btn_bg2.gif" />
+    <Content Include="Content\images\btn_bgtwo.gif" />
+    <Content Include="Content\images\calendar\close.gif" />
+    <Content Include="Content\images\calendar\mnext.gif" />
+    <Content Include="Content\images\calendar\mprev.gif" />
+    <Content Include="Content\images\calendar\ynext.gif" />
+    <Content Include="Content\images\calendar\yprev.gif" />
+    <Content Include="Content\images\cancel.jpg" />
+    <Content Include="Content\images\cancel_disabled.jpg" />
+    <Content Include="Content\images\chat.jpg" />
+    <Content Include="Content\images\chathistory.png" />
+    <Content Include="Content\images\chaticonline.png" />
+    <Content Include="Content\images\chatlogo.png" />
+    <Content Include="Content\images\chatrto.png" />
+    <Content Include="Content\images\chatsr.png" />
+    <Content Include="Content\images\chat_alert.png" />
+    <Content Include="Content\images\chat_bg.jpg" />
+    <Content Include="Content\images\chat_disabled.jpg" />
+    <Content Include="Content\images\chat_disabled.png" />
+    <Content Include="Content\images\chat_enable.gif" />
+    <Content Include="Content\images\chat_enable.png" />
+    <Content Include="Content\images\chat_flash.gif" />
+    <Content Include="Content\images\chat_hi_flash.gif" />
+    <Content Include="Content\images\chat_hover.jpg" />
+    <Content Include="Content\images\chat_select.png" />
+    <Content Include="Content\images\chat_stop.png" />
+    <Content Include="Content\images\chat_stop_selected.png" />
+    <Content Include="Content\images\check48.png" />
+    <Content Include="Content\images\close.png" />
+    <Content Include="Content\images\closed.gif" />
+    <Content Include="Content\images\closed.png" />
+    <Content Include="Content\images\closed1.jpg" />
+    <Content Include="Content\images\closed2.jpg" />
+    <Content Include="Content\images\closed3.jpg" />
+    <Content Include="Content\images\duilie.jpg" />
+    <Content Include="Content\images\duilie.png" />
+    <Content Include="Content\images\duilie_disabled.jpg" />
+    <Content Include="Content\images\duilie_disabled.png" />
+    <Content Include="Content\images\duofang.jpg" />
+    <Content Include="Content\images\duofang.png" />
+    <Content Include="Content\images\duofang_disabled.jpg" />
+    <Content Include="Content\images\duofang_disabled.png" />
+    <Content Include="Content\images\emote\angry.gif" />
+    <Content Include="Content\images\emote\awkward.gif" />
+    <Content Include="Content\images\emote\baituo.gif" />
+    <Content Include="Content\images\emote\baiy.gif" />
+    <Content Include="Content\images\emote\baoquan.gif" />
+    <Content Include="Content\images\emote\bye.gif" />
+    <Content Include="Content\images\emote\ch.gif" />
+    <Content Include="Content\images\emote\crazy.gif" />
+    <Content Include="Content\images\emote\cute.gif" />
+    <Content Include="Content\images\emote\despise.gif" />
+    <Content Include="Content\images\emote\doubt.gif" />
+    <Content Include="Content\images\emote\envy.gif" />
+    <Content Include="Content\images\emote\fastcry.gif" />
+    <Content Include="Content\images\emote\guzhang.gif" />
+    <Content Include="Content\images\emote\haixiu.gif" />
+    <Content Include="Content\images\emote\jingli.gif" />
+    <Content Include="Content\images\emote\keai.gif" />
+    <Content Include="Content\images\emote\kelian.gif" />
+    <Content Include="Content\images\emote\knock.gif" />
+    <Content Include="Content\images\emote\kuaikule.gif" />
+    <Content Include="Content\images\emote\laugh.gif" />
+    <Content Include="Content\images\emote\meigui.gif" />
+    <Content Include="Content\images\emote\ohmy.gif" />
+    <Content Include="Content\images\emote\OK.gif" />
+    <Content Include="Content\images\emote\panic.gif" />
+    <Content Include="Content\images\emote\proud.gif" />
+    <Content Include="Content\images\emote\qiang.gif" />
+    <Content Include="Content\images\emote\quiet.gif" />
+    <Content Include="Content\images\emote\sad.gif" />
+    <Content Include="Content\images\emote\shengli.gif" />
+    <Content Include="Content\images\emote\shutup.gif" />
+    <Content Include="Content\images\emote\shy.gif" />
+    <Content Include="Content\images\emote\sleep.gif" />
+    <Content Include="Content\images\emote\smile.gif" />
+    <Content Include="Content\images\emote\struggle.gif" />
+    <Content Include="Content\images\emote\titter.gif" />
+    <Content Include="Content\images\emote\tongue.gif" />
+    <Content Include="Content\images\emote\wail.gif" />
+    <Content Include="Content\images\emote\weiqu.gif" />
+    <Content Include="Content\images\emote\woshou.gif" />
+    <Content Include="Content\images\emote\wronged.gif" />
+    <Content Include="Content\images\emote\yongbao.gif" />
+    <Content Include="Content\images\emote\yun.gif" />
+    <Content Include="Content\images\face-sad.png" />
+    <Content Include="Content\images\face-smile.png" />
+    <Content Include="Content\images\guanzhu.jpg" />
+    <Content Include="Content\images\hi.png" />
+    <Content Include="Content\images\hi2.png" />
+    <Content Include="Content\images\hold.jpg" />
+    <Content Include="Content\images\hold.png" />
+    <Content Include="Content\images\hold_disabled.jpg" />
+    <Content Include="Content\images\hold_disabled.png" />
+    <Content Include="Content\images\hold_retrieve.gif" />
+    <Content Include="Content\images\hold_retrieve.png" />
+    <Content Include="Content\images\icons\anchor.gif" />
+    <Content Include="Content\images\icons\close.gif" />
+    <Content Include="Content\images\icons\flash.gif" />
+    <Content Include="Content\images\icons\icons.gif" />
+    <Content Include="Content\images\icons\loading.gif" />
+    <Content Include="Content\images\icons\progress.gif" />
+    <Content Include="Content\images\icons\progressbg.gif" />
+    <Content Include="Content\images\icons\waiting.gif" />
+    <Content Include="Content\images\icons\wmp.gif" />
+    <Content Include="Content\images\icons\wordimg.gif" />
+    <Content Include="Content\images\icon_t.gif" />
+    <Content Include="Content\images\ivr.jpg" />
+    <Content Include="Content\images\IVR.png" />
+    <Content Include="Content\images\ivr_disabled.gif" />
+    <Content Include="Content\images\jieqi.jpg" />
+    <Content Include="Content\images\jieqi.png" />
+    <Content Include="Content\images\jieqi_disabled.jpg" />
+    <Content Include="Content\images\jieqi_disabled.png" />
+    <Content Include="Content\images\jieqi_flash.gif" />
+    <Content Include="Content\images\key.jpg" />
+    <Content Include="Content\images\key.png" />
+    <Content Include="Content\images\key_disabled.jpg" />
+    <Content Include="Content\images\key_disabled.png" />
+    <Content Include="Content\images\lenovo.jpg" />
+    <Content Include="Content\images\line.jpg" />
+    <Content Include="Content\images\line_two.jpg" />
+    <Content Include="Content\images\links.png" />
+    <Content Include="Content\images\loginbig_bg.jpg" />
+    <Content Include="Content\images\loginbtn.jpg" />
+    <Content Include="Content\images\login_line.jpg" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\images\magnifier.png" />
+    <Content Include="Content\images\mainleftpic.jpg" />
+    <Content Include="Content\images\nav_bg.jpg" />
+    <Content Include="Content\images\nav_leftbg.jpg" />
+    <Content Include="Content\images\nav_line.jpg" />
+    <Content Include="Content\images\nav_middlebg.jpg" />
+    <Content Include="Content\images\nav_rightbg.jpg" />
+    <Content Include="Content\images\new_lenovo.jpg" />
+    <Content Include="Content\images\noready.gif" />
+    <Content Include="Content\images\notready.png" />
+    <Content Include="Content\images\notready_2.png" />
+    <Content Include="Content\images\notready_3.png" />
+    <Content Include="Content\images\notready_4.png" />
+    <Content Include="Content\images\notready_5.png" />
+    <Content Include="Content\images\notready_6.png" />
+    <Content Include="Content\images\notready_7.png" />
+    <Content Include="Content\images\notready_8.png" />
+    <Content Include="Content\images\one_downbg.jpg" />
+    <Content Include="Content\images\one_upbg.jpg" />
+    <Content Include="Content\images\pay.jpg" />
+    <Content Include="Content\images\pay.png" />
+    <Content Include="Content\images\pay_disablded.jpg" />
+    <Content Include="Content\images\pay_disablded.png" />
+    <Content Include="Content\images\person.jpg" />
+    <Content Include="Content\images\person_disabled.jpg" />
+    <Content Include="Content\images\pic1.jpg" />
+    <Content Include="Content\images\pic2.jpg" />
+    <Content Include="Content\images\pic_1.png" />
+    <Content Include="Content\images\pic_2.png" />
+    <Content Include="Content\images\pic_3.png" />
+    <Content Include="Content\images\quxiao.jpg" />
+    <Content Include="Content\images\quxiao_disabled.jpg" />
+    <Content Include="Content\images\ready.gif" />
+    <Content Include="Content\images\ready.png" />
+    <Content Include="Content\images\ready_chat.png" />
+    <Content Include="Content\images\ready_disabled.gif" />
+    <Content Include="Content\images\ready_disabled.png" />
+    <Content Include="Content\images\ready_voice.png" />
+    <Content Include="Content\images\redline.jpg" />
+    <Content Include="Content\images\release.gif" />
+    <Content Include="Content\images\release.png" />
+    <Content Include="Content\images\sanjiao.png" />
+    <Content Include="Content\images\sent_btn.png" />
+    <Content Include="Content\images\tab_bluebg.jpg" />
+    <Content Include="Content\images\tab_bluebg_bg.jpg" />
+    <Content Include="Content\images\title_bg.gif" />
+    <Content Include="Content\images\title_bigbg.gif" />
+    <Content Include="Content\images\toper_bg.png" />
+    <Content Include="Content\images\transferCancel.png" />
+    <Content Include="Content\images\transferCancel_disabled.png" />
+    <Content Include="Content\images\transfer_person_disabled.jpg" />
+    <Content Include="Content\images\transfer_person_disabled.png" />
+    <Content Include="Content\images\transfer_person_enable.gif" />
+    <Content Include="Content\images\transfer_person_enable.png" />
+    <Content Include="Content\images\zancun.jpg" />
+    <Content Include="Content\chat.css" />
+    <Content Include="Content\LenovoRTO.cab" />
+    <Content Include="Content\login_style.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\ttclient.cab" />
+    <Content Include="Content\ttvnc.cab" />
+    <Content Include="domain.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="LenovoTrace.aspx" />
+    <Content Include="Scripts\chat\calendar-setup.js" />
+    <Content Include="Scripts\chat\calendar.js" />
+    <Content Include="Scripts\chat\chat.js" />
+    <Content Include="Scripts\chat\chat_api.js" />
+    <Content Include="Scripts\chat\chat_interface.js" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\cti.js" />
+    <Content Include="log4net.config" />
+    <Content Include="lenovochat.io" />
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\toolbar.pubxml" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\chat\jqeditor.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.1.js" />
+    <Content Include="Scripts\jquery-ui-1.10.1.min.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.hotkeys.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\lenovo_business_cti.js" />
+    <Content Include="Scripts\modernizr-1.7.js" />
+    <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\softphone_api.js" />
+    <Content Include="Scripts\softphone_config.js" />
+    <Content Include="Scripts\softphone_interface.js" />
+    <Content Include="Scripts\cti_spBusiness.js" />
+    <Content Include="Setup\lenovo_softphone_setup.msi" />
+    <Content Include="Test.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SoftPhoneToolBar\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\SoftPhoneToolBar\TransferSearch.cshtml" />
+    <Content Include="Views\SoftPhoneToolBar\SkillAgentList.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\ChatTab.cshtml" />
+    <Content Include="Views\Chat\Meeting.cshtml" />
+    <Content Include="Views\Chat\Transfer.cshtml" />
+    <Content Include="Views\Chat\ChatHistory.cshtml" />
+    <Content Include="Views\SoftPhoneToolBar\ReTry.cshtml" />
+    <Content Include="Views\SoftPhoneToolBar\CCForBusiness.cshtml" />
+    <Content Include="Views\SoftPhoneToolBar\CCForBusinessESD.cshtml" />
+    <Content Include="Views\Chat\ChatRTO.cshtml" />
+    <Content Include="Views\Chat\FileUpload2.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftPhone.Business\SoftPhone.Business.csproj">
+      <Project>{c8c5a2d0-135a-49f5-9159-ab251352f1f5}</Project>
+      <Name>SoftPhone.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftPhone.Entity\SoftPhone.Entity.csproj">
+      <Project>{1bd9a071-f4cb-4ccd-9d57-77d597e3a759}</Project>
+      <Name>SoftPhone.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tele.Common\Tele.Common.csproj">
+      <Project>{780c5e02-8e9a-4f36-8b26-6d2c5b0395c3}</Project>
+      <Name>Tele.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tele.DataLibrary\Tele.DataLibrary.csproj">
+      <Project>{8b2261c8-e47d-4209-b45d-e812e85f334d}</Project>
+      <Name>Tele.DataLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>40460</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

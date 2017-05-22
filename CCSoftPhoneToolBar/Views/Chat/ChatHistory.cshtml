@@ -1,0 +1,137 @@
+﻿@model SoftPhoneToolBar.Models.HistoryModel
+@{
+    ViewBag.Title = "历史聊天记录";
+}
+<script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+<script src="../../Scripts/chat/chat.js?ver=5.8"></script>
+<script src="../../Scripts/chat/chat_api.js?ver=5.8"></script>
+<script src="../../Scripts/chat/calendar.js"></script>
+<script src="../../Scripts/chat/calendar-setup.js"></script>
+<link href="../../Content/chat.css?ver=5.8" rel="stylesheet" type="text/css" />
+<link href="../../Content/calendar.css" rel="stylesheet" />
+@{
+    if (Request.Cookies["softphone"] != null && Request.Cookies["softphone"].Values["isemergency"] == "0")
+    {
+    <script type="text/javascript">
+        document.domain = '@System.Web.Configuration.WebConfigurationManager.AppSettings["document.domain"]';
+    </script>
+    }
+}
+<script type="text/javascript">
+    var domain_phone, domain_phone_Db;
+    $(function () {
+        // 电话服务域名和端口
+        domain_phone = '@System.Configuration.ConfigurationManager.AppSettings["appServer"]';
+        domain_phone_Db = '@System.Configuration.ConfigurationManager.AppSettings["AppServer.Db"]';
+        $("#txtBeginTime").val(new Date().format('yyyy-MM-dd'));
+        $("#txtEndTime").val(new Date().format('yyyy-MM-dd'));
+        $("#btnSearch").click(function () { loadChatHistoryNav(); });
+    });
+
+
+    // 加载历史聊天记录
+    function loadChatHistoryNav() {
+        var url = String.format('{0}Db/GetChatHistory?ss={1}&jsoncallback?', window.top.domain_phone_Db, new Date().getTime());
+        var params = { employeeID: $("#EmployeeID").val(), machineNO: $.trim($("#txtMachineNO").val()), customerID: $("#txtCustomerID").val(), beginTime: $("#txtBeginTime").val(), endTime: $("#txtEndTime").val() };
+        sendRequest(url, params, function (data) {
+            if (data) {
+                var $chats = $("#chatList table tbody");
+                $chats.html("");
+                for (var ii = 0; ii <= data.length - 1; ii++) {
+                    var item = data[ii];
+                    if (!item.CustomerID || item.CustomerID == "") item.CustomerID = '&nbsp;';
+                    if (!item.MachineNo || item.MachineNo == "") item.MachineNo = '&nbsp;';
+
+
+                    var btnView = String.format("<input class='icon_btn2' type='button' value='查看'"
+                        + "title='{0}' onclick=\"loadChatHistory(\'{0}\');\" />", item.ChatID);
+                    var btnDownload = String.format("<input class='icon_btn2' type='button' value='下载'"
+                        + "title='{0}' onclick=\"loadChatHistory(\'{0}\',1);\" />", item.ChatID);
+                    var row = String.format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}&nbsp;{8}</td></tr>"
+                        , item.ChatID, item.EmployeeID, item.CustomerID, item.CustomerName, item.MachineNo
+                        , convertDate(item.ChatBeginTime), convertDate(item.ChatEndTime)
+                        , btnView, btnDownload);
+                    $chats.append(row);
+                }
+                function convertDate(strDate) {
+                    var theTime = strDate.replace(/\/Date\(/ig, '').replace(/\)\//ig, '').replace(/[A-Za-z]*/ig, '');
+                    return new Date(parseInt(theTime)).format('yyyy-MM-dd HH:mm:ss');
+                }
+            }
+        });
+    }
+
+
+    // 加载历史聊天记录
+    function loadChatHistory(id, isSave) {
+        var url = String.format('{0}Db/GetChatHistoryByID?ss={1}&jsoncallback?', window.top.domain_phone_Db, new Date().getTime());
+        var params = { chatID: id };
+        sendRequest(url, params, function (data) {
+            if (data) {
+                var $p = $("#pArea");
+                $p.html('');
+                for (var i = 0; i < data.length; i++) {
+                    var msg = unescape(data[i]);
+                    $p.append(msg);
+                    $p[0].scrollTop = $p[0].scrollHeight;
+                }
+                if (isSave) {
+                    var domainSkip = "javascript:void((function(){var d=document;d.open();d.domain='" + document.domain + "';d.write('');d.close()})())";
+                    if (document.domain == document.location.hostname) domainSkip = 'javascript:;';
+                    $(document.body).after('<iframe src="' + domainSkip + '" id="downWin" style="width:0;height:0"></iframe>');
+
+                    try {
+                        docInit();
+                    } catch (e) {
+                        setTimeout(function () {
+                            docInit();
+                        }, 30);
+                    }
+                    function docInit() {
+                        var win = $('#downWin')[0].contentWindow;
+                        var doc = win.document;
+                        doc.charset = "UTF-8";
+                        doc.write($p.html());
+                        doc.execCommand("SaveAs", false, id + ".txt");
+                    }
+                }// end if
+
+            }
+        });
+    }
+
+</script>
+<div class="historyBox">
+    <div class="content" style="width: 838px;">
+        <h1>聊天记录</h1>
+        <div class="historyQuery">
+            开始日期：<input id="txtBeginTime" type="text" class="qqcalendar" style="width: 70px;" />
+            截止日期：<input id="txtEndTime" type="text" class="qqcalendar" style="width: 70px;" />
+            员工ID：@Html.TextBoxFor(m => m.EmployeeID, new { style = "width:70px" })
+            客户ID：<input id="txtCustomerID" type="text" style="width: 100px;" />
+            主机编号：<input id="txtMachineNO" type="text" style="width: 100px;" />
+            <input id="btnSearch" type="button" class="icon_btn" value="搜索" />
+        </div>
+        <div id="chatList" class="chatNav">
+            <table class="listTable" border="0" cellpadding="1" cellspacing="1" width="808px">
+                <thead>
+                    <tr class="header">
+                        <th>ChatID</th>
+                        <th>员工ID</th>
+                        <th>客户ID</th>
+                        <th>客户姓名</th>
+                        <th>主机编号</th>
+                        <th>开始时间</th>
+                        <th>结束时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p id="pArea" class="chatHistory"></p>
+        </div>
+    </div>
+</div>

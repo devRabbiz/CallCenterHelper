@@ -1,0 +1,23 @@
+﻿.formTable {
+    width: 900px;
+}
+
+    .formTable tr {
+        margin-bottom: 5px;
+        height: 30px;
+    }
+
+        .formTable tr td {
+            width: 290px;
+        }
+
+.colLable {
+    width: 160px;
+    padding-left:5px;
+    background-color: #EFEFEF;
+}
+
+    .colLable span {
+        color: Red;
+        vertical-align: middle;
+    }

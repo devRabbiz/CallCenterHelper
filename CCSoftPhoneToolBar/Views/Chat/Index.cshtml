@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "☆聊天窗口";
+}
+@section header{
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
+    <meta http-equiv="expires" content="Wed,26 Feb 1997 08:21:57 GMT" />
+    <script type="text/javascript" src="../../Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery-ui-1.10.1.js"></script>
+    <script type="text/javascript" src="../../Scripts/json2.js"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat_interface.js"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat_api.js?ver=5.8"></script>
+    <script type="text/javascript" src="../../Scripts/chat/chat.js?ver=5.9"></script>
+    <script src="../../Scripts/jquery.cookie.js"></script>
+    <link href="../../Content/chat.css?ver=5.8" rel="stylesheet" />
+    <script type="text/javascript">
+        Business_AppUrl = '@System.Web.Configuration.WebConfigurationManager.AppSettings["Business.AppUrl"]';
+    </script>
+    @{
+        if (Request.Cookies["softphone"] != null && Request.Cookies["softphone"].Values["isemergency"] == "0")
+        {
+        <script type="text/javascript">
+            document.domain = '@System.Web.Configuration.WebConfigurationManager.AppSettings["document.domain"]';
+        </script>
+        }
+    }
+    <script type="text/javascript">
+
+        var domain, domain_phone, fileServer, arrStatus;
+        var iv, hasFlickWin = false, needFlick = false, isMin = false;
+
+        var oTitle = '☆聊天窗口';
+        var sTitle = 0;
+        function setTitle(a) {
+            if (!(a.length < 1)) {
+                oTitle = document.title;
+                clearInterval(sTitle);
+            }
+            sTitle = setInterval(function () {
+                document.title = a;
+                a = a.substr(1) + a.charAt(0)
+            }
+            , 200);
+            setTimeout(function () { resetTitle(); }, 5000);
+        }
+        function resetTitle() {
+            clearInterval(sTitle);
+            sTitle = 0;
+            document.title = oTitle;
+        }
+
+        $(function () {
+            // 坐席端服务域名和端口
+            domain = '@System.Configuration.ConfigurationManager.AppSettings["chatServiceServer"]';
+            // 电话服务域名和端口
+            domain_phone = '@System.Configuration.ConfigurationManager.AppSettings["appServer"]';
+            // 电话服务域名和端口（）
+            domain_phone_Db = '@System.Configuration.ConfigurationManager.AppSettings["appServer.Db"]';
+            // ttServerIP地址
+            ttserver_ip = '';
+            // 文件服务器
+            fileServer = '@System.Configuration.ConfigurationManager.AppSettings["fileServer"]';
+
+
+            $(window).keydown(function (ev) {
+                if (event.keyCode == 116) {
+                    event.keyCode = 0;
+                    event.returnValue = false;
+                }
+            });
+            document.body.oncontextmenu = function () { return false; }
+
+            try {
+                // 允许添加Tab窗口
+                window.opener.setChatStatus(true);
+                iv = setInterval(flickWin, 1500);
+            }
+            catch (e) { LogMessage(e.message); }
+
+            try {
+                // 第一次启动获取聊天信息
+                if (!th_msg)
+                    th_msg = setTimeout(getNewMessages, 1000);
+            }
+            catch (e) { }
+
+            //关闭ChatTab
+            $('.tabbox').on('click', '.tabClose', function () {
+                var id = $(this).attr('id');
+                closeTabWindow(id);
+            });
+        });
+
+        // 新消息闪动相关事件
+        function flickWin() {
+            hasFlickWin = $(".flick").length > 0;
+            isMin = (window.outerWidth)
+                ? (window.outerWidth <= 160 && window.outerHeight <= 27)
+                : (window.screenTop < -30000 && window.screenLeft < -30000);
+            //if (!isMin) needFlick = false;
+            isMin = true;
+            needFlick = false;
+            if ((needFlick || hasFlickWin) && isMin) {
+                // 闪
+                //var second = new Date().getSeconds();
+                //document.title = (second % 2 == 0) ? '★收到新消息。' : '☆聊天窗口';
+                if (sTitle == 0) {
+                    setTitle('来新消息了...');
+                }
+            }
+            else {
+                //document.title = '☆聊天窗口';
+            }
+        }
+        window.onfocus = function () { $(".selected", $(".tabhead")).click(); }
+        window.onbeforeunload = function closeTabs() {
+            var rv = 0;
+            $(".tabClose").each(function () { if (closeTabWindow(this.id) == 0) rv += 1; });
+            if (rv == 0)
+                window.returnValue = true;
+            else
+                return "子页面没有全部关闭，确定要关闭吗？";
+        }
+        window.onunload = function () {
+            try {
+                if (window.opener && window.opener.chatWin)
+                    window.opener.chatWin = null;
+            }
+            catch (e) { }
+        }
+
+        //快捷键
+
+        var QKSEND = -1;
+        var QKSEND_KEY = 'QKSEND';
+
+        // 快键选中
+        function qkSelectTab(i) {
+            var tabs = $(".tabhead");
+            tabs.children("dd").each(function (ii, ele) {
+                if (ii == i) {
+                    LogMessage("快捷键选择标签。序号：" + ii);
+                    ele.click();
+                }
+            });
+        }
+
+        // 获取快捷发送键
+        function getQkSend() {
+            if (QKSEND == -1) {
+                var val = $.cookie('QKSEND')
+                if (val == null) {
+                    QKSEND = 0;
+                }
+                else {
+                    try {
+                        QKSEND = parseInt(val);
+                    }
+                    catch (e) {
+                        QKSEND = 0;
+                    }
+                }
+            }
+            return QKSEND;
+        }
+
+        // 设置快捷发送键
+        function setQkSend(i) {
+            QKSEND = i;
+            $.cookie(QKSEND_KEY, i, { expires: 365 });
+
+        }
+
+        // 获取最新的聊天信息
+        var th_msg, agent = getAgentInfo();
+        function getNewMessages(agentID, lastRequest) {
+            var url = String.format('{0}/Chat/GetInfo?ss={1}&jsoncallback?', domain, new Date().getTime());
+            var params = { agentID: agent.AgentID };
+            sendRequest(url, params, function (data) {
+                if (data) {
+                    if (data.TabDatas && data.TabDatas.length > 0) {
+                        $(data.TabDatas).each(function () {
+                            // 如果ChatID不存在，取下一个消息
+                            if (!this.ChatID) return true;
+                            // 如果有新消息，调用Tab页面的方法显示出来
+                            var $content = $("#contentitem" + this.ChatID);
+                            if ($content.length > 0) {
+                                var win = $content[0].contentWindow;
+                                if (win && win.chat)
+                                    win.chat.showMsg(this);
+                            }
+                        });
+                    }
+                }
+            }, true, this.ChatID);
+            th_msg = setTimeout(getNewMessages, 1000);
+        }
+
+
+        //接口
+        //1:截图成功,1:取消截图,0:截图失败:(errmsg)
+        function CaptureImage() {
+            window.blur();
+            var r = String(ClipboardOCX.CaptureImage()).split(':')[0];
+            if (r == "1") {
+                //成功
+            }
+            else {
+                //失败
+                alert(r);
+            }
+            window.focus();   
+        }
+
+        //返回json对象字符串
+        function UploadImg() {
+            try{
+                var _uploadpath = "http://" + location.host + "/Chat/FileUpload";
+                var r = ClipboardOCX.UploadImg(_uploadpath);
+                return r;
+            }
+            catch (e) {
+                return '';
+            }
+        }
+
+        //截图控件出错
+        function ClipboardOCX_ERROR(msg) {
+            alert(msg);
+        }
+    </script>
+
+}
+<div class="tabbox">
+    <div class="chatlogo">
+        <img src="/content/images/chatlogo.png" />
+    </div>
+    <div style="clear: both;"></div>
+    <dl class="tabhead">
+    </dl>
+    <div style="clear: both;"></div>
+    <div class="tabcontent" style="overflow: hidden;">
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
+
+<object class="ClipboardOCX" id="ClipboardOCX" classid="clsid:EFD2F97C-3A62-4B31-A7F1-FBC5B8C64DCC" width="0" height="0" style="width: 0px; height: 0px; overflow: hidden;"></object>

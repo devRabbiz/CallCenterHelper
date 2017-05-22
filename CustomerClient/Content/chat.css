@@ -1,0 +1,127 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+img {
+    border: none;
+}
+
+
+.tabbox {
+    width: 540px;
+    height: 516px;
+    background: #E7E7E7;
+    margin: 0 auto;
+    padding-top: 3px;
+}
+
+.chatWait {
+    line-height: 44px;
+    padding-top: 2px;
+    padding-left: 10px;
+    float: left;
+}
+
+.overflow_ellipsis {
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat_content {
+    width: 536px;
+    height: 480px;
+    margin-left: 2px;
+    background: #fcfcfc;
+    border: 1px solid #c7c7c7;
+}
+
+.chat_wenbenone {
+    width: 526px;
+    padding: 1px;
+}
+
+.chat_wenben {
+    width: 526px;
+    height: 368px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+.jqeditor-client {
+    width: 536px;
+    height: 98px;
+    border: none;
+    background: #fcfcfc;
+    overflow-y: scroll;
+}
+
+.icon_btn {
+    width: 85px;
+    height: 25px;
+    background: url(../../content/images/btn_bg.gif) no-repeat;
+    border: none;
+    cursor:pointer;
+}
+
+.sent {
+    width: 536px;
+    height: 28px;
+    line-height: 28px;
+    background: #efefef;
+    color: #272727;
+    margin-top: 5px;
+}
+
+    .sent ul {
+        width: 536px;
+    }
+
+        .sent ul li {
+            float: left;
+            padding-left: 5px;
+        }
+
+.icon_btn {
+    color: #363636;
+    vertical-align: top;
+}
+
+/*************聊天话术样式*************/
+.AgentMessage, .ClientMessage, .CommonText, .Alert, .Notice {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.AgentMessage {
+    color: #76923C;
+}
+
+.ClientMessage, .ClientMessageBox {
+    color: blue;
+}
+
+.CommonText {
+    color: #010101;
+}
+
+.Alert {
+    color: #ccc;
+}
+
+.Notice {
+    color: #080808;
+}
+
+.MsgContent {
+    margin-left: 5px;
+}
+/**************************/

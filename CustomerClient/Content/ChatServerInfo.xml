@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<chatServers>
+	<chatServer enable="true">
+		<alias>8001</alias>
+		<host>10.99.36.158</host>
+		<port>4800</port>
+	</chatServer>
+	<chatServer enable="true">
+		<alias>801</alias>
+		<host>10.99.36.158</host>
+		<port>4801</port>
+	</chatServer>
+	<chatServer enable="true">
+		<alias>802</alias>
+		<host>10.99.36.158</host>
+		<port>4802</port>
+	</chatServer>
+	<chatServer enable="false">
+		<alias>803</alias>
+		<host>10.99.36.158</host>
+		<port>4803</port>
+	</chatServer>
+</chatServers>
